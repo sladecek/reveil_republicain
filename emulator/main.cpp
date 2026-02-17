@@ -45,7 +45,7 @@ int main(int, char**)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // Create our calculator instance
-    reveil::Calculator calc;
+    rr::ReveilRepublicain calc;
     
     // Application state
     int num1 = 0;
@@ -99,7 +99,7 @@ int main(int, char**)
             ImGui::InputText("Name", name_buffer, IM_ARRAYSIZE(name_buffer));
             
             if (ImGui::Button("Generate Greeting")) {
-                greeting_text = reveil::greet(std::string(name_buffer));
+                greeting_text = rr::greet(std::string(name_buffer));
             }
             
             if (!greeting_text.empty()) {

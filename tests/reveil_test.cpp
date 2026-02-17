@@ -1,13 +1,13 @@
 #include "reveil.h"
 #include <gtest/gtest.h>
 
-namespace reveil {
+namespace rr {
 namespace test {
 
 // Test fixture for Calculator tests
 class CalculatorTest : public ::testing::Test {
 protected:
-    Calculator calc;
+    ReveilRepublicain calc;
 };
 
 TEST_F(CalculatorTest, AddPositiveNumbers) {

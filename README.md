@@ -96,4 +96,7 @@ int main() {
 
 ## License
 
+
+https://www.instructables.com/A-Complete-Arduino-Rotary-Solution/
+
 MIT License
