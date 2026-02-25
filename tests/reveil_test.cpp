@@ -1,68 +1,62 @@
 #include "reveil.h"
+#include "hardware_interface.h"
 #include <gtest/gtest.h>
 
-namespace rr {
-namespace test {
+namespace rr
+{
+    namespace test
+    {
 
-// Test fixture for Calculator tests
-class CalculatorTest : public ::testing::Test {
-protected:
-    ReveilRepublicain calc;
-};
+        // Mock display for testing
+        class MockDisplay
+        {
+        public:
+            void start_window(const hw::window_t &) {}
+            void send_pixel(hw::pixel_t) {}
+            void finish_window() {}
+            void update() {}
+        };
 
-TEST_F(CalculatorTest, AddPositiveNumbers) {
-    EXPECT_EQ(calc.add(2, 3), 5);
-    EXPECT_EQ(calc.add(10, 20), 30);
-}
+        // Mock timer for testing
+        class MockTimer
+        {
+        public:
+            void set_next_clock_event_time(hw::Clock::time_point) {}
+        };
 
-TEST_F(CalculatorTest, AddNegativeNumbers) {
-    EXPECT_EQ(calc.add(-2, -3), -5);
-    EXPECT_EQ(calc.add(-10, 5), -5);
-}
+        // Test fixture
+        class ReveilTest : public ::testing::Test
+        {
+        protected:
+            ReveilRepublicain reveil;
+            MockDisplay display;
+            MockTimer timer;
+        };
 
-TEST_F(CalculatorTest, AddZero) {
-    EXPECT_EQ(calc.add(0, 0), 0);
-    EXPECT_EQ(calc.add(5, 0), 5);
-    EXPECT_EQ(calc.add(0, 5), 5);
-}
+        TEST_F(ReveilTest, ComputeUpdateReturnsFlags)
+        {
+            hw::TickEvent event{0};
+            hw::output_flags_t flags = reveil.compute_update(display, timer, event);
+            
+            // Should return some valid flags (even if just None)
+            EXPECT_GE(flags, 0);
+        }
 
-TEST_F(CalculatorTest, SubtractPositiveNumbers) {
-    EXPECT_EQ(calc.subtract(5, 3), 2);
-    EXPECT_EQ(calc.subtract(10, 20), -10);
-}
+        TEST_F(ReveilTest, HandlesClockEvent)
+        {
+            hw::ClockEvent event{hw::Clock::time_point{}};
+            hw::output_flags_t flags = reveil.compute_update(display, timer, event);
+            
+            EXPECT_GE(flags, 0);
+        }
 
-TEST_F(CalculatorTest, SubtractNegativeNumbers) {
-    EXPECT_EQ(calc.subtract(-5, -3), -2);
-    EXPECT_EQ(calc.subtract(-10, 5), -15);
-}
+        TEST_F(ReveilTest, HandlesEncoderEvent)
+        {
+            hw::EncoderEvent event{1, false};
+            hw::output_flags_t flags = reveil.compute_update(display, timer, event);
+            
+            EXPECT_GE(flags, 0);
+        }
 
-TEST_F(CalculatorTest, MultiplyPositiveNumbers) {
-    EXPECT_EQ(calc.multiply(2, 3), 6);
-    EXPECT_EQ(calc.multiply(10, 5), 50);
-}
-
-TEST_F(CalculatorTest, MultiplyByZero) {
-    EXPECT_EQ(calc.multiply(5, 0), 0);
-    EXPECT_EQ(calc.multiply(0, 5), 0);
-}
-
-TEST_F(CalculatorTest, MultiplyNegativeNumbers) {
-    EXPECT_EQ(calc.multiply(-2, 3), -6);
-    EXPECT_EQ(calc.multiply(-2, -3), 6);
-}
-
-// Tests for greet function
-TEST(GreetTest, BasicGreeting) {
-    EXPECT_EQ(greet("World"), "Hello, World! Welcome to Reveil.");
-}
-
-TEST(GreetTest, EmptyName) {
-    EXPECT_EQ(greet(""), "Hello, ! Welcome to Reveil.");
-}
-
-TEST(GreetTest, NameWithSpaces) {
-    EXPECT_EQ(greet("John Doe"), "Hello, John Doe! Welcome to Reveil.");
-}
-
-} // namespace test
-} // namespace reveil
+    } // namespace test
+} // namespace rr

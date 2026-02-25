@@ -9,6 +9,8 @@ cmake-build-*/
 *.swo
 *~
 
+.env
+
 # Compiled files
 *.o
 *.a

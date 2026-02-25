@@ -7,35 +7,14 @@
 namespace rr
 {
 
-    template <typename T>
-        requires std::derived_from<T, hh::Interface>
     class ReveilRepublicain
     {
     public:
-        /**
-         * @brief Add two integers
-         * @param a First operand
-         * @param b Second operand
-         * @return Sum of a and b
-         */
-        int add(int a, int b) const;
-
-        /**
-         * @brief Subtract two integers
-         * @param a First operand
-         * @param b Second operand
-         * @return Difference of a and b
-         */
-        int subtract(int a, int b) const;
-
-        /**
-         * @brief Multiply two integers
-         * @param a First operand
-         * @param b Second operand
-         * @return Product of a and b
-         */
-        int multiply(int a, int b) const;
+        template <hw::Display D, hw::Timer T>
+        hw::output_flags_t compute_update(D &display, T &timer, const hw::Event &event)
+        {
+            return static_cast<hw::output_flags_t>(hw::OutputFlags::None);
+        }
     };
-
 
 } // namespace rr
