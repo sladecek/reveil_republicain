@@ -1,6 +1,7 @@
 # Create the reveil library
 add_library(reveil
     reveil.cpp
+    generated/drawing_objects.cpp
 )
 
 target_include_directories(reveil

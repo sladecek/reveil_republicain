@@ -917,8 +917,8 @@ def main():
     normal_font = FontTable(char_table, "normal", 18, None)
     normal_font.render_font()
 
-    with open("../drawing_objects.h", "w", encoding="utf-8") as header_file:
-        with open("../drawing_objects.cpp", "w", encoding="utf-8") as source_file:
+    with open("../src/generated/drawing_objects.h", "w", encoding="utf-8") as header_file:
+        with open("../src/generated/drawing_objects.cpp", "w", encoding="utf-8") as source_file:
             # Write C++ header and source file preambles
             header_file.write("#pragma once\n\n")
             header_file.write("#include <cstdint>\n")

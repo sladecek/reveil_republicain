@@ -56,6 +56,26 @@ FetchContent_MakeAvailable(glfw)
 # Enable testing
 enable_testing()
 
+# Custom target to run code generation
+add_custom_target(codegen
+    COMMAND ${CMAKE_COMMAND} -E echo "Running codegen.py..."
+    COMMAND python3 codegen.py
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/codegen
+    COMMENT "Generating drawing objects from codegen.py"
+    VERBATIM
+)
+
+# Make the generated files a dependency
+add_custom_command(
+    OUTPUT ${CMAKE_SOURCE_DIR}/src/generated/drawing_objects.h ${CMAKE_SOURCE_DIR}/src/generated/drawing_objects.cpp
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/src/generated
+    COMMAND python3 codegen.py
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/codegen
+    DEPENDS ${CMAKE_SOURCE_DIR}/codegen/codegen.py
+    COMMENT "Generating drawing_objects.h and drawing_objects.cpp"
+    VERBATIM
+)
+
 # Add subdirectories
 add_subdirectory(src)
 add_subdirectory(tests)
