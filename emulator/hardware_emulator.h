@@ -14,7 +14,8 @@ namespace emulator
     public:
         static constexpr int DISPLAY_WIDTH = 200;
         static constexpr int DISPLAY_HEIGHT = 200;
-        static constexpr int PIXELS_PER_BYTE = 4; // 2 bits per pixel
+        static constexpr rr::hw::BitsPerPixel BITS_PER_PIXEL = rr::hw::BitsPerPixel::b2;
+        static constexpr int PIXELS_PER_BYTE = 8 / static_cast<int>(BITS_PER_PIXEL);
 
         HardwareEmulator(rr::ReveilRepublicain &reveil)
             : reveil_(reveil),
@@ -178,6 +179,26 @@ namespace emulator
 
             auto diff = next_alarm_time_.value() - current_time_;
             return std::chrono::duration_cast<std::chrono::seconds>(diff).count();
+        }
+        
+        // Get current tick counter
+        int get_tick_counter() const { return tick_counter_; }
+        
+        // Process output flags from compute_update
+        void process_output_flags(rr::hw::output_flags_t flags)
+        {
+            beep_flag_ = (flags & static_cast<rr::hw::output_flags_t>(rr::hw::OutputFlags::Beep)) != 0;
+            backlight_flag_ = (flags & static_cast<rr::hw::output_flags_t>(rr::hw::OutputFlags::Backlight)) != 0;
+
+            bool sleep_flag = (flags & static_cast<rr::hw::output_flags_t>(rr::hw::OutputFlags::Sleep)) != 0;
+            if (sleep_flag)
+            {
+                awake_ = false;
+            }
+            else
+            {
+                awake_ = true;
+            }
         }
 
     private:

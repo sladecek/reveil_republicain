@@ -13,7 +13,17 @@
 namespace rr::hw
 {
 
+
+    enum class BitsPerPixel: uint8_t
+    {
+        b1 = 1,
+        b2 = 2,
+        b4 = 4,
+        b8 = 8
+    };
+
     using pixel_t = std::uint8_t;
+    using color_t = std::uint8_t;
     using x_t = std::uint8_t;
     using y_t = std::uint16_t;
 

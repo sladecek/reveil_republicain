@@ -72,9 +72,17 @@ int main(int, char**)
             );
             hardware.update_time(time_point);
             
+            // Send clock event
+            rr::hw::ClockEvent clock_event{time_point};
+            auto flags = reveil.compute_update(hardware, hardware, clock_event);
+            hardware.process_output_flags(flags);
+            
             // Send tick event if awake
             if (hardware.is_awake())
             {
+                rr::hw::TickEvent tick_event{hardware.get_tick_counter()};
+                flags = reveil.compute_update(hardware, hardware, tick_event);
+                hardware.process_output_flags(flags);
                 hardware.handle_tick();
             }
         }
@@ -148,17 +156,23 @@ int main(int, char**)
             ImGui::Text("Encoder Controls:");
             if (ImGui::Button("➖ Minus"))
             {
-                hardware.handle_encoder_minus();
+                rr::hw::EncoderEvent event{-1, false};
+                auto flags = reveil.compute_update(hardware, hardware, event);
+                hardware.process_output_flags(flags);
             }
             ImGui::SameLine();
             if (ImGui::Button("⏺ Press"))
             {
-                hardware.handle_encoder_press();
+                rr::hw::EncoderEvent event{0, true};
+                auto flags = reveil.compute_update(hardware, hardware, event);
+                hardware.process_output_flags(flags);
             }
             ImGui::SameLine();
             if (ImGui::Button("➕ Plus"))
             {
-                hardware.handle_encoder_plus();
+                rr::hw::EncoderEvent event{1, false};
+                auto flags = reveil.compute_update(hardware, hardware, event);
+                hardware.process_output_flags(flags);
             }
             
             ImGui::Separator();

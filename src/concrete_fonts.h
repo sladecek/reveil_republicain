@@ -23,11 +23,11 @@ struct NormalFont {
 struct BigFont {
     static constexpr size_t font_len = big_font_len;
     static constexpr size_t font_height = big_font_height;
-    static constexpr size_t font_content_size = 1428;
+    static constexpr size_t font_content_size = 749;
 
     const std::array<uint8_t, big_font_len>& char_widths = big_font_char_widths;
     const std::array<uint16_t, big_font_len>& char_begin = big_font_char_begin;
-    const std::array<uint8_t, 1428>& content = big_font_content;
+    const std::array<uint8_t, 749>& content = big_font_content;
 };
 
 }
