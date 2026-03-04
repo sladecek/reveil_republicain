@@ -51,6 +51,10 @@ namespace rr::hw
         using duration = std::chrono::duration<rep, period>;
         using time_point = std::chrono::time_point<Clock>;
         static constexpr bool is_steady = true;
+    
+        // Seconds since midnight 2001-01-01 UTC
+        // JD 2451910.5
+        static constexpr std::uint32_t jd_zero = 2451910;
     };
 
     template <typename T>

@@ -1,6 +1,7 @@
 # Create the reveil library
 add_library(reveil
     reveil.cpp
+    rr_time.cpp
     generated/drawing_objects.cpp
 )
 

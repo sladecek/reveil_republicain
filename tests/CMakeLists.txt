@@ -2,6 +2,7 @@
 add_executable(reveil_tests
     reveil_test.cpp
     renderer_test.cpp
+    time_test.cpp
 )
 
 # Link against gtest, gtest_main, and the reveil library
