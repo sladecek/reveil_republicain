@@ -165,7 +165,7 @@ namespace rr::ui::test
         // Note: This is a simplified test - actual character mapping would need to be implemented
         String hello_str = {0, 0, 0, 0}; // Placeholder
 
-        renderer.draw(hello_str, 0, 3); // bg=0 (black), fg=3 (white/max)
+        renderer.draw(hello_str, 0, 3, Renderer<hw::BitsPerPixel::b2, MockDisplay, NormalFont>::Align::left); // bg=0 (black), fg=3 (white/max)
 
         // For now, just verify it doesn't crash
         // In a complete implementation, we would verify the pixel output
