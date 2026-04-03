@@ -1,5 +1,5 @@
 #include "string_iterator.h"
-#include "concrete_fonts.h"
+#include "generated/concrete_fonts.h"
 
 #include <gtest/gtest.h>
 #include <vector>

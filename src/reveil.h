@@ -2,7 +2,7 @@
 
 #include "hardware_interface.h"
 #include "renderer.h"
-#include "concrete_fonts.h"
+#include "generated/concrete_fonts.h"
 #include "time_painter.h"
 #include "rr_time.h"
 

@@ -1,5 +1,5 @@
 #include "char_pixel_extractor.h"
-#include "concrete_fonts.h"
+#include "generated/concrete_fonts.h"
 
 #include <gtest/gtest.h>
 #include <vector>
@@ -233,6 +233,70 @@ namespace rr::ui::test
         call_count = 0;
         extractor.extract_char_line(1, 0, 8, 3);
         EXPECT_EQ(call_count, 3);
+    }
+
+    TEST(CharPixelExtractorTest, VerifyDigit0Rendering)
+    {
+        using namespace rr::ui;
+        
+        NormalFont font;
+        
+        // Character '0' is at index 3
+        uint8_t char_index = 3;
+        uint8_t char_width = font.char_widths[char_index];
+        
+        // Expected pattern based on actual hex values from drawing_objects.cpp:
+        // Now correctly includes inter-character spacing (trailing 0s on each line)
+        std::vector<std::string> expected = {
+            "........", // padding
+            "........",
+            "........",
+            "........",
+            "........",
+            "........",
+            "........",
+            ".####...",  // line 7
+            ".#####..",  // line 8
+            "##..##..",  // line 9
+            "##...#..",  // line 10
+            "##...##.",  // line 11
+            "##...##.",  // line 12
+            "##...##.",  // line 13
+            "##...##.",  // line 14
+            "##...##.",  // line 15
+            "##...#..",  // line 16
+            "##..##..",  // line 17
+            ".#####..",  // line 18
+            ".####...",  // line 19
+            "........", // padding
+            "........",
+            "........",
+            "........"
+        };
+        
+        std::cout << "\nVerifying character '0' rendering:\n";
+        
+        // Extract and verify all lines
+        for (int y = 0; y < font.font_height; ++y) {
+            std::vector<bool> pixels;
+            auto draw_pixel = [&pixels](bool pixel) { pixels.push_back(pixel); };
+            
+            CharPixelExtractor<NormalFont> extractor(font, draw_pixel);
+            extractor.extract_char_line(char_index, y, char_width, char_width);
+            
+            // Build the actual string
+            std::string actual;
+            for (bool pixel : pixels) {
+                actual += pixel ? '#' : '.';
+            }
+            
+            // Print for visual inspection
+            std::cout << actual << "\n";
+            
+            // Verify against expected
+            EXPECT_EQ(actual, expected[y]) << "Mismatch at line " << y;
+        }
+        std::cout << "\n";
     }
 
 } // namespace rr::ui::test

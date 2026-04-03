@@ -37,6 +37,9 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     // colon: ":"
     13,
 
+    // space: " "
+    0,
+
     // bell: "🔔"
     61,
 
@@ -1254,407 +1257,408 @@ const std::array<uint16_t, fragment_count> fragment_begin = {
     8, // "8"
     9, // "9"
     10, // colon: ":"
-    11, // bell: "🔔"
-    12, // run: "run"
-    15, // stop: "stop"
-    19, // alarm: "alarm"
-    24, // hour: "hour"
-    28, // minute: "minute"
-    34, // set: "set"
-    37, // day: "day"
-    40, // month: "month"
-    45, // year: "year"
-    49, // annee: "année"
-    54, // on_off: "on"
-    56, // "off"
-    59, // months: "Vendémiaire"
-    70, // "Brumaire"
-    78, // "Frimaire"
-    86, // "Nivôse"
-    92, // "Pluviôse"
-    100, // "Ventôse"
-    107, // "Germinal"
-    115, // "Floréal"
-    122, // "Prairial"
-    130, // "Messidor"
-    138, // "Thermidor"
-    147, // "Fructidor"
-    156, // days: "Primidi"
-    163, // "Duodi"
-    168, // "Tridi"
-    173, // "Quartidi"
-    181, // "Quintidi"
-    189, // "Sextidi"
-    196, // "Septidi"
-    203, // "Octidi"
-    209, // "Nonidi"
-    215, // "Décadi"
-    221, // sansculottides: "Fête de la Vertu"
-    237, // "Fête du Génie"
-    250, // "Fête du Travail"
-    265, // "Fête de l'Opinion"
-    282, // "Fête des Récompenses"
-    302, // "Fête de la Révolution"
-    323, // day_of_year: "raisin"
-    329, // "safran"
-    335, // "châtaigne"
-    344, // "colchique"
-    353, // "cheval"
-    359, // "balsamine"
-    368, // "carotte"
-    375, // "amarante"
-    383, // "panais"
-    389, // "cuve"
-    393, // "pomme de terre"
-    407, // "immortelle"
-    417, // "potiron"
-    424, // "réséda"
-    430, // "âne"
-    433, // "belle de nuit"
-    446, // "citrouille"
-    456, // "sarrasin"
-    464, // "tournesol"
-    473, // "pressoir"
-    481, // "chanvre"
-    488, // "pêche"
-    493, // "navet"
-    498, // "amaryllis"
-    507, // "bœuf"
-    511, // "aubergine"
-    520, // "piment"
-    526, // "tomate"
-    532, // "orge"
-    536, // "tonneau"
-    543, // "pomme"
-    548, // "céleri"
-    554, // "poire"
-    559, // "betterave"
-    568, // "oie"
-    571, // "héliotrope"
-    581, // "figue"
-    586, // "scorsonère"
-    596, // "alisier"
-    603, // "charrue"
-    610, // "salsifis"
-    618, // "macre"
-    623, // "topinambour"
-    634, // "endive"
-    640, // "dindon"
-    646, // "chervis"
-    653, // "cresson"
-    660, // "dentelaire"
-    670, // "grenade"
-    677, // "herse"
-    682, // "bacchante"
-    691, // "azerole"
-    698, // "garance"
-    705, // "orange"
-    711, // "faisan"
-    717, // "pistache"
-    725, // "macjonc"
-    732, // "coing"
-    737, // "cormier"
-    744, // "rouleau"
-    751, // "raiponce"
-    759, // "turneps"
-    766, // "chicorée"
-    774, // "nèfle"
-    779, // "cochon"
-    785, // "mâche"
-    790, // "chou-fleur"
-    800, // "miel"
-    804, // "génépi"
-    810, // "pioche"
-    816, // "cire"
-    820, // "raifort"
-    827, // "cèdre"
-    832, // "sapin"
-    837, // "chevreuil"
-    846, // "ajonc"
-    851, // "cyprès"
-    857, // "lierre"
-    863, // "sabine"
-    869, // "hoye"
-    873, // "érable sucré"
-    885, // "bruyère"
-    892, // "roseau"
-    898, // "oseille"
-    905, // "grillon"
-    912, // "pignon"
-    918, // "liège"
-    923, // "truffe"
-    929, // "olive"
-    934, // "pelle"
-    939, // "tourbe"
-    945, // "houille"
-    952, // "bitume"
-    958, // "soufre"
-    964, // "chien"
-    969, // "lave"
-    973, // "terre végétale"
-    987, // "fumier"
-    993, // "salpêtre"
-    1001, // "fléau"
-    1006, // "granite"
-    1013, // "argile"
-    1019, // "ardoise"
-    1026, // "grès"
-    1030, // "lapin"
-    1035, // "silex"
-    1040, // "marne"
-    1045, // "pierre à chaux"
-    1059, // "marbre"
-    1065, // "van"
-    1068, // "pierre à plâtre"
-    1083, // "sel"
-    1086, // "fer"
-    1089, // "cuivre"
-    1095, // "chat"
-    1099, // "étain"
-    1104, // "plomb"
-    1109, // "zinc"
-    1113, // "mercure"
-    1120, // "crible"
-    1126, // "lauréole"
-    1134, // "mousse"
-    1140, // "fragon"
-    1146, // "pervenche"
-    1155, // "taureau"
-    1162, // "laurier-tin"
-    1173, // "amatyste"
-    1181, // "mézéréon"
-    1189, // "peuplier"
-    1197, // "coignée"
-    1204, // "ellébore"
-    1212, // "brocoli"
-    1219, // "laurier"
-    1226, // "avelinier"
-    1235, // "vache"
-    1240, // "buis"
-    1244, // "lichén"
-    1250, // "if"
-    1252, // "pulmonaire"
-    1262, // "serpette"
-    1270, // "thlaspi"
-    1277, // "thimelé"
-    1284, // "chiendent"
-    1293, // "traînasse"
-    1302, // "lièvre"
-    1308, // "guède"
-    1313, // "noisetier"
-    1322, // "cyclamen"
-    1330, // "chélidoine"
-    1340, // "traîneau"
-    1348, // "tussilage"
-    1357, // "cornouiller"
-    1368, // "violier"
-    1375, // "troène"
-    1381, // "bouc"
-    1385, // "asaret"
-    1391, // "alaterne"
-    1399, // "violette"
-    1407, // "marceau"
-    1414, // "bêche"
-    1419, // "narcisse"
-    1427, // "orme"
-    1431, // "fumeterre"
-    1440, // "vélar"
-    1445, // "chèvre"
-    1451, // "épinard"
-    1458, // "doronic"
-    1465, // "mouron"
-    1471, // "cerfeuil"
-    1479, // "cordeau"
-    1486, // "mandragore"
-    1496, // "persil"
-    1502, // "cochléaria"
-    1512, // "pâquerette"
-    1522, // "thon"
-    1526, // "pissenlit"
-    1535, // "sylvie"
-    1541, // "capillaire"
-    1551, // "frêne"
-    1556, // "plantoir"
-    1564, // "primevère"
-    1573, // "platane"
-    1580, // "asperge"
-    1587, // "tulipe"
-    1593, // "poule"
-    1598, // "bette"
-    1603, // "bouleau"
-    1610, // "jonquille"
-    1619, // "aulne"
-    1624, // "couvoir"
-    1631, // "perce-neige"
-    1642, // "crocus"
-    1648, // "hêtre"
-    1653, // "laitue"
-    1659, // "torillon"
-    1667, // "lilas"
-    1672, // "anémone"
-    1679, // "pensée"
-    1685, // "myrtille"
-    1693, // "greffoir"
-    1701, // "cerisier"
-    1709, // "verveine"
-    1717, // "grenadier"
-    1726, // "vernal"
-    1732, // "cheval"
-    1738, // "brenèche"
-    1746, // "charme"
-    1752, // "morille"
-    1759, // "hêtre enraciné"
-    1773, // "ruche"
-    1778, // "rose"
-    1782, // "chêne"
-    1787, // "fougère"
-    1794, // "aubépine"
-    1802, // "rossignol"
-    1811, // "ancolie"
-    1818, // "muguet"
-    1824, // "champignon"
-    1834, // "hyacinthe"
-    1843, // "râteau"
-    1849, // "rhubarbe"
-    1857, // "sainfoin"
-    1865, // "bâton-d'or"
-    1875, // "chamerisier"
-    1886, // "ver à soie"
-    1896, // "consoude"
-    1904, // "pimprenelle"
-    1915, // "corbeille d'or"
-    1929, // "arroche"
-    1936, // "sarcloir"
-    1944, // "statice"
-    1951, // "fritillaire"
-    1962, // "bourache"
-    1970, // "valériane"
-    1979, // "carpe"
-    1984, // "fusain"
-    1990, // "civette"
-    1997, // "buglosse"
-    2005, // "sénevé"
-    2011, // "houlette"
-    2019, // "luzerne"
-    2026, // "hémérocalle"
-    2037, // "trèfle"
-    2043, // "angélique"
-    2052, // "canard"
-    2058, // "mélisse"
-    2065, // "fromental"
-    2074, // "martagon"
-    2082, // "serpolet"
-    2090, // "faux"
-    2094, // "fraise"
-    2100, // "bétoine"
-    2107, // "pois"
-    2111, // "acacia"
-    2117, // "caille"
-    2123, // "œillet"
-    2129, // "sureau"
-    2135, // "pavot"
-    2140, // "tilleul"
-    2147, // "fourche"
-    2154, // "barbeau"
-    2161, // "camomille"
-    2170, // "chévrefeuille"
-    2183, // "caille-lait"
-    2194, // "tanche"
-    2200, // "jasmin"
-    2206, // "verveine"
-    2214, // "thym"
-    2218, // "pivoine"
-    2225, // "chariot"
-    2232, // "seigle"
-    2238, // "avoine"
-    2244, // "oignon"
-    2250, // "véronique"
-    2259, // "mulet"
-    2264, // "romaine"
-    2271, // "concombre"
-    2280, // "échalote"
-    2288, // "absinthe"
-    2296, // "faucille"
-    2304, // "coriandre"
-    2313, // "artichaut"
-    2322, // "girofle"
-    2329, // "lavande"
-    2336, // "chamois"
-    2343, // "tabac"
-    2348, // "groseille"
-    2357, // "gesse"
-    2362, // "cerise"
-    2368, // "parc"
-    2372, // "menthe"
-    2378, // "cumin"
-    2383, // "haricot"
-    2390, // "orcanète"
-    2398, // "pintade"
-    2405, // "sauge"
-    2410, // "ail"
-    2413, // "vesce"
-    2418, // "blé"
-    2421, // "chalémie"
-    2429, // "épeautre"
-    2437, // "bouillon-blanc"
-    2451, // "melon"
-    2456, // "ivraie"
-    2462, // "bélier"
-    2468, // "prêle"
-    2473, // "armoise"
-    2480, // "carthame"
-    2488, // "mûre"
-    2492, // "arrosoir"
-    2500, // "panis"
-    2505, // "salicorne"
-    2514, // "abricot"
-    2521, // "basilic"
-    2528, // "brebis"
-    2534, // "guimauve"
-    2542, // "lin"
-    2545, // "amande"
-    2551, // "gentiane"
-    2559, // "écluse"
-    2565, // "carline"
-    2572, // "câprier"
-    2579, // "lentille"
-    2587, // "aunée"
-    2592, // "loutre"
-    2598, // "myrte"
-    2603, // "colza"
-    2608, // "lupin"
-    2613, // "coton"
-    2618, // "moulin"
-    2624, // "prune"
-    2629, // "millet"
-    2635, // "lycoperdon"
-    2645, // "escourgeon"
-    2655, // "saumon"
-    2661, // "tubéreuse"
-    2670, // "sucrion"
-    2677, // "apocyn"
-    2683, // "réglisse"
-    2691, // "échelle"
-    2698, // "pastèque"
-    2706, // "fenouil"
-    2713, // "épine-vinette"
-    2726, // "noix"
-    2730, // "truite"
-    2736, // "citron"
-    2742, // "cardère"
-    2749, // "nerprun"
-    2756, // "tagette"
-    2763, // "hotte"
-    2768, // "églantier"
-    2777, // "noisette"
-    2785, // "houblon"
-    2792, // "sorgho"
-    2798, // "écrevisse"
-    2807, // "bigarade"
-    2815, // "verge d'or"
-    2825, // "maïs"
-    2829, // "marron"
-    2835, // "panier"
+    11, // space: " "
+    12, // bell: "🔔"
+    13, // run: "run"
+    16, // stop: "stop"
+    20, // alarm: "alarm"
+    25, // hour: "hour"
+    29, // minute: "minute"
+    35, // set: "set"
+    38, // day: "day"
+    41, // month: "month"
+    46, // year: "year"
+    50, // annee: "année"
+    55, // on_off: "on"
+    57, // "off"
+    60, // months: "Vendémiaire"
+    71, // "Brumaire"
+    79, // "Frimaire"
+    87, // "Nivôse"
+    93, // "Pluviôse"
+    101, // "Ventôse"
+    108, // "Germinal"
+    116, // "Floréal"
+    123, // "Prairial"
+    131, // "Messidor"
+    139, // "Thermidor"
+    148, // "Fructidor"
+    157, // days: "Primidi"
+    164, // "Duodi"
+    169, // "Tridi"
+    174, // "Quartidi"
+    182, // "Quintidi"
+    190, // "Sextidi"
+    197, // "Septidi"
+    204, // "Octidi"
+    210, // "Nonidi"
+    216, // "Décadi"
+    222, // sansculottides: "Fête de la Vertu"
+    238, // "Fête du Génie"
+    251, // "Fête du Travail"
+    266, // "Fête de l'Opinion"
+    283, // "Fête des Récompenses"
+    303, // "Fête de la Révolution"
+    324, // day_of_year: "raisin"
+    330, // "safran"
+    336, // "châtaigne"
+    345, // "colchique"
+    354, // "cheval"
+    360, // "balsamine"
+    369, // "carotte"
+    376, // "amarante"
+    384, // "panais"
+    390, // "cuve"
+    394, // "pomme de terre"
+    408, // "immortelle"
+    418, // "potiron"
+    425, // "réséda"
+    431, // "âne"
+    434, // "belle de nuit"
+    447, // "citrouille"
+    457, // "sarrasin"
+    465, // "tournesol"
+    474, // "pressoir"
+    482, // "chanvre"
+    489, // "pêche"
+    494, // "navet"
+    499, // "amaryllis"
+    508, // "bœuf"
+    512, // "aubergine"
+    521, // "piment"
+    527, // "tomate"
+    533, // "orge"
+    537, // "tonneau"
+    544, // "pomme"
+    549, // "céleri"
+    555, // "poire"
+    560, // "betterave"
+    569, // "oie"
+    572, // "héliotrope"
+    582, // "figue"
+    587, // "scorsonère"
+    597, // "alisier"
+    604, // "charrue"
+    611, // "salsifis"
+    619, // "macre"
+    624, // "topinambour"
+    635, // "endive"
+    641, // "dindon"
+    647, // "chervis"
+    654, // "cresson"
+    661, // "dentelaire"
+    671, // "grenade"
+    678, // "herse"
+    683, // "bacchante"
+    692, // "azerole"
+    699, // "garance"
+    706, // "orange"
+    712, // "faisan"
+    718, // "pistache"
+    726, // "macjonc"
+    733, // "coing"
+    738, // "cormier"
+    745, // "rouleau"
+    752, // "raiponce"
+    760, // "turneps"
+    767, // "chicorée"
+    775, // "nèfle"
+    780, // "cochon"
+    786, // "mâche"
+    791, // "chou-fleur"
+    801, // "miel"
+    805, // "génépi"
+    811, // "pioche"
+    817, // "cire"
+    821, // "raifort"
+    828, // "cèdre"
+    833, // "sapin"
+    838, // "chevreuil"
+    847, // "ajonc"
+    852, // "cyprès"
+    858, // "lierre"
+    864, // "sabine"
+    870, // "hoye"
+    874, // "érable sucré"
+    886, // "bruyère"
+    893, // "roseau"
+    899, // "oseille"
+    906, // "grillon"
+    913, // "pignon"
+    919, // "liège"
+    924, // "truffe"
+    930, // "olive"
+    935, // "pelle"
+    940, // "tourbe"
+    946, // "houille"
+    953, // "bitume"
+    959, // "soufre"
+    965, // "chien"
+    970, // "lave"
+    974, // "terre végétale"
+    988, // "fumier"
+    994, // "salpêtre"
+    1002, // "fléau"
+    1007, // "granite"
+    1014, // "argile"
+    1020, // "ardoise"
+    1027, // "grès"
+    1031, // "lapin"
+    1036, // "silex"
+    1041, // "marne"
+    1046, // "pierre à chaux"
+    1060, // "marbre"
+    1066, // "van"
+    1069, // "pierre à plâtre"
+    1084, // "sel"
+    1087, // "fer"
+    1090, // "cuivre"
+    1096, // "chat"
+    1100, // "étain"
+    1105, // "plomb"
+    1110, // "zinc"
+    1114, // "mercure"
+    1121, // "crible"
+    1127, // "lauréole"
+    1135, // "mousse"
+    1141, // "fragon"
+    1147, // "pervenche"
+    1156, // "taureau"
+    1163, // "laurier-tin"
+    1174, // "amatyste"
+    1182, // "mézéréon"
+    1190, // "peuplier"
+    1198, // "coignée"
+    1205, // "ellébore"
+    1213, // "brocoli"
+    1220, // "laurier"
+    1227, // "avelinier"
+    1236, // "vache"
+    1241, // "buis"
+    1245, // "lichén"
+    1251, // "if"
+    1253, // "pulmonaire"
+    1263, // "serpette"
+    1271, // "thlaspi"
+    1278, // "thimelé"
+    1285, // "chiendent"
+    1294, // "traînasse"
+    1303, // "lièvre"
+    1309, // "guède"
+    1314, // "noisetier"
+    1323, // "cyclamen"
+    1331, // "chélidoine"
+    1341, // "traîneau"
+    1349, // "tussilage"
+    1358, // "cornouiller"
+    1369, // "violier"
+    1376, // "troène"
+    1382, // "bouc"
+    1386, // "asaret"
+    1392, // "alaterne"
+    1400, // "violette"
+    1408, // "marceau"
+    1415, // "bêche"
+    1420, // "narcisse"
+    1428, // "orme"
+    1432, // "fumeterre"
+    1441, // "vélar"
+    1446, // "chèvre"
+    1452, // "épinard"
+    1459, // "doronic"
+    1466, // "mouron"
+    1472, // "cerfeuil"
+    1480, // "cordeau"
+    1487, // "mandragore"
+    1497, // "persil"
+    1503, // "cochléaria"
+    1513, // "pâquerette"
+    1523, // "thon"
+    1527, // "pissenlit"
+    1536, // "sylvie"
+    1542, // "capillaire"
+    1552, // "frêne"
+    1557, // "plantoir"
+    1565, // "primevère"
+    1574, // "platane"
+    1581, // "asperge"
+    1588, // "tulipe"
+    1594, // "poule"
+    1599, // "bette"
+    1604, // "bouleau"
+    1611, // "jonquille"
+    1620, // "aulne"
+    1625, // "couvoir"
+    1632, // "perce-neige"
+    1643, // "crocus"
+    1649, // "hêtre"
+    1654, // "laitue"
+    1660, // "torillon"
+    1668, // "lilas"
+    1673, // "anémone"
+    1680, // "pensée"
+    1686, // "myrtille"
+    1694, // "greffoir"
+    1702, // "cerisier"
+    1710, // "verveine"
+    1718, // "grenadier"
+    1727, // "vernal"
+    1733, // "cheval"
+    1739, // "brenèche"
+    1747, // "charme"
+    1753, // "morille"
+    1760, // "hêtre enraciné"
+    1774, // "ruche"
+    1779, // "rose"
+    1783, // "chêne"
+    1788, // "fougère"
+    1795, // "aubépine"
+    1803, // "rossignol"
+    1812, // "ancolie"
+    1819, // "muguet"
+    1825, // "champignon"
+    1835, // "hyacinthe"
+    1844, // "râteau"
+    1850, // "rhubarbe"
+    1858, // "sainfoin"
+    1866, // "bâton-d'or"
+    1876, // "chamerisier"
+    1887, // "ver à soie"
+    1897, // "consoude"
+    1905, // "pimprenelle"
+    1916, // "corbeille d'or"
+    1930, // "arroche"
+    1937, // "sarcloir"
+    1945, // "statice"
+    1952, // "fritillaire"
+    1963, // "bourache"
+    1971, // "valériane"
+    1980, // "carpe"
+    1985, // "fusain"
+    1991, // "civette"
+    1998, // "buglosse"
+    2006, // "sénevé"
+    2012, // "houlette"
+    2020, // "luzerne"
+    2027, // "hémérocalle"
+    2038, // "trèfle"
+    2044, // "angélique"
+    2053, // "canard"
+    2059, // "mélisse"
+    2066, // "fromental"
+    2075, // "martagon"
+    2083, // "serpolet"
+    2091, // "faux"
+    2095, // "fraise"
+    2101, // "bétoine"
+    2108, // "pois"
+    2112, // "acacia"
+    2118, // "caille"
+    2124, // "œillet"
+    2130, // "sureau"
+    2136, // "pavot"
+    2141, // "tilleul"
+    2148, // "fourche"
+    2155, // "barbeau"
+    2162, // "camomille"
+    2171, // "chévrefeuille"
+    2184, // "caille-lait"
+    2195, // "tanche"
+    2201, // "jasmin"
+    2207, // "verveine"
+    2215, // "thym"
+    2219, // "pivoine"
+    2226, // "chariot"
+    2233, // "seigle"
+    2239, // "avoine"
+    2245, // "oignon"
+    2251, // "véronique"
+    2260, // "mulet"
+    2265, // "romaine"
+    2272, // "concombre"
+    2281, // "échalote"
+    2289, // "absinthe"
+    2297, // "faucille"
+    2305, // "coriandre"
+    2314, // "artichaut"
+    2323, // "girofle"
+    2330, // "lavande"
+    2337, // "chamois"
+    2344, // "tabac"
+    2349, // "groseille"
+    2358, // "gesse"
+    2363, // "cerise"
+    2369, // "parc"
+    2373, // "menthe"
+    2379, // "cumin"
+    2384, // "haricot"
+    2391, // "orcanète"
+    2399, // "pintade"
+    2406, // "sauge"
+    2411, // "ail"
+    2414, // "vesce"
+    2419, // "blé"
+    2422, // "chalémie"
+    2430, // "épeautre"
+    2438, // "bouillon-blanc"
+    2452, // "melon"
+    2457, // "ivraie"
+    2463, // "bélier"
+    2469, // "prêle"
+    2474, // "armoise"
+    2481, // "carthame"
+    2489, // "mûre"
+    2493, // "arrosoir"
+    2501, // "panis"
+    2506, // "salicorne"
+    2515, // "abricot"
+    2522, // "basilic"
+    2529, // "brebis"
+    2535, // "guimauve"
+    2543, // "lin"
+    2546, // "amande"
+    2552, // "gentiane"
+    2560, // "écluse"
+    2566, // "carline"
+    2573, // "câprier"
+    2580, // "lentille"
+    2588, // "aunée"
+    2593, // "loutre"
+    2599, // "myrte"
+    2604, // "colza"
+    2609, // "lupin"
+    2614, // "coton"
+    2619, // "moulin"
+    2625, // "prune"
+    2630, // "millet"
+    2636, // "lycoperdon"
+    2646, // "escourgeon"
+    2656, // "saumon"
+    2662, // "tubéreuse"
+    2671, // "sucrion"
+    2678, // "apocyn"
+    2684, // "réglisse"
+    2692, // "échelle"
+    2699, // "pastèque"
+    2707, // "fenouil"
+    2714, // "épine-vinette"
+    2727, // "noix"
+    2731, // "truite"
+    2737, // "citron"
+    2743, // "cardère"
+    2750, // "nerprun"
+    2757, // "tagette"
+    2764, // "hotte"
+    2769, // "églantier"
+    2778, // "noisette"
+    2786, // "houblon"
+    2793, // "sorgho"
+    2799, // "écrevisse"
+    2808, // "bigarade"
+    2816, // "verge d'or"
+    2826, // "maïs"
+    2830, // "marron"
+    2836, // "panier"
 };
 
 // Fragment lengths
@@ -1670,6 +1674,7 @@ const std::array<uint16_t, fragment_count> fragment_len = {
     1, // "8"
     1, // "9"
     1, // colon: ":"
+    1, // space: " "
     1, // bell: "🔔"
     3, // run: "run"
     4, // stop: "stop"
@@ -2091,60 +2096,60 @@ const std::array<uint8_t, big_font_len> big_font_char_widths = {
 // big font character begin positions
 const std::array<uint16_t, big_font_len> big_font_char_begin = {
     0, // '0'
-    74, // '1'
-    128, // '2'
-    202, // '3'
-    276, // '4'
-    354, // '5'
-    423, // '6'
-    497, // '7'
-    571, // '8'
-    645, // '9'
-    719, // ':'
+    78, // '1'
+    156, // '2'
+    234, // '3'
+    312, // '4'
+    390, // '5'
+    468, // '6'
+    546, // '7'
+    624, // '8'
+    702, // '9'
+    780, // ':'
 };
 
 // big font content (bitmap data, packed)
-const std::array<uint8_t, 749> big_font_content = {
+const std::array<uint8_t, 819> big_font_content = {
     // '0'
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //      #####    
-    //    ########   
-    //    #########  
-    //   ####   #### 
-    //   ###    #### 
-    //  ####     ### 
-    //  ####     ####
-    //  ###      ####
-    //  ###      ####
-    //  ###      ####
-    // ####       ###
-    // ####       ###
-    // ####       ###
-    // ####       ###
-    // ####       ###
-    // ####      ####
-    //  ###      ####
-    //  ###      ####
-    //  ###      ####
-    //  ####     ####
-    //  ####     ### 
-    //  ####    #### 
-    //   ####   #### 
-    //   ##########  
-    //    ########   
-    //      #####    
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //      #####     
+    //    ########    
+    //    #########   
+    //   ####   ####  
+    //   ###    ####  
+    //  ####     ###  
+    //  ####     #### 
+    //  ###      #### 
+    //  ###      #### 
+    //  ###      #### 
+    // ####       ### 
+    // ####       ### 
+    // ####       ### 
+    // ####       ### 
+    // ####       ### 
+    // ####      #### 
+    //  ###      #### 
+    //  ###      #### 
+    //  ###      #### 
+    //  ####     #### 
+    //  ####     ###  
+    //  ####    ####  
+    //   ####   ####  
+    //   ##########   
+    //    ########    
+    //      #####     
     0x00,
     0x00,
     0x00,
@@ -2168,98 +2173,102 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xF8,
-    0x80,
-    0x7F,
-    0xE0,
-    0x3F,
-    0x3C,
-    0x1E,
-    0x87,
-    0xE7,
-    0xC1,
-    0x79,
-    0xF0,
-    0x0E,
-    0xBC,
-    0x03,
-    0xEF,
-    0xC0,
-    0x3F,
-    0xE0,
-    0x0F,
-    0xF8,
-    0x03,
-    0xFE,
-    0x80,
-    0x3F,
-    0xE0,
-    0x0F,
-    0xBC,
-    0x03,
-    0xEF,
-    0xC0,
-    0x3B,
-    0xF0,
-    0x1E,
-    0xBC,
+    0x00,
+    0x00,
+    0x00,
     0x07,
-    0xE7,
-    0xE1,
-    0xF1,
+    0xC0,
+    0x1F,
+    0xE0,
+    0x1F,
+    0xF0,
+    0x3C,
     0x78,
-    0xFC,
-    0x0F,
-    0xFE,
-    0x01,
-    0x3E,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
+    0x38,
+    0x78,
+    0x78,
+    0x38,
+    0x78,
+    0x3C,
+    0x70,
+    0x3C,
+    0x70,
+    0x3C,
+    0x70,
+    0x3C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x3C,
+    0x70,
+    0x3C,
+    0x70,
+    0x3C,
+    0x70,
+    0x3C,
+    0x78,
+    0x3C,
+    0x78,
+    0x38,
+    0x78,
+    0x78,
+    0x3C,
+    0x78,
+    0x3F,
+    0xF0,
+    0x1F,
+    0xE0,
+    0x07,
+    0xC0,
 
     // '1'
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //           
-    //       ####
-    //      #####
-    //     ######
-    //    #######
-    //   ########
-    //  #### ####
-    // ####  ####
-    //  ##   ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
-    //       ####
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //            
+    //       #### 
+    //      ##### 
+    //     ###### 
+    //    ####### 
+    //   ######## 
+    //  #### #### 
+    // ####  #### 
+    //  ##   #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
+    //       #### 
     0x00,
     0x00,
     0x00,
@@ -2277,84 +2286,108 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x03,
+    0xC0,
+    0x07,
+    0xC0,
     0x0F,
-    0x3E,
-    0xFC,
-    0xF8,
+    0xC0,
+    0x1F,
+    0xC0,
+    0x3F,
+    0xC0,
+    0x7B,
+    0xC0,
     0xF3,
-    0xEF,
-    0xFD,
-    0xF3,
-    0xC6,
-    0x03,
-    0x0F,
-    0x3C,
-    0xF0,
+    0xC0,
+    0x63,
     0xC0,
     0x03,
-    0x0F,
-    0x3C,
-    0xF0,
     0xC0,
     0x03,
-    0x0F,
-    0x3C,
-    0xF0,
     0xC0,
     0x03,
-    0x0F,
-    0x3C,
-    0xF0,
     0xC0,
     0x03,
-    0x0F,
-    0x3C,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
+    0x03,
+    0xC0,
 
     // '2'
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //     ######    
-    //   #########   
-    // ############  
-    //  ####   ##### 
-    //   #      #### 
-    //           ### 
-    //           ### 
-    //           ### 
-    //           ### 
-    //          #### 
-    //          #### 
-    //          #### 
-    //         ####  
-    //        ####   
-    //        ####   
-    //       ####    
-    //      ####     
-    //      ####     
-    //     ####      
-    //    ####       
-    //   #####       
-    //   ####        
-    //  ####         
-    // ##############
-    // ##############
-    // ##############
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //     ######     
+    //   #########    
+    // ############   
+    //  ####   #####  
+    //   #      ####  
+    //           ###  
+    //           ###  
+    //           ###  
+    //           ###  
+    //          ####  
+    //          ####  
+    //          ####  
+    //         ####   
+    //        ####    
+    //        ####    
+    //       ####     
+    //      ####      
+    //      ####      
+    //     ####       
+    //    ####        
+    //   #####        
+    //   ####         
+    //  ####          
+    // ############## 
+    // ############## 
+    // ############## 
     0x00,
     0x00,
     0x00,
@@ -2378,98 +2411,102 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xFC,
+    0x00,
+    0x00,
+    0x00,
+    0x0F,
     0xC0,
-    0x7F,
-    0xFC,
     0x3F,
-    0x1E,
-    0x1F,
-    0x81,
-    0x07,
-    0xC0,
+    0xE0,
+    0xFF,
+    0xF0,
+    0x78,
+    0xF8,
+    0x20,
+    0x78,
+    0x00,
+    0x38,
+    0x00,
+    0x38,
+    0x00,
+    0x38,
+    0x00,
+    0x38,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x00,
+    0xF0,
     0x01,
-    0x70,
-    0x00,
-    0x1C,
-    0x00,
-    0x07,
     0xE0,
     0x01,
-    0x78,
+    0xE0,
+    0x03,
+    0xC0,
+    0x07,
+    0x80,
+    0x07,
+    0x80,
+    0x0F,
     0x00,
     0x1E,
-    0xC0,
-    0x03,
-    0x78,
     0x00,
-    0x1E,
-    0xC0,
-    0x03,
-    0x78,
+    0x3E,
     0x00,
-    0x1E,
-    0xC0,
-    0x03,
-    0x78,
+    0x3C,
     0x00,
-    0x1F,
-    0xC0,
-    0x03,
     0x78,
     0x00,
     0xFF,
+    0xFC,
     0xFF,
+    0xFC,
     0xFF,
-    0xFF,
-    0xFF,
-    0x03,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
+    0xFC,
 
     // '3'
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //     ######    
-    //   ##########  
-    // ############  
-    //  ###    ##### 
-    //   #      #### 
-    //           ### 
-    //           ####
-    //           ### 
-    //          #### 
-    //          #### 
-    //        #####  
-    //    ########   
-    //    #######    
-    //    #########  
-    //         ##### 
-    //          #### 
-    //           ####
-    //           ####
-    //           ####
-    //           ####
-    //           ####
-    // #        #####
-    // ###     ##### 
-    // ############  
-    // ###########   
-    //   #######     
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //     ######     
+    //   ##########   
+    // ############   
+    //  ###    #####  
+    //   #      ####  
+    //           ###  
+    //           #### 
+    //           ###  
+    //          ####  
+    //          ####  
+    //        #####   
+    //    ########    
+    //    #######     
+    //    #########   
+    //         #####  
+    //          ####  
+    //           #### 
+    //           #### 
+    //           #### 
+    //           #### 
+    //           #### 
+    // #        ##### 
+    // ###     #####  
+    // ############   
+    // ###########    
+    //   #######      
     0x00,
     0x00,
     0x00,
@@ -2493,327 +2530,340 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xFC,
-    0xC0,
-    0xFF,
-    0xFC,
-    0x3F,
-    0x0E,
-    0x1F,
-    0x81,
-    0x07,
-    0xC0,
-    0x01,
-    0xF0,
     0x00,
-    0x1C,
-    0x80,
-    0x07,
-    0xE0,
-    0x01,
-    0x3E,
-    0xF8,
-    0x07,
-    0xFE,
-    0x80,
-    0xFF,
     0x00,
-    0x7C,
-    0x00,
-    0x1E,
     0x00,
     0x0F,
     0xC0,
-    0x03,
+    0x3F,
     0xF0,
+    0xFF,
+    0xF0,
+    0x70,
+    0xF8,
+    0x20,
+    0x78,
+    0x00,
+    0x38,
     0x00,
     0x3C,
     0x00,
+    0x38,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x01,
+    0xF0,
     0x1F,
     0xE0,
     0x1F,
-    0x7C,
-    0xFF,
-    0xCF,
-    0xFF,
-    0xC1,
+    0xC0,
     0x1F,
+    0xF0,
     0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // '4'
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                
-    //         ####   
-    //         ####   
-    //        #####   
-    //        #####   
-    //       ######   
-    //       ## ###   
-    //      ### ###   
-    //      ### ###   
-    //     ###  ###   
-    //     ###  ###   
-    //    ###   ###   
-    //    ###   ###   
-    //   ###    ###   
-    //   ###    ###   
-    //  ###     ###   
-    // ####     ###   
-    // ###      ###   
-    // ###############
-    // ###############
-    // ###############
-    //          ###   
-    //          ###   
-    //          ###   
-    //          ###   
-    //          ###   
-    //          ###   
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
+    0xF8,
     0x00,
     0x78,
     0x00,
     0x3C,
     0x00,
-    0x1F,
-    0x80,
-    0x0F,
-    0xE0,
-    0x07,
-    0xB0,
-    0x03,
-    0xDC,
-    0x01,
-    0xEE,
-    0x80,
-    0x73,
-    0xC0,
-    0x39,
-    0x70,
-    0x1C,
-    0x38,
-    0x0E,
-    0x0E,
-    0x07,
-    0x87,
-    0xC3,
-    0xC1,
-    0xF1,
-    0xE0,
-    0x38,
-    0x70,
-    0xFC,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0x7F,
+    0x3C,
     0x00,
-    0x07,
-    0x80,
-    0x03,
-    0xC0,
-    0x01,
-    0xE0,
+    0x3C,
     0x00,
-    0x70,
+    0x3C,
     0x00,
-    0x38,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // '5'
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //              
-    //  ########### 
-    //  ########### 
-    //  ########### 
-    //  ###         
-    //  ###         
-    //  ###         
-    // ####         
-    // ####         
-    // ####         
-    // ####         
-    // #########    
-    // ###########  
-    // ############ 
-    //  #     ##### 
-    //         #####
-    //          ####
-    //          ####
-    //          ####
-    //          ####
-    //          ####
-    //          ####
-    // #       #### 
-    // ##     ##### 
-    // ###########  
-    // ##########   
-    //  #######     
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0xFC,
-    0x9F,
-    0xFF,
-    0xF3,
-    0x7F,
-    0x0E,
-    0xC0,
-    0x01,
-    0x38,
-    0x80,
-    0x07,
-    0xF0,
-    0x00,
-    0x1E,
-    0xC0,
-    0x03,
-    0xF8,
-    0x0F,
-    0xFF,
-    0xE7,
-    0xFF,
-    0x09,
-    0x3E,
-    0x80,
-    0x0F,
-    0xE0,
-    0x01,
     0x3C,
     0x80,
-    0x07,
+    0x7C,
+    0xE0,
+    0xF8,
+    0xFF,
+    0xF0,
+    0xFF,
+    0xE0,
+    0x3F,
+    0x80,
+
+    // '4'
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //                 
+    //         ####    
+    //         ####    
+    //        #####    
+    //        #####    
+    //       ######    
+    //       ## ###    
+    //      ### ###    
+    //      ### ###    
+    //     ###  ###    
+    //     ###  ###    
+    //    ###   ###    
+    //    ###   ###    
+    //   ###    ###    
+    //   ###    ###    
+    //  ###     ###    
+    // ####     ###    
+    // ###      ###    
+    // ############### 
+    // ############### 
+    // ############### 
+    //          ###    
+    //          ###    
+    //          ###    
+    //          ###    
+    //          ###    
+    //          ###    
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0xF0,
     0x00,
-    0x1E,
-    0xC0,
+    0xF0,
+    0x01,
+    0xF0,
+    0x01,
+    0xF0,
+    0x03,
+    0xF0,
+    0x03,
+    0x70,
     0x07,
-    0xBC,
-    0xC1,
-    0xF7,
-    0x7F,
+    0x70,
+    0x07,
+    0x70,
+    0x0E,
+    0x70,
+    0x0E,
+    0x70,
+    0x1C,
+    0x70,
+    0x1C,
+    0x70,
+    0x38,
+    0x70,
+    0x38,
+    0x70,
+    0x70,
+    0x70,
+    0xF0,
+    0x70,
+    0xE0,
+    0x70,
+    0xFF,
     0xFE,
-    0x87,
-    0x3F,
+    0xFF,
+    0xFE,
+    0xFF,
+    0xFE,
+    0x00,
+    0x70,
+    0x00,
+    0x70,
+    0x00,
+    0x70,
+    0x00,
+    0x70,
+    0x00,
+    0x70,
+    0x00,
+    0x70,
+
+    // '5'
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //               
+    //  ###########  
+    //  ###########  
+    //  ###########  
+    //  ###          
+    //  ###          
+    //  ###          
+    // ####          
+    // ####          
+    // ####          
+    // ####          
+    // #########     
+    // ###########   
+    // ############  
+    //  #     #####  
+    //         ##### 
+    //          #### 
+    //          #### 
+    //          #### 
+    //          #### 
+    //          #### 
+    //          #### 
+    // #       ####  
+    // ##     #####  
+    // ###########   
+    // ##########    
+    //  #######      
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x7F,
+    0xF0,
+    0x7F,
+    0xF0,
+    0x7F,
+    0xF0,
+    0x70,
+    0x00,
+    0x70,
+    0x00,
+    0x70,
+    0x00,
+    0xF0,
+    0x00,
+    0xF0,
+    0x00,
+    0xF0,
+    0x00,
+    0xF0,
+    0x00,
+    0xFF,
+    0x80,
+    0xFF,
+    0xE0,
+    0xFF,
+    0xF0,
+    0x41,
+    0xF0,
+    0x00,
+    0xF8,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x00,
+    0x78,
+    0x80,
+    0xF0,
+    0xC1,
+    0xF0,
+    0xFF,
+    0xE0,
+    0xFF,
+    0xC0,
+    0x7F,
     0x00,
 
     // '6'
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //        ###### 
-    //      ######## 
-    //     ######### 
-    //    #####      
-    //   ####        
-    //   ###         
-    //   ###         
-    //  ####         
-    //  ###          
-    //  ###  #####   
-    //  ### #######  
-    //  ############ 
-    //  #####   #### 
-    // #####     ####
-    // #####     ####
-    // ####       ###
-    // ####       ###
-    //  ###       ###
-    //  ###       ###
-    //  ####     ####
-    //  ####     ####
-    //   ###     ####
-    //   ####   #### 
-    //    ########## 
-    //     ########  
-    //      #####    
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //        ######  
+    //      ########  
+    //     #########  
+    //    #####       
+    //   ####         
+    //   ###          
+    //   ###          
+    //  ####          
+    //  ###           
+    //  ###  #####    
+    //  ### #######   
+    //  ############  
+    //  #####   ####  
+    // #####     #### 
+    // #####     #### 
+    // ####       ### 
+    // ####       ### 
+    //  ###       ### 
+    //  ###       ### 
+    //  ####     #### 
+    //  ####     #### 
+    //   ###     #### 
+    //   ####   ####  
+    //    ##########  
+    //     ########   
+    //      #####     
     0x00,
     0x00,
     0x00,
@@ -2837,98 +2887,102 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xE0,
-    0x07,
-    0xFE,
-    0xC1,
-    0x7F,
-    0xF8,
     0x00,
-    0x0F,
-    0xC0,
+    0x00,
+    0x00,
     0x01,
-    0x70,
-    0x00,
-    0x1E,
-    0x80,
-    0x03,
-    0xE0,
-    0x7C,
-    0xB8,
-    0x3F,
-    0xFE,
-    0x9F,
-    0x8F,
-    0xF7,
-    0xC1,
-    0x7F,
-    0xF0,
-    0x0F,
     0xF8,
-    0x03,
-    0xEE,
-    0x80,
-    0x3B,
-    0xE0,
-    0x1E,
-    0xBC,
     0x07,
-    0xCF,
-    0xC1,
-    0xF3,
-    0x78,
+    0xF8,
+    0x0F,
     0xF8,
     0x1F,
-    0xFC,
-    0x03,
-    0x3E,
     0x00,
+    0x3C,
     0x00,
+    0x38,
     0x00,
+    0x38,
     0x00,
+    0x78,
     0x00,
+    0x70,
     0x00,
+    0x73,
+    0xE0,
+    0x77,
+    0xF0,
+    0x7F,
+    0xF8,
+    0x7C,
+    0x78,
+    0xF8,
+    0x3C,
+    0xF8,
+    0x3C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0x70,
+    0x1C,
+    0x70,
+    0x1C,
+    0x78,
+    0x3C,
+    0x78,
+    0x3C,
+    0x38,
+    0x3C,
+    0x3C,
+    0x78,
+    0x1F,
+    0xF8,
+    0x0F,
+    0xF0,
+    0x07,
+    0xC0,
 
     // '7'
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    // ##############
-    // ##############
-    // ##############
-    //           ####
-    //           ####
-    //           ### 
-    //          #### 
-    //          #### 
-    //          ###  
-    //         ####  
-    //         ####  
-    //         ###   
-    //        ####   
-    //        ####   
-    //        ###    
-    //       ####    
-    //       ####    
-    //      ####     
-    //      ####     
-    //      ####     
-    //     ####      
-    //     ####      
-    //     ####      
-    //    ####       
-    //    ####       
-    //   #####       
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    // ############## 
+    // ############## 
+    // ############## 
+    //           #### 
+    //           #### 
+    //           ###  
+    //          ####  
+    //          ####  
+    //          ###   
+    //         ####   
+    //         ####   
+    //         ###    
+    //        ####    
+    //        ####    
+    //        ###     
+    //       ####     
+    //       ####     
+    //      ####      
+    //      ####      
+    //      ####      
+    //     ####       
+    //     ####       
+    //     ####       
+    //    ####        
+    //    ####        
+    //   #####        
     0x00,
     0x00,
     0x00,
@@ -2951,99 +3005,103 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0xFF,
+    0xFC,
     0xFF,
+    0xFC,
     0xFF,
-    0xFF,
-    0xFF,
+    0xFC,
     0x00,
     0x3C,
     0x00,
-    0x0F,
-    0xC0,
-    0x01,
+    0x3C,
+    0x00,
+    0x38,
+    0x00,
     0x78,
     0x00,
-    0x1E,
-    0x80,
-    0x03,
+    0x78,
+    0x00,
+    0x70,
+    0x00,
     0xF0,
     0x00,
-    0x3C,
-    0x00,
-    0x07,
-    0xE0,
-    0x01,
-    0x78,
-    0x00,
-    0x0E,
-    0xC0,
-    0x03,
     0xF0,
     0x00,
-    0x1E,
-    0x80,
-    0x07,
     0xE0,
     0x01,
-    0x3C,
-    0x00,
-    0x0F,
+    0xE0,
+    0x01,
+    0xE0,
+    0x01,
     0xC0,
     0x03,
-    0x78,
-    0x00,
-    0x1E,
+    0xC0,
+    0x03,
     0xC0,
     0x07,
+    0x80,
+    0x07,
+    0x80,
+    0x07,
+    0x80,
+    0x0F,
     0x00,
+    0x0F,
     0x00,
+    0x0F,
     0x00,
+    0x1E,
     0x00,
+    0x1E,
     0x00,
+    0x3E,
     0x00,
 
     // '8'
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //     ######    
-    //    #########  
-    //   ########### 
-    //  #####   #### 
-    //  ####     ####
-    //  ####     ####
-    //  ###      ####
-    //  ####     ####
-    //  ####     ### 
-    //   ####   #### 
-    //   ##### ####  
-    //    ########   
-    //     ######    
-    //    ########   
-    //   ####  ####  
-    //  ####    #### 
-    //  ###      ####
-    // ####       ###
-    // ####       ###
-    // ####       ###
-    // ####       ###
-    //  ###      ####
-    //  ####    #####
-    //  ############ 
-    //   ##########  
-    //     ######    
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //     ######     
+    //    #########   
+    //   ###########  
+    //  #####   ####  
+    //  ####     #### 
+    //  ####     #### 
+    //  ###      #### 
+    //  ####     #### 
+    //  ####     ###  
+    //   ####   ####  
+    //   ##### ####   
+    //    ########    
+    //     ######     
+    //    ########    
+    //   ####  ####   
+    //  ####    ####  
+    //  ###      #### 
+    // ####       ### 
+    // ####       ### 
+    // ####       ### 
+    // ####       ### 
+    //  ###      #### 
+    //  ####    ##### 
+    //  ############  
+    //   ##########   
+    //     ######     
     0x00,
     0x00,
     0x00,
@@ -3067,98 +3125,102 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xFC,
-    0x80,
-    0xFF,
+    0x00,
+    0x00,
+    0x00,
+    0x0F,
+    0xC0,
+    0x1F,
     0xF0,
-    0x7F,
-    0x3E,
-    0x9E,
-    0x07,
-    0xEF,
-    0xC1,
-    0x3B,
-    0xF0,
-    0x1E,
-    0xBC,
-    0x07,
-    0xC7,
-    0xE3,
-    0xF1,
-    0x3D,
-    0xF8,
-    0x07,
-    0xFC,
-    0x80,
-    0x7F,
-    0xF0,
-    0x3C,
-    0x1E,
-    0x9E,
-    0x03,
-    0xFF,
-    0x80,
     0x3F,
+    0xF8,
+    0x7C,
+    0x78,
+    0x78,
+    0x3C,
+    0x78,
+    0x3C,
+    0x70,
+    0x3C,
+    0x78,
+    0x3C,
+    0x78,
+    0x38,
+    0x3C,
+    0x78,
+    0x3E,
+    0xF0,
+    0x1F,
     0xE0,
     0x0F,
-    0xF8,
-    0x03,
-    0xEE,
     0xC0,
-    0x7B,
-    0xF8,
-    0xFE,
     0x1F,
-    0xFF,
-    0x03,
+    0xE0,
+    0x3C,
+    0xF0,
+    0x78,
+    0x78,
+    0x70,
+    0x3C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0xF0,
+    0x1C,
+    0x70,
+    0x3C,
+    0x78,
+    0x7C,
+    0x7F,
+    0xF8,
     0x3F,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
+    0xF0,
+    0x0F,
+    0xC0,
 
     // '9'
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //               
-    //     ######    
-    //    ########   
-    //   ##########  
-    //  #####   #### 
-    //  ####    #### 
-    //  ###      ### 
-    // ####      ####
-    // ####      ####
-    // ####      ####
-    // ####      ####
-    // ####      ####
-    //  ####     ####
-    //  ####    #####
-    //   ######## ###
-    //   ######## ###
-    //     ####  ####
-    //           ####
-    //           ####
-    //           ### 
-    //          #### 
-    //          #### 
-    //         ####  
-    //  #     #####  
-    //   #########   
-    //   ########    
-    //   ######      
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //                
+    //     ######     
+    //    ########    
+    //   ##########   
+    //  #####   ####  
+    //  ####    ####  
+    //  ###      ###  
+    // ####      #### 
+    // ####      #### 
+    // ####      #### 
+    // ####      #### 
+    // ####      #### 
+    //  ####     #### 
+    //  ####    ##### 
+    //   ######## ### 
+    //   ######## ### 
+    //     ####  #### 
+    //           #### 
+    //           #### 
+    //           ###  
+    //          ####  
+    //          ####  
+    //         ####   
+    //  #     #####   
+    //   #########    
+    //   ########     
+    //   ######       
     0x00,
     0x00,
     0x00,
@@ -3182,98 +3244,102 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xFC,
-    0x80,
-    0x7F,
-    0xF0,
-    0x3F,
-    0x3E,
-    0x9E,
-    0x87,
-    0xE7,
-    0xC0,
-    0x3D,
-    0xF0,
+    0x00,
+    0x00,
+    0x00,
     0x0F,
-    0xFC,
-    0x03,
-    0xFF,
     0xC0,
+    0x1F,
+    0xE0,
     0x3F,
     0xF0,
-    0x1E,
-    0xBC,
-    0x87,
-    0xCF,
-    0xBF,
-    0xF3,
-    0xEF,
+    0x7C,
+    0x78,
+    0x78,
+    0x78,
+    0x70,
+    0x38,
     0xF0,
     0x3C,
-    0x00,
-    0x0F,
-    0xC0,
-    0x03,
-    0x70,
-    0x00,
-    0x1E,
-    0x80,
-    0x07,
     0xF0,
-    0x08,
-    0x3E,
-    0xFC,
-    0x07,
-    0xFF,
-    0xC0,
+    0x3C,
+    0xF0,
+    0x3C,
+    0xF0,
+    0x3C,
+    0xF0,
+    0x3C,
+    0x78,
+    0x3C,
+    0x78,
+    0x7C,
+    0x3F,
+    0xDC,
+    0x3F,
+    0xDC,
     0x0F,
+    0x3C,
     0x00,
+    0x3C,
     0x00,
+    0x3C,
     0x00,
+    0x38,
     0x00,
+    0x78,
     0x00,
+    0x78,
+    0x00,
+    0xF0,
+    0x41,
+    0xF0,
+    0x3F,
+    0xE0,
+    0x3F,
+    0xC0,
+    0x3F,
     0x00,
 
     // ':'
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //  ### 
-    // #### 
-    // #####
-    // #### 
-    //  ### 
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //  ### 
-    // #### 
-    // #####
-    // #### 
-    //  ### 
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //  ###  
+    // ####  
+    // ##### 
+    // ####  
+    //  ###  
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //  ###  
+    // ####  
+    // ##### 
+    // ####  
+    //  ###  
     0x00,
     0x00,
     0x00,
@@ -3286,24 +3352,33 @@ const std::array<uint8_t, 749> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0xF7,
-    0xFE,
-    0x73,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0xB8,
-    0xF7,
-    0x9F,
-    0x03,
+    0x00,
+    0x70,
+    0xF0,
+    0xF8,
+    0xF0,
+    0x70,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x00
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x70,
+    0xF0,
+    0xF8,
+    0xF0,
+    0x70
 };
 
 // normal font character widths
@@ -3375,72 +3450,81 @@ const std::array<uint8_t, normal_font_len> normal_font_char_widths = {
 // normal font character begin positions
 const std::array<uint16_t, normal_font_len> normal_font_char_begin = {
     0, // ' '
-    15, // '''
-    24, // '-'
-    42, // '0'
-    66, // '1'
-    84, // '2'
-    108, // '3'
-    132, // '4'
-    159, // '5'
-    183, // '6'
-    207, // '7'
-    231, // '8'
-    255, // '9'
-    279, // ':'
-    288, // 'B'
-    315, // 'D'
-    342, // 'F'
-    363, // 'G'
-    390, // 'M'
-    426, // 'N'
-    456, // 'O'
-    486, // 'P'
-    510, // 'Q'
-    540, // 'R'
-    567, // 'S'
-    588, // 'T'
-    615, // 'V'
-    645, // 'a'
-    666, // 'b'
-    690, // 'c'
-    711, // 'd'
-    735, // 'e'
-    759, // 'f'
-    780, // 'g'
-    804, // 'h'
-    828, // 'i'
-    837, // 'j'
-    849, // 'l'
-    858, // 'm'
-    894, // 'n'
-    918, // 'o'
-    942, // 'p'
-    966, // 'q'
-    990, // 'r'
-    1008, // 's'
-    1026, // 't'
-    1044, // 'u'
-    1068, // 'v'
-    1095, // 'x'
-    1119, // 'y'
-    1146, // 'z'
-    1167, // 'à'
-    1188, // 'â'
-    1209, // 'è'
-    1233, // 'é'
-    1257, // 'ê'
-    1281, // 'î'
-    1299, // 'ï'
-    1311, // 'ô'
-    1335, // 'û'
-    1359, // 'œ'
-    1398, // '🔔' (custom bell bitmap)
+    24, // '''
+    48, // '-'
+    72, // '0'
+    96, // '1'
+    120, // '2'
+    144, // '3'
+    168, // '4'
+    216, // '5'
+    240, // '6'
+    264, // '7'
+    288, // '8'
+    312, // '9'
+    336, // ':'
+    360, // 'B'
+    408, // 'D'
+    456, // 'F'
+    480, // 'G'
+    528, // 'M'
+    576, // 'N'
+    624, // 'O'
+    672, // 'P'
+    696, // 'Q'
+    744, // 'R'
+    792, // 'S'
+    816, // 'T'
+    864, // 'V'
+    912, // 'a'
+    936, // 'b'
+    960, // 'c'
+    984, // 'd'
+    1008, // 'e'
+    1032, // 'f'
+    1056, // 'g'
+    1080, // 'h'
+    1104, // 'i'
+    1128, // 'j'
+    1152, // 'l'
+    1176, // 'm'
+    1224, // 'n'
+    1248, // 'o'
+    1272, // 'p'
+    1296, // 'q'
+    1320, // 'r'
+    1344, // 's'
+    1368, // 't'
+    1392, // 'u'
+    1416, // 'v'
+    1464, // 'x'
+    1488, // 'y'
+    1536, // 'z'
+    1560, // 'à'
+    1584, // 'â'
+    1608, // 'è'
+    1632, // 'é'
+    1656, // 'ê'
+    1680, // 'î'
+    1704, // 'ï'
+    1728, // 'ô'
+    1752, // 'û'
+    1776, // 'œ'
+    1824, // '🔔' (custom bell bitmap)
 };
 
 // normal font content (bitmap data, packed)
-const std::array<uint8_t, 1428> normal_font_content = {
+const std::array<uint8_t, 1872> normal_font_content = {
     // ' '
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -3458,33 +3542,48 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // '''
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0xC0,
-    0xFF,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -3493,30 +3592,30 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // '-'
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    // #####
-    // #####
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    // ##### 
+    // ##### 
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
     0x00,
     0x00,
     0x00,
@@ -3525,8 +3624,14 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0xC0,
-    0xFF,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xF8,
+    0xF8,
     0x00,
     0x00,
     0x00,
@@ -3537,224 +3642,230 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // '0'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ####  
-    //  ##### 
-    // ##  ## 
-    // ##   # 
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   # 
-    // ##  ## 
-    //  ##### 
-    //  ####  
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ####   
+    //  #####  
+    // ##  ##  
+    // ##   #  
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   #  
+    // ##  ##  
+    //  #####  
+    //  ####   
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x3C,
-    0xBE,
-    0xD9,
-    0x68,
-    0x3C,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xA3,
-    0x99,
-    0xCF,
-    0x03,
     0x00,
-    0x00,
+    0x78,
+    0x7C,
+    0xCC,
+    0xC4,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC4,
+    0xCC,
+    0x7C,
+    0x78,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '1'
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //    ##
-    //   ###
-    //  ####
-    // ## ##
-    //    ##
-    //    ##
-    //    ##
-    //    ##
-    //    ##
-    //    ##
-    //    ##
-    //    ##
-    //    ##
-    //      
-    //      
-    //      
-    //      
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //    ## 
+    //   ### 
+    //  #### 
+    // ## ## 
+    //    ## 
+    //    ## 
+    //    ## 
+    //    ## 
+    //    ## 
+    //    ## 
+    //    ## 
+    //    ## 
+    //    ## 
+    //       
+    //       
+    //       
+    //       
     0x00,
     0x00,
     0x00,
     0x00,
-    0xC0,
-    0xDC,
-    0x6F,
-    0x8C,
-    0x31,
-    0xC6,
+    0x00,
+    0x00,
+    0x00,
     0x18,
-    0x63,
-    0x0C,
-    0x00,
+    0x38,
+    0x78,
+    0xD8,
+    0x18,
+    0x18,
+    0x18,
+    0x18,
+    0x18,
+    0x18,
+    0x18,
+    0x18,
+    0x18,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '2'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ####  
-    // ###### 
-    // #   ## 
-    //     ## 
-    //     ## 
-    //     ## 
-    //    ##  
-    //    ##  
-    //   ##   
-    //  ##    
-    //  ##    
-    // #######
-    // #######
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ####   
+    // ######  
+    // #   ##  
+    //     ##  
+    //     ##  
+    //     ##  
+    //    ##   
+    //    ##   
+    //   ##    
+    //  ##     
+    //  ##     
+    // ####### 
+    // ####### 
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x3C,
-    0xBF,
-    0x18,
+    0x00,
+    0x78,
+    0xFC,
+    0x8C,
     0x0C,
-    0x06,
-    0xC3,
-    0x60,
+    0x0C,
+    0x0C,
     0x18,
-    0x06,
-    0xC3,
-    0xFF,
-    0x0F,
-    0x00,
-    0x00,
+    0x18,
+    0x30,
+    0x60,
+    0x60,
+    0xFE,
+    0xFE,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '3'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ####  
-    // ###### 
-    // #   ## 
-    //     ## 
-    //     ## 
-    //  ####  
-    //  ####  
-    //     ## 
-    //      # 
-    //      ##
-    //     ## 
-    // ###### 
-    // #####  
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ####   
+    // ######  
+    // #   ##  
+    //     ##  
+    //     ##  
+    //  ####   
+    //  ####   
+    //     ##  
+    //      #  
+    //      ## 
+    //     ##  
+    // ######  
+    // #####   
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x3C,
-    0xBF,
-    0x18,
+    0x00,
+    0x78,
+    0xFC,
+    0x8C,
     0x0C,
-    0xE6,
-    0xF1,
-    0xC0,
-    0x40,
-    0x60,
-    0xD8,
-    0xEF,
-    0x03,
-    0x00,
-    0x00,
+    0x0C,
+    0x78,
+    0x78,
+    0x0C,
+    0x04,
+    0x06,
+    0x0C,
+    0xFC,
+    0xF8,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '4'
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //      ## 
-    //     ### 
-    //     ### 
-    //    # ## 
-    //   ## ## 
-    //   #  ## 
-    //  ##  ## 
-    //  #   ## 
-    // ########
-    // ########
-    //      ## 
-    //      ## 
-    //      ## 
-    //         
-    //         
-    //         
-    //         
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //      ##  
+    //     ###  
+    //     ###  
+    //    # ##  
+    //   ## ##  
+    //   #  ##  
+    //  ##  ##  
+    //  #   ##  
+    // ######## 
+    // ######## 
+    //      ##  
+    //      ##  
+    //      ##  
+    //          
+    //          
+    //          
+    //          
     0x00,
     0x00,
     0x00,
@@ -3762,19 +3873,40 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x60,
-    0x70,
-    0x70,
-    0x68,
-    0x6C,
-    0x64,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x06,
+    0x00,
+    0x0E,
+    0x00,
+    0x0E,
+    0x00,
+    0x16,
+    0x00,
+    0x36,
+    0x00,
+    0x26,
+    0x00,
     0x66,
-    0x62,
+    0x00,
+    0x46,
+    0x00,
     0xFF,
+    0x00,
     0xFF,
-    0x60,
-    0x60,
-    0x60,
+    0x00,
+    0x06,
+    0x00,
+    0x06,
+    0x00,
+    0x06,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -3784,130 +3916,131 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // '5'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ###### 
-    // ###### 
-    // ##     
-    // ##     
-    // ##     
-    // #####  
-    // ###### 
-    //     ## 
-    //      ##
-    //      ##
-    //     ## 
-    // ###### 
-    // #####  
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ######  
+    // ######  
+    // ##      
+    // ##      
+    // ##      
+    // #####   
+    // ######  
+    //     ##  
+    //      ## 
+    //      ## 
+    //     ##  
+    // ######  
+    // #####   
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x7E,
-    0xBF,
-    0xC1,
-    0x60,
-    0xF0,
-    0xF9,
-    0xC1,
+    0x00,
+    0xFC,
+    0xFC,
     0xC0,
-    0x60,
-    0xD8,
-    0xEF,
-    0x03,
-    0x00,
-    0x00,
+    0xC0,
+    0xC0,
+    0xF8,
+    0xFC,
+    0x0C,
+    0x06,
+    0x06,
+    0x0C,
+    0xFC,
+    0xF8,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '6'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //   #### 
-    //  ##### 
-    //  #     
-    // ##     
-    // ## #   
-    // ###### 
-    // ##  ## 
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   # 
-    //  ##### 
-    //   ###  
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //   ####  
+    //  #####  
+    //  #      
+    // ##      
+    // ## #    
+    // ######  
+    // ##  ##  
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   #  
+    //  #####  
+    //   ###   
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x78,
-    0x3E,
-    0xC1,
-    0x60,
-    0xF1,
-    0x9B,
-    0x8D,
-    0xC7,
-    0xE3,
-    0x91,
-    0x8F,
-    0x03,
     0x00,
-    0x00,
+    0x3C,
+    0x7C,
+    0x40,
+    0xC0,
+    0xD0,
+    0xFC,
+    0xCC,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC4,
+    0x7C,
+    0x38,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '7'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // #######
-    // #######
-    //     ## 
-    //     ## 
-    //     ## 
-    //    ##  
-    //    ##  
-    //    ##  
-    //   ##   
-    //   ##   
-    //   ##   
-    //  ##    
-    //  ##    
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ####### 
+    // ####### 
+    //     ##  
+    //     ##  
+    //     ##  
+    //    ##   
+    //    ##   
+    //    ##   
+    //   ##    
+    //   ##    
+    //   ##    
+    //  ##     
+    //  ##     
+    //         
+    //         
+    //         
+    //         
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -3915,184 +4048,198 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0xFE,
-    0x7F,
-    0x18,
+    0xFE,
     0x0C,
-    0x86,
-    0xC1,
+    0x0C,
+    0x0C,
+    0x18,
+    0x18,
+    0x18,
+    0x30,
+    0x30,
+    0x30,
     0x60,
-    0x18,
-    0x0C,
-    0x86,
-    0xC1,
-    0x00,
-    0x00,
-    0x00,
+    0x60,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '8'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ####  
-    // ###### 
-    // ##   # 
-    // ##   # 
-    // ##  ## 
-    //  ####  
-    //  ####  
-    // ##  ## 
-    // ##   ##
-    // #    ##
-    // ##   ##
-    // ###### 
-    //  ####  
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ####   
+    // ######  
+    // ##   #  
+    // ##   #  
+    // ##  ##  
+    //  ####   
+    //  ####   
+    // ##  ##  
+    // ##   ## 
+    // #    ## 
+    // ##   ## 
+    // ######  
+    //  ####   
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x3C,
-    0xBF,
-    0xD1,
-    0x68,
-    0xE6,
-    0xF1,
+    0x00,
+    0x78,
+    0xFC,
+    0xC4,
+    0xC4,
+    0xCC,
+    0x78,
+    0x78,
     0xCC,
     0xC6,
-    0xE1,
-    0xF1,
-    0xCF,
-    0x03,
-    0x00,
-    0x00,
+    0x86,
+    0xC6,
+    0xFC,
+    0x78,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // '9'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ####  
-    // ###### 
-    // ##  ## 
-    // ##   # 
-    // #    ##
-    // ##  ###
-    // #######
-    //  ### # 
-    //      # 
-    //     ## 
-    //     ## 
-    // #####  
-    // ####   
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ####   
+    // ######  
+    // ##  ##  
+    // ##   #  
+    // #    ## 
+    // ##  ### 
+    // ####### 
+    //  ### #  
+    //      #  
+    //     ##  
+    //     ##  
+    // #####   
+    // ####    
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x3C,
-    0xBF,
-    0xD9,
-    0x28,
-    0x3C,
-    0xFF,
-    0xBB,
-    0x40,
-    0x30,
-    0xD8,
-    0xE7,
-    0x01,
     0x00,
-    0x00,
+    0x78,
+    0xFC,
+    0xCC,
+    0xC4,
+    0x86,
+    0xCE,
+    0xFE,
+    0x74,
+    0x04,
+    0x0C,
+    0x0C,
+    0xF8,
+    0xF0,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // ':'
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    // ##
-    // ##
-    // ##
-    //   
-    //   
-    //   
-    //   
-    // ##
-    // ##
-    // ##
-    //   
-    //   
-    //   
-    //   
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    // ## 
+    // ## 
+    // ## 
+    //    
+    //    
+    //    
+    //    
+    // ## 
+    // ## 
+    // ## 
+    //    
+    //    
+    //    
+    //    
     0x00,
     0x00,
-    0xF0,
-    0x03,
-    0xFC,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'B'
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    // ######  
-    // ####### 
-    // ##   ## 
-    // ##   ## 
-    // ##   ## 
-    // ####### 
-    // ######  
-    // ##   ## 
-    // ##    ##
-    // ##    ##
-    // ##   ## 
-    // ####### 
-    // ######  
-    //         
-    //         
-    //         
-    //         
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    // ######   
+    // #######  
+    // ##   ##  
+    // ##   ##  
+    // ##   ##  
+    // #######  
+    // ######   
+    // ##   ##  
+    // ##    ## 
+    // ##    ## 
+    // ##   ##  
+    // #######  
+    // ######   
+    //          
+    //          
+    //          
+    //          
     0x00,
     0x00,
     0x00,
@@ -4100,19 +4247,40 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x3F,
-    0x7F,
-    0x63,
-    0x63,
-    0x63,
-    0x7F,
-    0x3F,
-    0x63,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xFC,
+    0x00,
+    0xFE,
+    0x00,
+    0xC6,
+    0x00,
+    0xC6,
+    0x00,
+    0xC6,
+    0x00,
+    0xFE,
+    0x00,
+    0xFC,
+    0x00,
+    0xC6,
+    0x00,
     0xC3,
+    0x00,
     0xC3,
-    0x63,
-    0x7F,
-    0x3F,
+    0x00,
+    0xC6,
+    0x00,
+    0xFE,
+    0x00,
+    0xFC,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4122,30 +4290,30 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'D'
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    // ######  
-    // ####### 
-    // ##   ###
-    // ##    ##
-    // ##    ##
-    // ##    ##
-    // ##    ##
-    // ##    ##
-    // ##    ##
-    // ##    ##
-    // ##   ###
-    // ####### 
-    // ######  
-    //         
-    //         
-    //         
-    //         
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    // ######   
+    // #######  
+    // ##   ### 
+    // ##    ## 
+    // ##    ## 
+    // ##    ## 
+    // ##    ## 
+    // ##    ## 
+    // ##    ## 
+    // ##    ## 
+    // ##   ### 
+    // #######  
+    // ######   
+    //          
+    //          
+    //          
+    //          
     0x00,
     0x00,
     0x00,
@@ -4153,19 +4321,40 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x3F,
-    0x7F,
-    0xE3,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xFC,
+    0x00,
+    0xFE,
+    0x00,
+    0xC7,
+    0x00,
     0xC3,
+    0x00,
     0xC3,
+    0x00,
     0xC3,
+    0x00,
     0xC3,
+    0x00,
     0xC3,
+    0x00,
     0xC3,
+    0x00,
     0xC3,
-    0xE3,
-    0x7F,
-    0x3F,
+    0x00,
+    0xC7,
+    0x00,
+    0xFE,
+    0x00,
+    0xFC,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4175,77 +4364,80 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'F'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    // ######
-    // ######
-    // ##    
-    // ##    
-    // ##    
-    // ##    
-    // ######
-    // ######
-    // ##    
-    // ##    
-    // ##    
-    // ##    
-    // ##    
-    //       
-    //       
-    //       
-    //       
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    // ###### 
+    // ###### 
+    // ##     
+    // ##     
+    // ##     
+    // ##     
+    // ###### 
+    // ###### 
+    // ##     
+    // ##     
+    // ##     
+    // ##     
+    // ##     
+    //        
+    //        
+    //        
+    //        
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0xFC,
-    0xFF,
-    0x30,
-    0x0C,
-    0xC3,
-    0xFF,
-    0x0F,
-    0xC3,
-    0x30,
-    0x0C,
-    0x00,
-    0x00,
+    0xFC,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xFC,
+    0xFC,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'G'
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //    #####
-    //  #######
-    //  ##     
-    // ##      
-    // ##      
-    // ##      
-    // ##   ###
-    // ##   ###
-    // ##     #
-    // ##     #
-    //  ##    #
-    //  #######
-    //    #####
-    //         
-    //         
-    //         
-    //         
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //    ##### 
+    //  ####### 
+    //  ##      
+    // ##       
+    // ##       
+    // ##       
+    // ##   ### 
+    // ##   ### 
+    // ##     # 
+    // ##     # 
+    //  ##    # 
+    //  ####### 
+    //    ##### 
+    //          
+    //          
+    //          
+    //          
     0x00,
     0x00,
     0x00,
@@ -4253,19 +4445,40 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0xF8,
-    0xFE,
-    0x06,
-    0x03,
-    0x03,
-    0x03,
-    0xE3,
-    0xE3,
-    0x83,
-    0x83,
-    0x86,
-    0xFE,
-    0xF8,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x1F,
+    0x00,
+    0x7F,
+    0x00,
+    0x60,
+    0x00,
+    0xC0,
+    0x00,
+    0xC0,
+    0x00,
+    0xC0,
+    0x00,
+    0xC7,
+    0x00,
+    0xC7,
+    0x00,
+    0xC1,
+    0x00,
+    0xC1,
+    0x00,
+    0x61,
+    0x00,
+    0x7F,
+    0x00,
+    0x1F,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4275,30 +4488,35 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'M'
-    //            
-    //            
-    //            
-    //            
-    //            
-    //            
-    //            
-    // ###      ##
-    // ###     ###
-    // ####    ###
-    // ####    # #
-    // ## #    # #
-    // ## #   ## #
-    // ## ##  #  #
-    // ## ##  #  #
-    // ##  # ##  #
-    // ##  ####  #
-    // ##  ###   #
-    // ##   ##   #
-    // ##   ##   #
-    //            
-    //            
-    //            
-    //            
+    //             
+    //             
+    //             
+    //             
+    //             
+    //             
+    //             
+    // ###      ## 
+    // ###     ### 
+    // ####    ### 
+    // ####    # # 
+    // ## #    # # 
+    // ## #   ## # 
+    // ## ##  #  # 
+    // ## ##  #  # 
+    // ##  # ##  # 
+    // ##  ####  # 
+    // ##  ###   # 
+    // ##   ##   # 
+    // ##   ##   # 
+    //             
+    //             
+    //             
+    //             
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4309,24 +4527,31 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0xE0,
-    0xC0,
-    0x07,
-    0x7F,
-    0xF8,
-    0x43,
-    0x17,
-    0xBA,
-    0xD8,
-    0x4D,
-    0x6E,
-    0x72,
-    0x9A,
-    0xF3,
-    0x9C,
-    0xE3,
-    0x18,
-    0xC7,
-    0x08,
+    0x60,
+    0xE0,
+    0xE0,
+    0xF0,
+    0xE0,
+    0xF0,
+    0xA0,
+    0xD0,
+    0xA0,
+    0xD1,
+    0xA0,
+    0xD9,
+    0x20,
+    0xD9,
+    0x20,
+    0xCB,
+    0x20,
+    0xCF,
+    0x20,
+    0xCE,
+    0x20,
+    0xC6,
+    0x20,
+    0xC6,
+    0x20,
     0x00,
     0x00,
     0x00,
@@ -4337,30 +4562,30 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'N'
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    // ###    ##
-    // ###    ##
-    // ####   ##
-    // ####   ##
-    // ## ##  ##
-    // ## ##  ##
-    // ##  ## ##
-    // ##  ## ##
-    // ##   # ##
-    // ##   ####
-    // ##   ####
-    // ##    ###
-    // ##    ###
-    //          
-    //          
-    //          
-    //          
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    // ###    ## 
+    // ###    ## 
+    // ####   ## 
+    // ####   ## 
+    // ## ##  ## 
+    // ## ##  ## 
+    // ##  ## ## 
+    // ##  ## ## 
+    // ##   # ## 
+    // ##   #### 
+    // ##   #### 
+    // ##    ### 
+    // ##    ### 
+    //           
+    //           
+    //           
+    //           
     0x00,
     0x00,
     0x00,
@@ -4368,22 +4593,40 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xE1,
+    0x80,
+    0xE1,
+    0x80,
+    0xF1,
+    0x80,
+    0xF1,
+    0x80,
+    0xD9,
+    0x80,
+    0xD9,
+    0x80,
+    0xCD,
+    0x80,
+    0xCD,
+    0x80,
+    0xC5,
+    0x80,
+    0xC7,
+    0x80,
+    0xC7,
     0x80,
     0xC3,
-    0x87,
-    0x1F,
-    0x3F,
-    0xDE,
-    0xBC,
-    0x79,
-    0xF6,
-    0xEC,
-    0xD1,
-    0xE3,
-    0xC7,
-    0x0F,
-    0x1F,
-    0x0E,
+    0x80,
+    0xC3,
+    0x80,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4393,30 +4636,36 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'O'
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    //   #####  
-    //  ####### 
-    //  ##   ## 
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    //  ##   ## 
-    //  ####### 
-    //   #####  
-    //          
-    //          
-    //          
-    //          
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    //   #####   
+    //  #######  
+    //  ##   ##  
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    //  ##   ##  
+    //  #######  
+    //   #####   
+    //           
+    //           
+    //           
+    //           
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4426,20 +4675,32 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x3E,
-    0xFE,
-    0x8C,
-    0x0D,
-    0x1E,
-    0x3C,
-    0x78,
-    0xF0,
-    0xE0,
+    0x00,
+    0x7F,
+    0x00,
+    0x63,
+    0x00,
     0xC1,
-    0x83,
-    0x8D,
-    0xF9,
-    0xE3,
-    0x03,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0x63,
+    0x00,
+    0x7F,
+    0x00,
+    0x3E,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4449,112 +4710,6 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'P'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ###### 
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ###### 
-    // #####  
-    // ##     
-    // ##     
-    // ##     
-    // ##     
-    // ##     
-    //        
-    //        
-    //        
-    //        
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x7E,
-    0xFF,
-    0xF1,
-    0x78,
-    0x3C,
-    0xFE,
-    0x7D,
-    0x06,
-    0x83,
-    0xC1,
-    0x60,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'Q'
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    //   #####  
-    //  ####### 
-    //  ##   ## 
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    // ##     ##
-    //  ##   ## 
-    //  ####### 
-    //   #####  
-    //      ##  
-    //       ## 
-    //       ###
-    //          
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x3E,
-    0xFE,
-    0x8C,
-    0x0D,
-    0x1E,
-    0x3C,
-    0x78,
-    0xF0,
-    0xE0,
-    0xC1,
-    0x83,
-    0x8D,
-    0xF9,
-    0xE3,
-    0x03,
-    0x06,
-    0x18,
-    0x70,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'R'
     //         
     //         
     //         
@@ -4570,11 +4725,11 @@ const std::array<uint8_t, 1428> normal_font_content = {
     // ##   ## 
     // ######  
     // #####   
-    // ##  ##  
-    // ##  ##  
-    // ##   ## 
-    // ##   ## 
-    // ##    ##
+    // ##      
+    // ##      
+    // ##      
+    // ##      
+    // ##      
     //         
     //         
     //         
@@ -4586,19 +4741,164 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x3F,
+    0xFC,
+    0xFE,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xFC,
+    0xF8,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // 'Q'
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    //   #####   
+    //  #######  
+    //  ##   ##  
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    // ##     ## 
+    //  ##   ##  
+    //  #######  
+    //   #####   
+    //      ##   
+    //       ##  
+    //       ### 
+    //           
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x3E,
+    0x00,
     0x7F,
+    0x00,
     0x63,
+    0x00,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
+    0xC1,
+    0x80,
     0x63,
-    0x63,
-    0x63,
-    0x3F,
-    0x1F,
-    0x33,
-    0x33,
-    0x63,
-    0x63,
+    0x00,
+    0x7F,
+    0x00,
+    0x3E,
+    0x00,
+    0x06,
+    0x00,
+    0x03,
+    0x00,
+    0x03,
+    0x80,
+    0x00,
+    0x00,
+
+    // 'R'
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    // ######   
+    // #######  
+    // ##   ##  
+    // ##   ##  
+    // ##   ##  
+    // ##   ##  
+    // ######   
+    // #####    
+    // ##  ##   
+    // ##  ##   
+    // ##   ##  
+    // ##   ##  
+    // ##    ## 
+    //          
+    //          
+    //          
+    //          
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xFC,
+    0x00,
+    0xFE,
+    0x00,
+    0xC6,
+    0x00,
+    0xC6,
+    0x00,
+    0xC6,
+    0x00,
+    0xC6,
+    0x00,
+    0xFC,
+    0x00,
+    0xF8,
+    0x00,
+    0xCC,
+    0x00,
+    0xCC,
+    0x00,
+    0xC6,
+    0x00,
+    0xC6,
+    0x00,
     0xC3,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4608,77 +4908,87 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'S'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //  #####
-    // ######
-    // ##    
-    // ##    
-    // ##    
-    // ###   
-    //  #### 
-    //    ###
-    //     ##
-    //     ##
-    //     ##
-    // ######
-    // ##### 
-    //       
-    //       
-    //       
-    //       
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //  ##### 
+    // ###### 
+    // ##     
+    // ##     
+    // ##     
+    // ###    
+    //  ####  
+    //    ### 
+    //     ## 
+    //     ## 
+    //     ## 
+    // ###### 
+    // #####  
+    //        
+    //        
+    //        
+    //        
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0xF8,
-    0xFF,
-    0x30,
-    0x0C,
-    0x87,
-    0x87,
-    0xC3,
-    0x30,
+    0x00,
+    0x00,
+    0x7C,
     0xFC,
-    0x7F,
-    0x00,
-    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xE0,
+    0x78,
+    0x1C,
+    0x0C,
+    0x0C,
+    0x0C,
+    0xFC,
+    0xF8,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'T'
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    // ########
-    // ########
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //    ##   
-    //         
-    //         
-    //         
-    //         
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    // ######## 
+    // ######## 
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //    ##    
+    //          
+    //          
+    //          
+    //          
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4687,18 +4997,32 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0xFF,
+    0x00,
     0xFF,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
     0x18,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4708,30 +5032,30 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'V'
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    // ##     ##
-    // ##     # 
-    //  ##   ## 
-    //  ##   ## 
-    //  ##   ## 
-    //  ##   #  
-    //   #  ##  
-    //   ## ##  
-    //   ## ##  
-    //   ## #   
-    //    ###   
-    //    ###   
-    //    ###   
-    //          
-    //          
-    //          
-    //          
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    //           
+    // ##     ## 
+    // ##     #  
+    //  ##   ##  
+    //  ##   ##  
+    //  ##   ##  
+    //  ##   #   
+    //   #  ##   
+    //   ## ##   
+    //   ## ##   
+    //   ## #    
+    //    ###    
+    //    ###    
+    //    ###    
+    //           
+    //           
+    //           
+    //           
     0x00,
     0x00,
     0x00,
@@ -4739,22 +5063,40 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xC1,
     0x80,
     0xC1,
-    0x83,
-    0x8C,
-    0x19,
-    0x33,
-    0x66,
-    0x84,
-    0x0C,
-    0x1B,
+    0x00,
+    0x63,
+    0x00,
+    0x63,
+    0x00,
+    0x63,
+    0x00,
+    0x62,
+    0x00,
+    0x26,
+    0x00,
     0x36,
-    0x2C,
-    0x70,
-    0xE0,
-    0xC0,
-    0x01,
+    0x00,
+    0x36,
+    0x00,
+    0x34,
+    0x00,
+    0x1C,
+    0x00,
+    0x1C,
+    0x00,
+    0x1C,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -4764,30 +5106,30 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'a'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    // ##### 
-    //  #####
-    //     ##
-    //     ##
-    //  #####
-    // ######
-    // ##  ##
-    // #   ##
-    // #### #
-    //  ### #
-    //       
-    //       
-    //       
-    //       
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    // #####  
+    //  ##### 
+    //     ## 
+    //     ## 
+    //  ##### 
+    // ###### 
+    // ##  ## 
+    // #   ## 
+    // #### # 
+    //  ### # 
+    //        
+    //        
+    //        
+    //        
     0x00,
     0x00,
     0x00,
@@ -4795,96 +5137,99 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0xF0,
-    0xF9,
-    0x30,
-    0xEC,
-    0xFF,
-    0x73,
+    0x00,
+    0x00,
+    0x00,
+    0xF8,
+    0x7C,
+    0x0C,
+    0x0C,
+    0x7C,
     0xFC,
-    0xBA,
-    0x00,
-    0x00,
+    0xCC,
+    0x8C,
+    0xF4,
+    0x74,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'b'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ##     
-    // ##     
-    // ##     
-    // ##     
-    // ## ### 
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // #######
-    // ## ### 
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ##      
+    // ##      
+    // ##      
+    // ##      
+    // ## ###  
+    // ####### 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ####### 
+    // ## ###  
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x0C,
-    0x06,
-    0x83,
-    0xC1,
-    0xEE,
-    0x3F,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0x7F,
-    0x07,
     0x00,
-    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xDC,
+    0xFE,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xFE,
+    0xDC,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'c'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //   ####
-    //  #### 
-    // ##    
-    // ##    
-    // ##    
-    // ##    
-    // ##    
-    // ##    
-    // ##### 
-    //  #### 
-    //       
-    //       
-    //       
-    //       
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //   #### 
+    //  ####  
+    // ##     
+    // ##     
+    // ##     
+    // ##     
+    // ##     
+    // ##     
+    // #####  
+    //  ####  
+    //        
+    //        
+    //        
+    //        
     0x00,
     0x00,
     0x00,
@@ -4892,96 +5237,99 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x3C,
+    0x78,
     0xC0,
-    0x7B,
-    0xC3,
-    0x30,
-    0x0C,
-    0xC3,
-    0xF0,
-    0x79,
-    0x00,
-    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xF8,
+    0x78,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'd'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //      ##
-    //      ##
-    //      ##
-    //      ##
-    //  ### ##
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // #######
-    //  ### ##
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //      ## 
+    //      ## 
+    //      ## 
+    //      ## 
+    //  ### ## 
+    // ####### 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ####### 
+    //  ### ## 
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x80,
-    0xC1,
-    0x60,
-    0xB0,
-    0xFB,
-    0x3F,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0xDF,
-    0x0D,
     0x00,
-    0x00,
+    0x06,
+    0x06,
+    0x06,
+    0x06,
+    0x76,
+    0xFE,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xFE,
+    0x76,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'e'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ####  
-    //  ##### 
-    // ##   # 
-    // ##   # 
-    // #######
-    // #######
-    // ##     
-    // ##     
-    //  ##### 
-    //   #### 
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ####   
+    //  #####  
+    // ##   #  
+    // ##   #  
+    // ####### 
+    // ####### 
+    // ##      
+    // ##      
+    //  #####  
+    //   ####  
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
@@ -4990,95 +5338,98 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x80,
-    0xC7,
-    0x37,
-    0x1A,
-    0xFD,
-    0xFF,
-    0x83,
-    0x81,
-    0x8F,
-    0x07,
     0x00,
     0x00,
+    0x78,
+    0x7C,
+    0xC4,
+    0xC4,
+    0xFE,
+    0xFE,
+    0xC0,
+    0xC0,
+    0x7C,
+    0x3C,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'f'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //   ####
-    //   ### 
-    //  ##   
-    //  ##   
-    // ##### 
-    // ##### 
-    //  ##   
-    //  ##   
-    //  ##   
-    //  ##   
-    //  ##   
-    //  ##   
-    //  ##   
-    //  ##   
-    //       
-    //       
-    //       
-    //       
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //   #### 
+    //   ###  
+    //  ##    
+    //  ##    
+    // #####  
+    // #####  
+    //  ##    
+    //  ##    
+    //  ##    
+    //  ##    
+    //  ##    
+    //  ##    
+    //  ##    
+    //  ##    
+    //        
+    //        
+    //        
+    //        
     0x00,
     0x00,
     0x00,
     0x00,
-    0xC0,
-    0x73,
-    0x86,
-    0xF1,
-    0x7D,
-    0x86,
-    0x61,
-    0x18,
-    0x86,
-    0x61,
-    0x18,
     0x00,
     0x00,
+    0x3C,
+    0x38,
+    0x60,
+    0x60,
+    0xF8,
+    0xF8,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'g'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ### ##
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // #######
-    //  ### ##
-    //      ##
-    //      ##
-    // ###### 
-    // #####  
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ### ## 
+    // ####### 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ####### 
+    //  ### ## 
+    //      ## 
+    //      ## 
+    // ######  
+    // #####   
     0x00,
     0x00,
     0x00,
@@ -5087,213 +5438,48 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x80,
-    0xFB,
-    0x3F,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0xDF,
-    0x0D,
+    0x00,
+    0x00,
+    0x76,
+    0xFE,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xFE,
+    0x76,
     0x06,
-    0xFF,
-    0x3E,
-    0x00,
-    0x00,
-    0x00,
+    0x06,
+    0xFC,
+    0xF8,
 
     // 'h'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ##     
-    // ##     
-    // ##     
-    // ##     
-    // ## ### 
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    //        
-    //        
-    //        
-    //        
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x0C,
-    0x06,
-    0x83,
-    0xC1,
-    0xEE,
-    0x3F,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0x78,
-    0x0C,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'i'
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    // ##
-    // ##
-    //   
-    //   
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    //   
-    //   
-    //   
-    //   
-    0x00,
-    0xF0,
-    0xF0,
-    0xFF,
-    0xFF,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'j'
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //  ##
-    //  ##
-    //    
-    //    
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    //  ##
-    // ###
-    // ## 
-    0x00,
-    0x00,
-    0xD8,
-    0x80,
-    0x6D,
-    0xDB,
-    0xB6,
-    0x6D,
-    0x7F,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'l'
-    //   
-    //   
-    //   
-    //   
-    //   
-    //   
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    // ##
-    //   
-    //   
-    //   
-    //   
-    0x00,
-    0xF0,
-    0xFF,
-    0xFF,
-    0xFF,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'm'
-    //            
-    //            
-    //            
-    //            
-    //            
-    //            
-    //            
-    //            
-    //            
-    //            
-    // ## ### ### 
-    // ###########
-    // ##   ##  ##
-    // ##   ##   #
-    // ##   ##   #
-    // ##   ##   #
-    // ##   ##   #
-    // ##   ##   #
-    // ##   ##   #
-    // ##   ##   #
-    //            
-    //            
-    //            
-    //            
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ##      
+    // ##      
+    // ##      
+    // ##      
+    // ## ###  
+    // ####### 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
@@ -5301,20 +5487,239 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0xC0,
-    0xEE,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xDC,
     0xFE,
-    0x3F,
-    0xE6,
-    0x31,
-    0x8E,
-    0x71,
-    0x8C,
-    0x63,
-    0x1C,
-    0xE3,
-    0x18,
-    0xC7,
-    0x08,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // 'i'
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    // ## 
+    // ## 
+    //    
+    //    
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    //    
+    //    
+    //    
+    //    
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xC0,
+    0xC0,
+    0x00,
+    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // 'j'
+    //     
+    //     
+    //     
+    //     
+    //     
+    //     
+    //  ## 
+    //  ## 
+    //     
+    //     
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    //  ## 
+    // ### 
+    // ##  
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x60,
+    0x60,
+    0x00,
+    0x00,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0xE0,
+    0xC0,
+
+    // 'l'
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    //    
+    //    
+    //    
+    //    
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // 'm'
+    //             
+    //             
+    //             
+    //             
+    //             
+    //             
+    //             
+    //             
+    //             
+    //             
+    // ## ### ###  
+    // ########### 
+    // ##   ##  ## 
+    // ##   ##   # 
+    // ##   ##   # 
+    // ##   ##   # 
+    // ##   ##   # 
+    // ##   ##   # 
+    // ##   ##   # 
+    // ##   ##   # 
+    //             
+    //             
+    //             
+    //             
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xDD,
+    0xC0,
+    0xFF,
+    0xE0,
+    0xC6,
+    0x60,
+    0xC6,
+    0x20,
+    0xC6,
+    0x20,
+    0xC6,
+    0x20,
+    0xC6,
+    0x20,
+    0xC6,
+    0x20,
+    0xC6,
+    0x20,
+    0xC6,
+    0x20,
     0x00,
     0x00,
     0x00,
@@ -5325,30 +5730,30 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'n'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ## ### 
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ## ###  
+    // ####### 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
@@ -5357,48 +5762,48 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0xC0,
-    0xEE,
-    0x3F,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0x78,
-    0x0C,
     0x00,
     0x00,
+    0xDC,
+    0xFE,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'o'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ####  
-    //  ##### 
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    //  ##### 
-    //   ###  
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ####   
+    //  #####  
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    //  #####  
+    //   ###   
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
@@ -5407,48 +5812,48 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x80,
-    0xC7,
-    0x37,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xB1,
-    0x8F,
-    0x03,
     0x00,
     0x00,
+    0x78,
+    0x7C,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0x7C,
+    0x38,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'p'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ## ### 
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // #######
-    // ## ### 
-    // ##     
-    // ##     
-    // ##     
-    // ##     
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ## ###  
+    // ####### 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ####### 
+    // ## ###  
+    // ##      
+    // ##      
+    // ##      
+    // ##      
     0x00,
     0x00,
     0x00,
@@ -5457,48 +5862,48 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
+    0x00,
+    0x00,
+    0xDC,
+    0xFE,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xFE,
+    0xDC,
     0xC0,
-    0xEE,
-    0x3F,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0x7F,
-    0x37,
-    0x18,
-    0x0C,
-    0x06,
-    0x00,
-    0x00,
-    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
 
     // 'q'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //  ### ##
-    // #######
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // #######
-    //  ### ##
-    //      ##
-    //      ##
-    //      ##
-    //      ##
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ### ## 
+    // ####### 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ####### 
+    //  ### ## 
+    //      ## 
+    //      ## 
+    //      ## 
+    //      ## 
     0x00,
     0x00,
     0x00,
@@ -5507,180 +5912,198 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x80,
-    0xFB,
-    0x3F,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0xDF,
-    0x0D,
+    0x00,
+    0x00,
+    0x76,
+    0xFE,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xFE,
+    0x76,
     0x06,
-    0x83,
-    0xC1,
-    0x00,
-    0x00,
-    0x00,
+    0x06,
+    0x06,
+    0x06,
 
     // 'r'
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    // ## ##
-    // #####
-    // ##   
-    // ##   
-    // ##   
-    // ##   
-    // ##   
-    // ##   
-    // ##   
-    // ##   
-    //      
-    //      
-    //      
-    //      
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    // ## ## 
+    // ##### 
+    // ##    
+    // ##    
+    // ##    
+    // ##    
+    // ##    
+    // ##    
+    // ##    
+    // ##    
+    //       
+    //       
+    //       
+    //       
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0xEC,
-    0x3F,
-    0xC6,
-    0x18,
-    0x63,
-    0x8C,
-    0x01,
     0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xD8,
+    0xF8,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 's'
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //  ####
-    // #####
-    // #    
-    // ##   
-    // ###  
-    //   ###
-    //    ##
-    //    ##
-    // #####
-    // #### 
-    //      
-    //      
-    //      
-    //      
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //  #### 
+    // ##### 
+    // #     
+    // ##    
+    // ###   
+    //   ### 
+    //    ## 
+    //    ## 
+    // ##### 
+    // ####  
+    //       
+    //       
+    //       
+    //       
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x78,
     0xF8,
-    0x1F,
-    0xC6,
-    0xE1,
+    0x80,
+    0xC0,
+    0xE0,
+    0x38,
     0x18,
-    0xFF,
-    0x07,
-    0x00,
+    0x18,
+    0xF8,
+    0xF0,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 't'
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //   #  
-    //   #  
-    // #####
-    // #####
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ####
-    //   ###
-    //      
-    //      
-    //      
-    //      
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //   #   
+    //   #   
+    // ##### 
+    // ##### 
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  #### 
+    //   ### 
+    //       
+    //       
+    //       
+    //       
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x84,
-    0xFC,
-    0x6F,
-    0x8C,
-    0x31,
-    0xC6,
+    0x00,
+    0x00,
+    0x00,
+    0x20,
+    0x20,
+    0xF8,
+    0xF8,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
     0x78,
-    0x0E,
-    0x00,
+    0x38,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'u'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ### ###
-    //  ### ##
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ### ### 
+    //  ### ## 
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
@@ -5689,48 +6112,58 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0xC0,
-    0x78,
-    0x3C,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0xDD,
-    0x0D,
     0x00,
     0x00,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xEE,
+    0x76,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'v'
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    // ##    ##
-    // ##   ## 
-    //  ##  ## 
-    //  ##  ## 
-    //  ##  #  
-    //   # ##  
-    //   # ##  
-    //   ###   
-    //   ###   
-    //    ##   
-    //         
-    //         
-    //         
-    //         
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    // ##    ## 
+    // ##   ##  
+    //  ##  ##  
+    //  ##  ##  
+    //  ##  #   
+    //   # ##   
+    //   # ##   
+    //   ###    
+    //   ###    
+    //    ##    
+    //          
+    //          
+    //          
+    //          
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -5742,15 +6175,26 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0xC3,
-    0x63,
+    0x00,
+    0xC6,
+    0x00,
     0x66,
+    0x00,
     0x66,
-    0x26,
-    0x34,
-    0x34,
-    0x1C,
-    0x1C,
+    0x00,
+    0x64,
+    0x00,
+    0x2C,
+    0x00,
+    0x2C,
+    0x00,
+    0x38,
+    0x00,
+    0x38,
+    0x00,
     0x18,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -5760,30 +6204,30 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
 
     // 'x'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    // ###  ##
-    //  ##  ##
-    //   # ## 
-    //   #### 
-    //    ##  
-    //   ###  
-    //   #### 
-    //  ## ## 
-    //  ##  ##
-    // ##   ##
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    // ###  ## 
+    //  ##  ## 
+    //   # ##  
+    //   ####  
+    //    ##   
+    //   ###   
+    //   ####  
+    //  ## ##  
+    //  ##  ## 
+    // ##   ## 
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
@@ -5792,48 +6236,58 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0xC0,
-    0xD9,
-    0x4C,
-    0xE3,
-    0x61,
+    0x00,
+    0x00,
+    0xE6,
+    0x66,
+    0x2C,
+    0x3C,
+    0x18,
     0x38,
     0x3C,
-    0x9B,
-    0x79,
-    0x0C,
-    0x00,
-    0x00,
+    0x6C,
+    0x66,
+    0xC6,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'y'
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    //         
-    // ##    ##
-    // ##   ## 
-    //  ##  ## 
-    //  ##  ## 
-    //  ##  #  
-    //   # ##  
-    //   ####  
-    //   ###   
-    //    ##   
-    //    ##   
-    //    ##   
-    //   ##    
-    // ####    
-    // ###     
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    //          
+    // ##    ## 
+    // ##   ##  
+    //  ##  ##  
+    //  ##  ##  
+    //  ##  #   
+    //   # ##   
+    //   ####   
+    //   ###    
+    //    ##    
+    //    ##    
+    //    ##    
+    //   ##     
+    // ####     
+    // ###      
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -5845,48 +6299,59 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0xC3,
-    0x63,
+    0x00,
+    0xC6,
+    0x00,
     0x66,
+    0x00,
     0x66,
-    0x26,
-    0x34,
+    0x00,
+    0x64,
+    0x00,
+    0x2C,
+    0x00,
     0x3C,
-    0x1C,
-    0x18,
-    0x18,
-    0x18,
-    0x0C,
-    0x0F,
-    0x07,
     0x00,
+    0x38,
     0x00,
+    0x18,
+    0x00,
+    0x18,
+    0x00,
+    0x18,
+    0x00,
+    0x30,
+    0x00,
+    0xF0,
+    0x00,
+    0xE0,
     0x00,
 
     // 'z'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //  #####
-    //  #####
-    //    ## 
-    //    ## 
-    //   ##  
-    //   ##  
-    //   #   
-    //  ##   
-    //  #####
-    // ######
-    //       
-    //       
-    //       
-    //       
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //  ##### 
+    //  ##### 
+    //    ##  
+    //    ##  
+    //   ##   
+    //   ##   
+    //   #    
+    //  ##    
+    //  ##### 
+    // ###### 
+    //        
+    //        
+    //        
+    //        
     0x00,
     0x00,
     0x00,
@@ -5894,116 +6359,25 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0xE0,
-    0xFB,
+    0x00,
+    0x00,
+    0x00,
+    0x7C,
+    0x7C,
     0x18,
-    0xC6,
+    0x18,
     0x30,
-    0x84,
-    0xE1,
-    0xFF,
-    0x00,
-    0x00,
+    0x30,
+    0x20,
+    0x60,
+    0x7C,
+    0xFC,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'à'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //  ##   
-    //   ##  
-    //    #  
-    //       
-    // ##### 
-    //  #####
-    //     ##
-    //     ##
-    //  #####
-    // ######
-    // ##  ##
-    // #   ##
-    // #### #
-    //  ### #
-    //       
-    //       
-    //       
-    //       
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x60,
-    0x30,
-    0x08,
-    0xF0,
-    0xF9,
-    0x30,
-    0xEC,
-    0xFF,
-    0x73,
-    0xFC,
-    0xBA,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'â'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //   ##  
-    //  #### 
-    //  #  ##
-    //       
-    // ##### 
-    //  #####
-    //     ##
-    //     ##
-    //  #####
-    // ######
-    // ##  ##
-    // #   ##
-    // #### #
-    //  ### #
-    //       
-    //       
-    //       
-    //       
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0xC0,
-    0x78,
-    0x32,
-    0xF0,
-    0xF9,
-    0x30,
-    0xEC,
-    0xFF,
-    0x73,
-    0xFC,
-    0xBA,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // 'è'
     //        
     //        
     //        
@@ -6014,16 +6388,66 @@ const std::array<uint8_t, 1428> normal_font_content = {
     //   ##   
     //    #   
     //        
+    // #####  
+    //  ##### 
+    //     ## 
+    //     ## 
+    //  ##### 
+    // ###### 
+    // ##  ## 
+    // #   ## 
+    // #### # 
+    //  ### # 
+    //        
+    //        
+    //        
+    //        
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x60,
+    0x30,
+    0x10,
+    0x00,
+    0xF8,
+    0x7C,
+    0x0C,
+    0x0C,
+    0x7C,
+    0xFC,
+    0xCC,
+    0x8C,
+    0xF4,
+    0x74,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // 'â'
+    //        
+    //        
+    //        
+    //        
+    //        
+    //        
+    //   ##   
     //  ####  
+    //  #  ## 
+    //        
+    // #####  
     //  ##### 
-    // ##   # 
-    // ##   # 
-    // #######
-    // #######
-    // ##     
-    // ##     
+    //     ## 
+    //     ## 
     //  ##### 
-    //   #### 
+    // ###### 
+    // ##  ## 
+    // #   ## 
+    // #### # 
+    //  ### # 
     //        
     //        
     //        
@@ -6033,233 +6457,302 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x18,
-    0x18,
-    0x08,
-    0x80,
-    0xC7,
-    0x37,
-    0x1A,
-    0xFD,
-    0xFF,
-    0x83,
-    0x81,
-    0x8F,
-    0x07,
+    0x00,
+    0x30,
+    0x78,
+    0x4C,
+    0x00,
+    0xF8,
+    0x7C,
+    0x0C,
+    0x0C,
+    0x7C,
+    0xFC,
+    0xCC,
+    0x8C,
+    0xF4,
+    0x74,
     0x00,
     0x00,
+    0x00,
+    0x00,
+
+    // 'è'
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //  ##     
+    //   ##    
+    //    #    
+    //         
+    //  ####   
+    //  #####  
+    // ##   #  
+    // ##   #  
+    // ####### 
+    // ####### 
+    // ##      
+    // ##      
+    //  #####  
+    //   ####  
+    //         
+    //         
+    //         
+    //         
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x60,
+    0x30,
+    0x10,
+    0x00,
+    0x78,
+    0x7C,
+    0xC4,
+    0xC4,
+    0xFE,
+    0xFE,
+    0xC0,
+    0xC0,
+    0x7C,
+    0x3C,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'é'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //     ## 
-    //    ##  
-    //   ##   
-    //        
-    //  ####  
-    //  ##### 
-    // ##   # 
-    // ##   # 
-    // #######
-    // #######
-    // ##     
-    // ##     
-    //  ##### 
-    //   #### 
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //     ##  
+    //    ##   
+    //   ##    
+    //         
+    //  ####   
+    //  #####  
+    // ##   #  
+    // ##   #  
+    // ####### 
+    // ####### 
+    // ##      
+    // ##      
+    //  #####  
+    //   ####  
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0xC0,
-    0x30,
+    0x00,
     0x0C,
-    0x80,
-    0xC7,
-    0x37,
-    0x1A,
-    0xFD,
-    0xFF,
-    0x83,
-    0x81,
-    0x8F,
-    0x07,
+    0x18,
+    0x30,
     0x00,
-    0x00,
+    0x78,
+    0x7C,
+    0xC4,
+    0xC4,
+    0xFE,
+    0xFE,
+    0xC0,
+    0xC0,
+    0x7C,
+    0x3C,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'ê'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //   ##   
-    //  ####  
-    //  #  ## 
-    //        
-    //  ####  
-    //  ##### 
-    // ##   # 
-    // ##   # 
-    // #######
-    // #######
-    // ##     
-    // ##     
-    //  ##### 
-    //   #### 
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //   ##    
+    //  ####   
+    //  #  ##  
+    //         
+    //  ####   
+    //  #####  
+    // ##   #  
+    // ##   #  
+    // ####### 
+    // ####### 
+    // ##      
+    // ##      
+    //  #####  
+    //   ####  
+    //         
+    //         
+    //         
+    //         
+    0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
     0x30,
+    0x78,
+    0x4C,
+    0x00,
+    0x78,
+    0x7C,
+    0xC4,
+    0xC4,
+    0xFE,
+    0xFE,
+    0xC0,
+    0xC0,
+    0x7C,
     0x3C,
-    0x32,
-    0x80,
-    0xC7,
-    0x37,
-    0x1A,
-    0xFD,
-    0xFF,
-    0x83,
-    0x81,
-    0x8F,
-    0x07,
-    0x00,
-    0x00,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'î'
-    //      
-    //      
-    //      
-    //      
-    //      
-    //      
-    //  ##  
-    // #### 
-    // #  ##
-    //      
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //  ##  
-    //      
-    //      
-    //      
-    //      
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //  ##   
+    // ####  
+    // #  ## 
+    //       
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //  ##   
+    //       
+    //       
+    //       
+    //       
     0x00,
     0x00,
     0x00,
-    0x80,
-    0x79,
-    0x19,
-    0x18,
-    0x63,
-    0x8C,
-    0x31,
-    0xC6,
-    0x18,
-    0x03,
     0x00,
+    0x00,
+    0x00,
+    0x60,
+    0xF0,
+    0x98,
+    0x00,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
+    0x60,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'ï'
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //   #
-    //   #
-    //    
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    //    
-    //    
-    //    
-    //    
+    //     
+    //     
+    //     
+    //     
+    //     
+    //     
+    //     
+    //   # 
+    //   # 
+    //     
+    // ##  
+    // ##  
+    // ##  
+    // ##  
+    // ##  
+    // ##  
+    // ##  
+    // ##  
+    // ##  
+    // ##  
+    //     
+    //     
+    //     
+    //     
     0x00,
     0x00,
-    0x80,
-    0xC4,
-    0xB6,
-    0x6D,
-    0xDB,
-    0x06,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x20,
+    0x20,
+    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'ô'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //   ##   
-    //   # #  
-    //  #  ## 
-    //        
-    //  ####  
-    //  ##### 
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    //  ##### 
-    //   ###  
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //   ##    
+    //   # #   
+    //  #  ##  
+    //         
+    //  ####   
+    //  #####  
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    //  #####  
+    //   ###   
+    //         
+    //         
+    //         
+    //         
+    0x00,
     0x00,
     0x00,
     0x00,
@@ -6267,99 +6760,98 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x30,
     0x28,
-    0x32,
-    0x80,
-    0xC7,
-    0x37,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xB1,
-    0x8F,
-    0x03,
+    0x4C,
     0x00,
-    0x00,
+    0x78,
+    0x7C,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0x7C,
+    0x38,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'û'
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //   ###  
-    //   # #  
-    //  #   # 
-    //        
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ##   ##
-    // ### ###
-    //  ### ##
-    //        
-    //        
-    //        
-    //        
+    //         
+    //         
+    //         
+    //         
+    //         
+    //         
+    //   ###   
+    //   # #   
+    //  #   #  
+    //         
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ##   ## 
+    // ### ### 
+    //  ### ## 
+    //         
+    //         
+    //         
+    //         
     0x00,
     0x00,
     0x00,
     0x00,
     0x00,
-    0x70,
+    0x00,
+    0x38,
     0x28,
-    0x22,
-    0xC0,
-    0x78,
-    0x3C,
-    0x1E,
-    0x8F,
-    0xC7,
-    0xE3,
-    0xF1,
-    0xDD,
-    0x0D,
+    0x44,
     0x00,
-    0x00,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xC6,
+    0xEE,
+    0x76,
     0x00,
     0x00,
     0x00,
     0x00,
 
     // 'œ'
-    //             
-    //             
-    //             
-    //             
-    //             
-    //             
-    //             
-    //             
-    //             
-    //             
-    //  ####  ###  
-    //  ########## 
-    // ##   ##   ##
-    // ##   ##   ##
-    // ##   #######
-    // ##   #######
-    // ##   ##     
-    // ##   ##     
-    //  ########## 
-    //   ###  #### 
-    //             
-    //             
-    //             
-    //             
+    //              
+    //              
+    //              
+    //              
+    //              
+    //              
+    //              
+    //              
+    //              
+    //              
+    //  ####  ###   
+    //  ##########  
+    // ##   ##   ## 
+    // ##   ##   ## 
+    // ##   ####### 
+    // ##   ####### 
+    // ##   ##      
+    // ##   ##      
+    //  ##########  
+    //   ###  ####  
+    //              
+    //              
+    //              
+    //              
     0x00,
     0x00,
     0x00,
@@ -6375,22 +6867,31 @@ const std::array<uint8_t, 1428> normal_font_content = {
     0x00,
     0x00,
     0x00,
-    0x9E,
-    0xE3,
-    0x7F,
-    0x63,
-    0x3C,
-    0xC6,
-    0xE3,
-    0x3F,
-    0xFE,
-    0x63,
-    0x30,
-    0x06,
-    0xFE,
-    0xC7,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x79,
+    0xC0,
+    0x7F,
+    0xE0,
+    0xC6,
+    0x30,
+    0xC6,
+    0x30,
+    0xC7,
+    0xF0,
+    0xC7,
+    0xF0,
+    0xC6,
     0x00,
+    0xC6,
+    0x00,
+    0x7F,
+    0xE0,
+    0x39,
+    0xE0,
     0x00,
     0x00,
     0x00,
@@ -6425,26 +6926,44 @@ const std::array<uint8_t, 1428> normal_font_content = {
     //          
     //          
     //          
-    0x38,
-    0xF8,
-    0xF8,
-    0xF3,
-    0xF7,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xFF,
-    0xBF,
-    0x3F,
+    0x1C,
     0x00,
-    0x38,
-    0x70,
+    0x7C,
+    0x40,
+    0xFC,
+    0xC0,
+    0xFB,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFF,
+    0xC0,
+    0xFD,
+    0xC0,
+    0xF0,
+    0x00,
+    0x01,
+    0xC0,
+    0x03,
+    0x80,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,

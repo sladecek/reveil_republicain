@@ -212,19 +212,39 @@ class FontTable:
                 # Extract pixel data
                 pixels = list(char_img.getdata())
                 
-                # Create ASCII art representation
+                # Debug for character '1'
+                if char == '1':
+                    print(f"DEBUG '1': char_width={char_width}, bbox={bbox}, pixels length={len(pixels)}")
+                
+                # Add inter-character spacing pixels (zeros) to the right of each line
+                pixels_with_spacing = []
+                for y in range(self.height):
+                    # Copy the pixels for this line
+                    for x in range(char_width):
+                        pixels_with_spacing.append(pixels[y * char_width + x])
+                    # Add INTERCHAR_SPACE zero pixels at the end of each line
+                    for _ in range(INTERCHAR_SPACE):
+                        pixels_with_spacing.append(0)
+                
+                # Create ASCII art representation (including spacing)
                 ascii_art = []
                 for y in range(self.height):
                     row = ""
-                    for x in range(char_width):
-                        pixel = pixels[y * char_width + x]
+                    for x in range(char_width + INTERCHAR_SPACE):
+                        pixel = pixels_with_spacing[y * (char_width + INTERCHAR_SPACE) + x]
                         row += "#" if pixel else " "
                     ascii_art.append(row)
+                
+                # Debug for character '1'
+                if char == '1':
+                    print(f"DEBUG '1': glyph width={char_width + INTERCHAR_SPACE}, pixels_with_spacing length={len(pixels_with_spacing)}")
+                    print(f"DEBUG '1': ASCII art line 7: '{ascii_art[7]}' (len={len(ascii_art[7])})")
+                    print(f"DEBUG '1': ASCII art line 8: '{ascii_art[8]}' (len={len(ascii_art[8])})")
                 
                 self.glyphs[char] = {
                     'width': char_width + INTERCHAR_SPACE,
                     'height': self.height,
-                    'data': pixels,
+                    'data': pixels_with_spacing,
                     'ascii_art': ascii_art
                 }
 
@@ -237,8 +257,11 @@ class FontTable:
         file.write(f"extern const std::array<uint8_t, {self.name}_font_len> {self.name}_font_char_widths;\n")
         file.write(f"extern const std::array<uint16_t, {self.name}_font_len> {self.name}_font_char_begin;\n")
         
-        # Calculate total content size (packed into bytes)
-        total_size = sum((glyph['width'] * glyph['height'] + 7) // 8 for glyph in self.glyphs.values())
+        # Calculate total content size (line-by-line packing)
+        total_size = 0
+        for glyph in self.glyphs.values():
+            char_line_bytes = (glyph['width'] + 7) // 8
+            total_size += char_line_bytes * glyph['height']
         file.write(f"extern const std::array<uint8_t, {total_size}> {self.name}_font_content;\n\n")
 
     def write_content(self, file):
@@ -265,9 +288,9 @@ class FontTable:
             char_display = char if char.isprintable() and char not in ['"', '\\'] else f"U+{ord(char):04X}"
             bell_note = " (custom bell bitmap)" if self.is_bell_emoji(char) else ""
             file.write(f"    {current_pos}, // '{char_display}'{bell_note}\n")
-            # Calculate bytes needed for this glyph
-            bits = glyph['width'] * glyph['height']
-            bytes_needed = (bits + 7) // 8
+            # Calculate bytes needed for this glyph (line-by-line packing)
+            char_line_bytes = (glyph['width'] + 7) // 8
+            bytes_needed = char_line_bytes * glyph['height']
             current_pos += bytes_needed
         file.write("};\n\n")
         
@@ -280,8 +303,8 @@ class FontTable:
         byte_pos = 0
         for i, char in enumerate(sorted_chars):
             glyph = self.glyphs.get(char, {'width': 7, 'height': self.height, 'data': [], 'ascii_art': []})
-            bits = glyph['width'] * glyph['height']
-            bytes_needed = (bits + 7) // 8
+            char_line_bytes = (glyph['width'] + 7) // 8
+            bytes_needed = char_line_bytes * glyph['height']
             
             char_display = char if char.isprintable() and char not in ['"', '\\'] else f"U+{ord(char):04X}"
             bell_note = " (custom bell bitmap)" if self.is_bell_emoji(char) else ""
@@ -295,24 +318,69 @@ class FontTable:
             for art_line in glyph['ascii_art']:
                 file.write(f"    // {art_line}\n")
             
-            # Pack bits into bytes
+            # Pack bits into bytes (MSB first, line-by-line)
             byte_data = []
-            current_byte = 0
-            bit_count = 0
+            char_width_with_space = glyph['width']
+            char_line_bytes = (char_width_with_space + 7) // 8
             
-            for pixel in glyph['data']:
-                if pixel:
-                    current_byte |= (1 << bit_count)
-                bit_count += 1
+            # Debug: print pixels for character '1' line 7
+            if char == '1' and i == 4:  # character '1' at index 4 in normal font
+                print(f"DEBUG: Character '1' packing (normal font)")
+                print(f"  Glyph width={char_width_with_space}, char_line_bytes={char_line_bytes}")
+                for line_idx in [7, 8, 9]:
+                    start = line_idx * char_width_with_space
+                    end = start + char_width_with_space
+                    line_pixels = glyph['data'][start:end]
+                    print(f"  Line {line_idx}: '{glyph['ascii_art'][line_idx]}' pixels={line_pixels}")
+                    # Manually pack this line
+                    test_byte = 0
+                    for bit_idx, pixel in enumerate(line_pixels):
+                        test_byte <<= 1
+                        if pixel:
+                            test_byte |= 1
+                    # Pad remaining bits
+                    if len(line_pixels) < 8:
+                        test_byte <<= (8 - len(line_pixels))
+                    print(f"    Expected byte: 0x{test_byte:02X}")
+            
+            # Pack each line separately
+            for line_y in range(glyph['height']):
+                line_start = line_y * char_width_with_space
+                line_end = line_start + char_width_with_space
+                line_pixels = glyph['data'][line_start:line_end]
                 
-                if bit_count == 8:
+                # Pack this line's pixels into bytes
+                current_byte = 0
+                bit_count = 0
+                
+                for pixel in line_pixels:
+                    # Shift byte left to make room for next bit
+                    current_byte <<= 1
+                    # Set LSB if pixel is set
+                    if pixel:
+                        current_byte |= 1
+                    bit_count += 1
+                    
+                    if bit_count == 8:
+                        byte_data.append(current_byte)
+                        current_byte = 0
+                        bit_count = 0
+                
+                # Write remaining bits if any (pad to byte boundary)
+                if bit_count > 0:
+                    # Shift remaining bits to MSB position
+                    current_byte <<= (8 - bit_count)
                     byte_data.append(current_byte)
-                    current_byte = 0
-                    bit_count = 0
             
-            # Write remaining bits if any
-            if bit_count > 0:
-                byte_data.append(current_byte)
+            # Debug: print bytes for character '0' line 7
+            if char == '0' and i == 3:  # character '0' at index 3
+                print("DEBUG: Character '0' packing")
+                char_width_with_space = glyph['width']
+                for line_idx in range(len(glyph['ascii_art'])):
+                    start = line_idx * char_width_with_space
+                    end = start + char_width_with_space
+                    line_pixels = glyph['data'][start:end]
+                    print(f"  Line {line_idx}: '{glyph['ascii_art'][line_idx]}' pixels={line_pixels}")
             
             # Ensure we have the right number of bytes
             while len(byte_data) < bytes_needed:
@@ -468,6 +536,7 @@ def main():
 
     fragments.add_string_list("nr", ["0","1","2","3","4","5","6","7","8","9"])
     fragments.add_string("colon", ":")
+    fragments.add_string("space", " ")
     fragments.add_string("bell", "🔔")
     fragments.add_string("run")
     fragments.add_string("stop")
@@ -945,6 +1014,47 @@ def main():
             # Close namespaces
             header_file.write("} // namespace rr::ui\n")
             source_file.write("} // namespace rr::ui\n")
+
+
+    # Generate concrete_fonts.h with correct sizes
+    with open("../src/generated/concrete_fonts.h", "w", encoding="utf-8") as concrete_file:
+        concrete_file.write("/// Font definitions\n")
+        concrete_file.write("#pragma once\n\n")
+        concrete_file.write("#include \"generated/drawing_objects.h\"\n")
+        concrete_file.write("#include \"font.h\"\n\n")
+        concrete_file.write("namespace rr::ui\n")
+        concrete_file.write("{\n\n")
+        
+        # Calculate actual content sizes
+        normal_content_size = 0
+        for glyph in normal_font.glyphs.values():
+            char_line_bytes = (glyph["width"] + 7) // 8
+            normal_content_size += char_line_bytes * glyph["height"]
+        
+        big_content_size = 0
+        for glyph in big_font.glyphs.values():
+            char_line_bytes = (glyph["width"] + 7) // 8
+            big_content_size += char_line_bytes * glyph["height"]
+        
+        concrete_file.write("// Wrapper for the normal font to match Font template structure\n")
+        concrete_file.write("struct NormalFont {\n")
+        concrete_file.write("    static constexpr size_t font_len = normal_font_len;\n")
+        concrete_file.write("    static constexpr size_t font_height = normal_font_height;\n")
+        concrete_file.write(f"    static constexpr size_t font_content_size = {normal_content_size};\n\n")
+        concrete_file.write("    const std::array<uint8_t, normal_font_len>& char_widths = normal_font_char_widths;\n")
+        concrete_file.write("    const std::array<uint16_t, normal_font_len>& char_begin = normal_font_char_begin;\n")
+        concrete_file.write(f"    const std::array<uint8_t, {normal_content_size}>& content = normal_font_content;\n")
+        concrete_file.write("};\n\n\n")
+        concrete_file.write("// Wrapper for the big font to match Font template structure\n")
+        concrete_file.write("struct BigFont {\n")
+        concrete_file.write("    static constexpr size_t font_len = big_font_len;\n")
+        concrete_file.write("    static constexpr size_t font_height = big_font_height;\n")
+        concrete_file.write(f"    static constexpr size_t font_content_size = {big_content_size};\n\n")
+        concrete_file.write("    const std::array<uint8_t, big_font_len>& char_widths = big_font_char_widths;\n")
+        concrete_file.write("    const std::array<uint16_t, big_font_len>& char_begin = big_font_char_begin;\n")
+        concrete_file.write(f"    const std::array<uint8_t, {big_content_size}>& content = big_font_content;\n")
+        concrete_file.write("};\n\n")
+        concrete_file.write("}\n")
 
 
 if __name__ == "__main__":

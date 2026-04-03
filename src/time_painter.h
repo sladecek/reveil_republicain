@@ -114,7 +114,7 @@ namespace rr::ui
             String line1_str;
             line1_str[0] = day_str[2];
             line1_str[1] = day_str[3];
-            line1_str[2] = 0; // space
+            line1_str[2] = static_cast<uint16_t>(rr::ui::fragment_index::space);
             line1_str[3] = static_cast<uint16_t>(get_month_fragment(time.month));
             
             // Draw the complete line

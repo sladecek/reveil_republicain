@@ -7,6 +7,7 @@ add_executable(reveil_tests
     char_pixel_extractor_test.cpp
     text_layout_calculator_test.cpp
     string_iterator_test.cpp
+    line_renderer_test.cpp
 )
 
 # Link against gtest, gtest_main, and the reveil library
