@@ -3,6 +3,7 @@
 
 #include "hardware_interface.h"
 #include "renderer.h"
+#include "text_layout_calculator.h"
 #include "rr_time.h"
 #include "number_to_string.h"
 #include "generated/drawing_objects.h"
@@ -117,7 +118,7 @@ namespace rr::ui
             line1_str[3] = static_cast<uint16_t>(get_month_fragment(time.month));
             
             // Draw the complete line
-            renderer.draw(line1_str, COLOR_RED, COLOR_YELLOW, Renderer<BPP, D, NormalFont>::Align::left);
+            renderer.draw(line1_str, COLOR_RED, COLOR_YELLOW, Align::left);
         }
 
         void paint_line2(const Time &time)
@@ -141,7 +142,7 @@ namespace rr::ui
             line2_str[3] = minute_str[2]; // First minute digit
             
             // Draw the complete line
-            renderer.draw(line2_str, COLOR_WHITE, COLOR_BLACK, Renderer<BPP, D, LargeFont>::Align::left);
+            renderer.draw(line2_str, COLOR_WHITE, COLOR_BLACK, Align::left);
             
             // TODO: Draw second minute digit separately if needed
         }
@@ -169,7 +170,7 @@ namespace rr::ui
             line3_str[3] = day_str[3]; // day digit
             
             // Draw the complete line
-            renderer.draw(line3_str, COLOR_YELLOW, COLOR_BLACK, Renderer<BPP, D, NormalFont>::Align::left);
+            renderer.draw(line3_str, COLOR_YELLOW, COLOR_BLACK, Align::left);
         }
 
         void paint_line4(const Time &time)
@@ -191,7 +192,7 @@ namespace rr::ui
             line4_str[3] = year_str[3]; // Third year digit
             
             // Draw the complete line
-            renderer.draw(line4_str, COLOR_YELLOW, COLOR_BLACK, Renderer<BPP, D, NormalFont>::Align::left);
+            renderer.draw(line4_str, COLOR_YELLOW, COLOR_BLACK, Align::left);
         }
 
         void paint_line5(const Time &time)
@@ -215,7 +216,7 @@ namespace rr::ui
             line5_str[3] = NULL_CHAR;
             
             // Draw the complete line
-            renderer.draw(line5_str, COLOR_YELLOW, COLOR_BLACK, Renderer<BPP, D, NormalFont>::Align::left);
+            renderer.draw(line5_str, COLOR_YELLOW, COLOR_BLACK, Align::left);
         }
 
         // Helper to get month name fragment index

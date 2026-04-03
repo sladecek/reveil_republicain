@@ -37,7 +37,7 @@ namespace emulator
             window_pixel_index_ = 0;
         }
 
-        void send_pixel(rr::hw::pixel_t pixel)
+        void send_pixels(rr::hw::pixels_t pixel)
         {
             if (!current_window_.has_value())
                 return;
@@ -61,7 +61,7 @@ namespace emulator
                     int buffer_index = global_y * DISPLAY_WIDTH + global_x;
                     // Extract 2 bits for this pixel (from MSB to LSB)
                     int shift = 6 - (i * 2);
-                    rr::hw::pixel_t pixel_value = (pixel >> shift) & 0x03;
+                    rr::hw::pixels_t pixel_value = (pixel >> shift) & 0x03;
                     display_buffer_[buffer_index] = pixel_value;
                 }
             }
@@ -84,7 +84,7 @@ namespace emulator
         }
 
         // Get pixel color for rendering (returns 2-bit value: 00, 01, 10, 11)
-        rr::hw::pixel_t get_pixel(int x, int y) const
+        rr::hw::pixels_t get_pixel(int x, int y) const
         {
             if (x < 0 || x >= DISPLAY_WIDTH || y < 0 || y >= DISPLAY_HEIGHT)
                 return 0;
@@ -92,7 +92,7 @@ namespace emulator
         }
 
         // Convert 2-bit pixel value to RGB color
-        void get_pixel_color(rr::hw::pixel_t pixel, float &r, float &g, float &b) const
+        void get_pixel_color(rr::hw::pixels_t pixel, float &r, float &g, float &b) const
         {
             switch (pixel & 0x03)
             {
@@ -222,7 +222,7 @@ namespace emulator
         }
 
         rr::ReveilRepublicain &reveil_;
-        std::array<rr::hw::pixel_t, DISPLAY_WIDTH * DISPLAY_HEIGHT> display_buffer_;
+        std::array<rr::hw::pixels_t, DISPLAY_WIDTH * DISPLAY_HEIGHT> display_buffer_;
         std::optional<rr::hw::window_t> current_window_;
         int window_pixel_index_;
 

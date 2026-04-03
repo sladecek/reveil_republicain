@@ -1,5 +1,6 @@
 #include "renderer.h"
 #include "concrete_fonts.h"
+#include "text_layout_calculator.h"
 
 #include <gtest/gtest.h>
 #include <vector>
@@ -18,9 +19,9 @@ namespace rr::ui::test
         
         struct Pixel
         {
-            hw::x_t x;
-            hw::y_t y;
-            hw::color_t value;
+            hw::x_t x{};
+            hw::y_t y{};
+            hw::color_t value{};
         };
 
         void start_window(const hw::window_t &w)
@@ -29,7 +30,7 @@ namespace rr::ui::test
             window_pixel_index_ = 0;
         }
 
-        void send_pixel(hw::pixel_t pixel)
+        void send_pixels(hw::pixels_t pixel)
         {
             // Each byte contains 4 pixels (2 bits each)
             for (int i = 0; i < PIXELS_PER_BYTE; ++i)
@@ -165,11 +166,134 @@ namespace rr::ui::test
         // Note: This is a simplified test - actual character mapping would need to be implemented
         String hello_str = {0, 0, 0, 0}; // Placeholder
 
-        renderer.draw(hello_str, 0, 3, Renderer<hw::BitsPerPixel::b2, MockDisplay, NormalFont>::Align::left); // bg=0 (black), fg=3 (white/max)
+        renderer.draw(hello_str, 0, 3, Align::left); // bg=0 (black), fg=3 (white/max)
 
         // For now, just verify it doesn't crash
         // In a complete implementation, we would verify the pixel output
         SUCCEED();
+    }
+
+    TEST(RendererTest, MeasureEmptyStringWidth)
+    {
+        MockDisplay display;
+        NormalFont font;
+        hw::window_t window{0, 0, 200, 24};
+
+        Renderer<hw::BitsPerPixel::b2, MockDisplay, NormalFont> renderer(display, window, font);
+
+        // Create empty string (all NULL_CHAR)
+        String empty_str = {NULL_CHAR, NULL_CHAR, NULL_CHAR, NULL_CHAR};
+
+        hw::x_t width = renderer.measure_string_width(empty_str);
+
+        // Empty string should have width 0
+        EXPECT_EQ(width, 0);
+    }
+
+    TEST(RendererTest, MeasureString123Width)
+    {
+        MockDisplay display;
+        NormalFont font;
+        hw::window_t window{0, 0, 200, 24};
+
+        Renderer<hw::BitsPerPixel::b2, MockDisplay, NormalFont> renderer(display, window, font);
+
+        // Create string "123" using digit fragments
+        // nr fragment starts at index 0, so digit 1 = fragment 1, digit 2 = fragment 2, digit 3 = fragment 3
+        String str_123 = {
+            static_cast<uint16_t>(fragment_index::nr) + 1,  // "1"
+            static_cast<uint16_t>(fragment_index::nr) + 2,  // "2"
+            static_cast<uint16_t>(fragment_index::nr) + 3,  // "3"
+            NULL_CHAR
+        };
+
+        hw::x_t width = renderer.measure_string_width(str_123);
+
+        // Width should be sum of individual character widths from the font
+        // Fragment 1 contains char 4 (width 6), fragment 2 contains char 5 (width 8), fragment 3 contains char 6 (width 8)
+        hw::x_t expected_width = 6 + 8 + 8;  // = 22
+        
+        EXPECT_EQ(width, expected_width);
+        EXPECT_GT(width, 0);  // Should be non-zero
+    }
+
+    TEST(RendererTest, DrawDigit0)
+    {
+        MockDisplay display;
+        NormalFont font;
+        
+        // Digit "0" is 8 pixels wide and font height is 24 pixels
+        hw::window_t window{0, 0, 8, 24};
+        
+        Renderer<hw::BitsPerPixel::b2, MockDisplay, NormalFont> renderer(display, window, font);
+        
+        // Create string with just digit "0" (fragment index 0)
+        String str_0 = {
+            static_cast<uint16_t>(fragment_index::nr) + 0,  // "0"
+            NULL_CHAR,
+            NULL_CHAR,
+            NULL_CHAR
+        };
+        
+        display.clear();
+        renderer.draw(str_0, 0, 3, Align::left);
+        
+        const auto &pixels = display.get_pixels();
+        
+        // Should have exactly 8x24 = 192 pixels
+        EXPECT_EQ(pixels.size(), 192);
+        
+        // Verify all pixels are within the window bounds
+        for (const auto &pixel : pixels)
+        {
+            EXPECT_LT(pixel.x, 8);
+            EXPECT_LT(pixel.y, 24);
+        }
+        
+        
+        // Check a few specific pixels to validate the digit shape
+        // Digit '0' should have foreground pixels forming an oval shape
+        // Top-left corner should be background
+        EXPECT_EQ(pixels[0].value, 0) << "Top-left corner should be background";
+        
+        // Top-right corner should be background
+        EXPECT_EQ(pixels[7].value, 0) << "Top-right corner should be background";
+        
+        // Bottom-left corner should be background (pixel at y=23, x=0)
+        auto bottom_left = std::find_if(pixels.begin(), pixels.end(), 
+            [](const MockDisplay::Pixel& p) { return p.x == 0 && p.y == 23; });
+        ASSERT_NE(bottom_left, pixels.end());
+        EXPECT_EQ(bottom_left->value, 0) << "Bottom-left corner should be background";
+        
+        // Bottom-right corner should be background (pixel at y=23, x=7)
+        auto bottom_right = std::find_if(pixels.begin(), pixels.end(), 
+            [](const MockDisplay::Pixel& p) { return p.x == 7 && p.y == 23; });
+        ASSERT_NE(bottom_right, pixels.end());
+        EXPECT_EQ(bottom_right->value, 0) << "Bottom-right corner should be background";
+        
+        // Print pixels for visual inspection
+        std::cout << "\nDigit '0' bitmap (8x24 pixels):\n";
+        std::cout << "Legend: . = background (0), # = foreground (3)\n\n";
+        
+        for (int y = 0; y < 24; ++y)
+        {
+            for (int x = 0; x < 8; ++x)
+            {
+                auto pixel = std::find_if(pixels.begin(), pixels.end(),
+                    [x, y](const MockDisplay::Pixel& p) { return p.x == x && p.y == y; });
+                
+                if (pixel != pixels.end())
+                {
+                    std::cout << (pixel->value == 3 ? '#' : '.');
+                }
+                else
+                {
+                    std::cout << '?';  // Should never happen
+                }
+            }
+            std::cout << '\n';
+        }
+        std::cout << std::endl;
     }
 
 } // namespace rr::ui::test

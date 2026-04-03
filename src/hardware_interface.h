@@ -22,8 +22,9 @@ namespace rr::hw
         b8 = 8
     };
 
-    using pixel_t = std::uint8_t;
-    using color_t = std::uint8_t;
+    // packed pixels, 8/BPP per byte. Upper left pixel starts at MSB 
+    using pixels_t = std::uint8_t;
+    using color_t = pixels_t;
     using x_t = std::uint8_t;
     using y_t = std::uint16_t;
 
@@ -36,9 +37,9 @@ namespace rr::hw
     };
 
     template <typename T>
-    concept Display = requires(T display, const window_t &w, pixel_t pixel) {
+    concept Display = requires(T display, const window_t &w, pixels_t pixel) {
         { display.start_window(w) } -> std::same_as<void>;
-        { display.send_pixel(pixel) } -> std::same_as<void>;
+        { display.send_pixels(pixel) } -> std::same_as<void>;
         { display.finish_window() } -> std::same_as<void>;
         { display.update() } -> std::same_as<void>;
     };

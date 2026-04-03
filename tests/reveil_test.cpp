@@ -12,7 +12,7 @@ namespace rr
         {
         public:
             void start_window(const hw::window_t &) {}
-            void send_pixel(hw::pixel_t) {}
+            void send_pixels(hw::pixels_t) {}
             void finish_window() {}
             void update() {}
         };
