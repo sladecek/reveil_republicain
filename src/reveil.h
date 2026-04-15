@@ -18,7 +18,7 @@ namespace rr
     class ReveilRepublicain
     {
     public:
-        ReveilRepublicain() {}
+        ReveilRepublicain() = default;
         
         template <hw::Display D, hw::Timer T>
         hw::output_flags_t compute_update(D &display, T &timer, const hw::Event &event)

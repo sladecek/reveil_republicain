@@ -20,7 +20,7 @@ namespace rr::ui
     public:
         using CharCallback = std::function<void(uint8_t ch, hw::x_t x, hw::x_t char_width)>;
 
-        StringIterator(const F &font) : font_(font) {}
+        StringIterator(const F &font) : font(font) {}
 
         // Iterate through all characters in the string, calling the callback for each
         // Returns the total width of the string
@@ -35,7 +35,7 @@ namespace rr::ui
                     for (size_t ic = 0; ic < fragment_len[fragment]; ++ic)
                     {
                         const auto ch = fragment_content[fragment_begin[fragment] + ic];
-                        const hw::x_t char_width = font_.char_widths[ch];
+                        const hw::x_t char_width = font.char_widths[ch];
                         callback(ch, x, char_width);
                         x += char_width;
                     }
@@ -51,7 +51,7 @@ namespace rr::ui
         }
 
     private:
-        const F &font_;
+        const F &font;
     };
 
 } // namespace rr::ui

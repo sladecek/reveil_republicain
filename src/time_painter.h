@@ -26,7 +26,7 @@ namespace rr::ui
     {
     public:
         TimePainter(D &display, const NormalFont &normal_font, const LargeFont &large_font)
-            : display_(display), normal_font_(normal_font), large_font_(large_font)
+            : display(display), normal_font(normal_font), large_font(large_font)
         {
         }
 
@@ -39,45 +39,45 @@ namespace rr::ui
             bool needs_display_update = false;
             
             // Line 1: Day and month name (yellow on red, normal font)
-            if (!previous_time_.has_value() || 
-                previous_time_->day != time.day || 
-                previous_time_->month != time.month)
+            if (!previous_time.has_value() || 
+                previous_time->day != time.day || 
+                previous_time->month != time.month)
             {
                 paint_line1(time);
                 needs_display_update = true;
             }
             
             // Line 2: Hour:Minute (black on white, large font)
-            if (!previous_time_.has_value() ||
-                previous_time_->hour != time.hour ||
-                previous_time_->minute != time.minute)
+            if (!previous_time.has_value() ||
+                previous_time->hour != time.hour ||
+                previous_time->minute != time.minute)
             {
                 paint_line2(time);
                 needs_display_update = true;
             }
             
             // Line 3: Day name (e.g., "Primidi d.1", black on yellow, normal font)
-            if (!previous_time_.has_value() ||
-                previous_time_->day != time.day ||
-                previous_time_->decade != time.decade)
+            if (!previous_time.has_value() ||
+                previous_time->day != time.day ||
+                previous_time->decade != time.decade)
             {
                 paint_line3(time);
                 needs_display_update = true;
             }
             
             // Line 4: Year (e.g., "an 234", black on yellow, normal font)
-            if (!previous_time_.has_value() ||
-                previous_time_->year != time.year)
+            if (!previous_time.has_value() ||
+                previous_time->year != time.year)
             {
                 paint_line4(time);
                 needs_display_update = true;
             }
             
             // Line 5: Day of year name (black on yellow, normal font)
-            if (!previous_time_.has_value() ||
-                previous_time_->day != time.day ||
-                previous_time_->decade != time.decade ||
-                previous_time_->month != time.month)
+            if (!previous_time.has_value() ||
+                previous_time->day != time.day ||
+                previous_time->decade != time.decade ||
+                previous_time->month != time.month)
             {
                 paint_line5(time);
                 needs_display_update = true;
@@ -85,24 +85,24 @@ namespace rr::ui
 
             if (needs_display_update)
             {
-                display_.update();
+                display.update();
             }
             
             // Save current time
-            previous_time_ = time;
+            previous_time = time;
         }
 
     private:
-        D &display_;
-        const NormalFont &normal_font_;
-        const LargeFont &large_font_;
-        std::optional<Time> previous_time_;
+        D &display;
+        const NormalFont &normal_font;
+        const LargeFont &large_font;
+        std::optional<Time> previous_time;
 
         void paint_line1(const Time &time)
         {
             // Line 1: "DD MonthName" (yellow on red)
             hw::window_t window{0, 0, 200, normal_font_height};
-            Renderer<BPP, D, NormalFont> renderer(display_, window, normal_font_);
+            Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
             
             // Convert day of decade to 2-digit string
             NumberToString<NormalFont, 2> day_converter;
@@ -125,7 +125,7 @@ namespace rr::ui
         {
             // Line 2: "HH:MM" (black on white, large font)
             hw::window_t window{0, static_cast<hw::y_t>(normal_font_height), 200, big_font_height};
-            Renderer<BPP, D, LargeFont> renderer(display_, window, large_font_);
+            Renderer<BPP, D, LargeFont> renderer(display, window, large_font);
             
             // Convert hour and minute to 2-digit strings
             NumberToString<LargeFont, 2> converter;
@@ -152,7 +152,7 @@ namespace rr::ui
             // Line 3: "DayName d.D" (e.g., "Primidi d.1", black on yellow)
             hw::y_t y_pos = normal_font_height + big_font_height;
             hw::window_t window{0, y_pos, 200, normal_font_height};
-            Renderer<BPP, D, NormalFont> renderer(display_, window, normal_font_);
+            Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
             
             // Get day name fragment (Primidi, Duodi, etc.)
             fragment_index day_name = get_day_name_fragment(time.day);
@@ -178,7 +178,7 @@ namespace rr::ui
             // Line 4: "an YYY" (3 digit year, black on yellow)
             hw::y_t y_pos = normal_font_height + big_font_height + normal_font_height;
             hw::window_t window{0, y_pos, 200, normal_font_height};
-            Renderer<BPP, D, NormalFont> renderer(display_, window, normal_font_);
+            Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
             
             // Convert year to 3-digit string
             NumberToString<NormalFont, 3> converter;
@@ -200,7 +200,7 @@ namespace rr::ui
             // Line 5: Day of year name (e.g., "raisin", black on yellow)
             hw::y_t y_pos = normal_font_height + big_font_height + 2 * normal_font_height;
             hw::window_t window{0, y_pos, 200, normal_font_height};
-            Renderer<BPP, D, NormalFont> renderer(display_, window, normal_font_);
+            Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
             
             // Get day of year (0-364 or 0-365)
             int day_of_year = time.day_of_year();

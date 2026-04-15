@@ -26,8 +26,8 @@ namespace rr::ui::test
 
         void start_window(const hw::window_t &w)
         {
-            current_window_ = w;
-            window_pixel_index_ = 0;
+            current_window = w;
+            window_pixel_index = 0;
         }
 
         void send_pixels(hw::pixels_t pixel)
@@ -35,22 +35,22 @@ namespace rr::ui::test
             // Each byte contains 4 pixels (2 bits each)
             for (int i = 0; i < PIXELS_PER_BYTE; ++i)
             {
-                if (window_pixel_index_ >= current_window_.width * current_window_.height)
+                if (window_pixel_index >= current_window.width * current_window.height)
                     break;
 
-                int local_x = window_pixel_index_ % current_window_.width;
-                int local_y = window_pixel_index_ / current_window_.width;
-                int global_x = current_window_.x + local_x;
-                int global_y = current_window_.y + local_y;
+                int local_x = window_pixel_index % current_window.width;
+                int local_y = window_pixel_index / current_window.width;
+                int global_x = current_window.x + local_x;
+                int global_y = current_window.y + local_y;
 
                 // Extract 2 bits for this pixel (from MSB to LSB)
                 int shift = 6 - (i * 2);
                 hw::color_t pixel_value = (pixel >> shift) & 0x03;
                 
-                pixels_.push_back({static_cast<hw::x_t>(global_x), 
+                pixels.push_back({static_cast<hw::x_t>(global_x), 
                                   static_cast<hw::y_t>(global_y), 
                                   pixel_value});
-                window_pixel_index_++;
+                window_pixel_index++;
             }
         }
 
@@ -64,13 +64,13 @@ namespace rr::ui::test
             // Nothing to do
         }
 
-        const std::vector<Pixel> &get_pixels() const { return pixels_; }
-        void clear() { pixels_.clear(); }
+        const std::vector<Pixel> &get_pixels() const { return pixels; }
+        void clear() { pixels.clear(); }
 
     private:
-        hw::window_t current_window_{};
-        int window_pixel_index_{};
-        std::vector<Pixel> pixels_;
+        hw::window_t current_window{};
+        int window_pixel_index{};
+        std::vector<Pixel> pixels;
     };
 
     TEST(RendererTest, CreateRenderer)

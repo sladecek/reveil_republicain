@@ -17,8 +17,8 @@ namespace rr::ui
         using PixelCallback = std::function<void(bool)>;
 
         CharPixelExtractor(const F &font, PixelCallback draw_pixel)
-            : font_(font)
-            , draw_pixel_(draw_pixel)
+            : font(font)
+            , draw_pixel(draw_pixel)
         {
         }
 
@@ -30,7 +30,7 @@ namespace rr::ui
         void extract_char_line(uint8_t ch, hw::y_t y, hw::x_t char_width, hw::x_t max_pixels)
         {
             const auto char_line_bytes = (char_width + 7) / 8;
-            auto char_data_begin = font_.char_begin[ch] + y * char_line_bytes;
+            auto char_data_begin = font.char_begin[ch] + y * char_line_bytes;
             
             int bit = 0;
             uint8_t byte{};
@@ -39,9 +39,9 @@ namespace rr::ui
             {
                 if (bit == 0)
                 {
-                    byte = font_.content[char_data_begin++];
+                    byte = font.content[char_data_begin++];
                 }
-                draw_pixel_(byte & 0x80);
+                draw_pixel(byte & 0x80);
                 byte <<= 1;
                 bit++;
                 bit %= 8;
@@ -49,8 +49,8 @@ namespace rr::ui
         }
 
     private:
-        const F &font_;
-        PixelCallback draw_pixel_;
+        const F &font;
+        PixelCallback draw_pixel;
     };
 
 } // namespace rr::ui

@@ -16,7 +16,7 @@ namespace rr::ui
     class LineRenderer
     {
     public:
-        LineRenderer(const F &font) : font_(font) {}
+        LineRenderer(const F &font) : font(font) {}
 
         // Render one line (y coordinate) of a string
         // packer: BitPacker for pixel output
@@ -54,8 +54,8 @@ namespace rr::ui
 
                 fill_pixels_with_bg(layout.left_padding);
 
-                CharPixelExtractor<F> extractor(font_, draw_pixel);
-                StringIterator<F> iterator(font_);
+                CharPixelExtractor<F> extractor(font, draw_pixel);
+                StringIterator<F> iterator(font);
 
                 iterator.iterate(s, [&](uint8_t ch, hw::x_t x, hw::x_t char_width)
                 {
@@ -79,7 +79,7 @@ namespace rr::ui
         }
 
     private:
-        const F &font_;
+        const F &font;
     };
 
 } // namespace rr::ui

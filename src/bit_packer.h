@@ -20,52 +20,52 @@ namespace rr::ui
         using ByteCallback = std::function<void(uint8_t)>;
 
         explicit BitPacker(ByteCallback send_byte)
-            : send_byte_(send_byte)
-            , packed_bits_(0)
-            , packed_pixels_(0)
+            : send_byte(send_byte)
+            , packed_bits(0)
+            , packed_pixels(0)
         {
         }
 
         void start_line()
         {
-            packed_bits_ = 0;
-            packed_pixels_ = 0;
+            packed_bits = 0;
+            packed_pixels = 0;
         }
 
         void end_line()
         {
             // Send any remaining pixels in the current byte
-            if (packed_pixels_ > 0)
+            if (packed_pixels > 0)
             {
                 // Shift remaining bits to align to MSB
-                int remaining_bits = (pixels_per_byte - packed_pixels_) * BitsPerPixel;
-                packed_bits_ <<= remaining_bits;
-                send_byte_(packed_bits_);
+                int remaining_bits = (pixels_per_byte - packed_pixels) * BitsPerPixel;
+                packed_bits <<= remaining_bits;
+                send_byte(packed_bits);
             }
         }
 
         void draw_pixel(uint8_t pixel_value)
         {
-            if (packed_pixels_ >= pixels_per_byte)
+            if (packed_pixels >= pixels_per_byte)
             {
                 // Byte is full, send it
-                send_byte_(packed_bits_);
+                send_byte(packed_bits);
                 start_line();
             }
             // Pack pixel from MSB to LSB
-            packed_bits_ <<= BitsPerPixel;
-            packed_bits_ |= pixel_value;
-            packed_pixels_ += 1;
+            packed_bits <<= BitsPerPixel;
+            packed_bits |= pixel_value;
+            packed_pixels += 1;
         }
 
-        uint8_t get_packed_pixels() const { return packed_pixels_; }
+        uint8_t get_packed_pixels() const { return packed_pixels; }
 
-        int get_packed_bits() const { return packed_bits_; }
+        int get_packed_bits() const { return packed_bits; }
 
     private:
-        ByteCallback send_byte_;
-        int packed_bits_;
-        uint8_t packed_pixels_;
+        ByteCallback send_byte;
+        int packed_bits;
+        uint8_t packed_pixels;
     };
 
 } // namespace rr::ui

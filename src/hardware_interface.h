@@ -58,6 +58,8 @@ namespace rr::hw
         static constexpr std::uint32_t jd_zero = 2451910;
     };
 
+
+    // The first time event should be sent by the hardware automatically.
     template <typename T>
     concept Timer = requires(T timer, Clock::time_point time) {
         { timer.set_next_clock_event_time(time) } -> std::same_as<void>;

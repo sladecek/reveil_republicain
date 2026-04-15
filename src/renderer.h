@@ -19,34 +19,34 @@ namespace rr::ui
     {
     public:
         Renderer(D &display, const hw::window_t &w, const F &font)
-            : display_(display), window_(w), font_(font), string_iterator_(font), line_renderer_(font)
+            : display(display), window(w), font(font), string_iterator(font), line_renderer(font)
         {
         }
 
         void draw(const String &s, hw::color_t bg, hw::color_t fg, Align align)
         {
-            display_.start_window(window_);
+            display.start_window(window);
 
-            const auto string_width = string_iterator_.measure_width(s);
+            const auto string_width = string_iterator.measure_width(s);
             const auto layout = TextLayoutCalculator::compute_horizontal_alignment(
-                window_.width, string_width, align);
+                window.width, string_width, align);
 
             // Create bit packer with callback to send bytes to display
-            auto send_byte = [this](uint8_t byte) { display_.send_pixels(byte); };
+            auto send_byte = [this](uint8_t byte) { display.send_pixels(byte); };
             BitPacker<static_cast<int>(BPP)> packer(send_byte);
 
-            for (hw::y_t y = 0; y < window_.height; y++)
+            for (hw::y_t y = 0; y < window.height; y++)
             {
-                line_renderer_.render_line(packer, y, font_.font_height, window_.width,
+                line_renderer.render_line(packer, y, font.font_height, window.width,
                                           layout, s, bg, fg);
             }
 
-            display_.finish_window();
+            display.finish_window();
         }
 
         hw::x_t measure_string_width(const String &s)
         {
-            return string_iterator_.measure_width(s);
+            return string_iterator.measure_width(s);
         }
 
         void fill(hw::color_t bg)
@@ -56,11 +56,11 @@ namespace rr::ui
         }
 
     private:
-        D &display_;
-        hw::window_t window_;
-        const F &font_;
-        StringIterator<F> string_iterator_;
-        LineRenderer<BPP, F> line_renderer_;
+        D &display;
+        hw::window_t window;
+        const F &font;
+        StringIterator<F> string_iterator;
+        LineRenderer<BPP, F> line_renderer;
     };
 
 }
