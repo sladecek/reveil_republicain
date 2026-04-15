@@ -1,3 +1,5 @@
+// Main class for the French Calender Alarm Clock
+
 #pragma once
 
 #include "hardware_interface.h"
@@ -5,6 +7,7 @@
 #include "generated/concrete_fonts.h"
 #include "time_painter.h"
 #include "rr_time.h"
+#include "state.h"
 
 #include <concepts>
 #include <variant>
@@ -39,6 +42,8 @@ namespace rr
             
             return static_cast<hw::output_flags_t>(hw::OutputFlags::None);
         }
+        private:
+        State state{};
     };
 
 } // namespace rr

@@ -16,14 +16,17 @@ namespace rr
     // Packed time structure for French Republican Calendar:
     struct Time
     {
-        uint32_t second : 7;   // 0-99 (decimal seconds)
-        uint32_t minute : 7;   // 0-99 (decimal minutes)
-        uint32_t hour : 4;     // 0-9 (decimal hours)
-        uint32_t day : 4;      // 0-9 (day of decade)
-        uint32_t decade : 2;   // 0-2 (which decade in month: 0, 1, or 2)
-        uint32_t month : 4;    // 0-11 (month) or 12 (complementary days)
-        uint32_t year : 10;    // years since era start
+        uint32_t second : 7 = 0;   // 0-99 (decimal seconds)
+        uint32_t minute : 7 = 0;   // 0-99 (decimal minutes)
+        uint32_t hour : 4 = 0;     // 0-9 (decimal hours)
+        uint32_t day : 4 = 1;      // 0-9 (day of decade)
+        uint32_t decade : 2 = 0;   // 0-2 (which decade in month: 0, 1, or 2)
+        uint32_t month : 4 = 0;    // 0-11 (month) or 12 (complementary days)
+        uint32_t year : 10 = 209;  // years since era start
     
+        // Default constructor using default member initializers
+        Time() = default;
+
         // Construct from hardware clock time point (Unix timestamp)
         // Converts from Gregorian calendar with 24h time to Republican calendar with decimal time
         Time(hw::Clock::time_point time_point);

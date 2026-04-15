@@ -13,7 +13,7 @@
 namespace rr::hw
 {
 
-
+    // -- DISPLAY ---
     enum class BitsPerPixel: uint8_t
     {
         b1 = 1,
@@ -44,7 +44,7 @@ namespace rr::hw
         { display.update() } -> std::same_as<void>;
     };
 
-
+    // -- TIMER -----
     struct Clock
     {
         using rep = std::uint32_t;
@@ -63,6 +63,10 @@ namespace rr::hw
         { timer.set_next_clock_event_time(time) } -> std::same_as<void>;
     };
   
+
+    // -- EVENTS ----
+    // From hw to algorithm
+
     // Clock events sent to the update function when the reaches a new time point.
     // The event can wake the system up if it is asleep.
     struct ClockEvent
@@ -85,6 +89,9 @@ namespace rr::hw
     };
 
     using Event = std::variant<ClockEvent, EncoderEvent, TickEvent>;
+
+    // -- OUTPUT ----
+    // From algorithm to hw
 
     using output_flags_t = std::uint8_t;
     enum class OutputFlags : output_flags_t
