@@ -9,6 +9,7 @@
 namespace emulator
 {
 
+    template<typename ReveilType>
     class HardwareEmulator
     {
     public:
@@ -17,7 +18,7 @@ namespace emulator
         static constexpr rr::hw::BitsPerPixel BITS_PER_PIXEL = rr::hw::BitsPerPixel::b2;
         static constexpr int PIXELS_PER_BYTE = 8 / static_cast<int>(BITS_PER_PIXEL);
 
-        HardwareEmulator(rr::ReveilRepublicain &reveil)
+        HardwareEmulator(ReveilType &reveil)
             : reveil(reveil),
               awake(true),
               beep_flag(false),
@@ -159,7 +160,7 @@ namespace emulator
                 old_time < next_alarm_time.value() &&
                 current_time >= next_alarm_time.value())
             {
-                rr::hw::ClockEvent event{current_time};
+                rr::hw::TimerEvent event{current_time};
                 process_event(event);
             }
         }
@@ -221,7 +222,7 @@ namespace emulator
             }
         }
 
-        rr::ReveilRepublicain &reveil;
+        ReveilType &reveil;
         std::array<rr::hw::pixels_t, DISPLAY_WIDTH * DISPLAY_HEIGHT> display_buffer;
         std::optional<rr::hw::window_t> current_window;
         int window_pixel_index;

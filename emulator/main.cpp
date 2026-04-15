@@ -7,6 +7,7 @@
 #include <string>
 #include <cstdio>
 #include <chrono>
+#include <ctime>
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -40,6 +41,14 @@ public:
     {
         last_second_time = glfwGetTime();
         
+        // Send initial timer event with current real time
+        auto initial_time = get_current_time_point();
+        hardware.update_time(initial_time);
+        
+        rr::hw::TimerEvent initial_event{initial_time};
+        auto flags = reveil.compute_update(hardware, hardware, initial_event);
+        hardware.process_output_flags(flags);
+        
         while (!glfwWindowShouldClose(window))
         {
             glfwPollEvents();
@@ -65,6 +74,26 @@ private:
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         
         return true;
+    }
+    
+    // Convert current system time to Clock::time_point
+    rr::hw::Clock::time_point get_current_time_point()
+    {
+        // Get current system time
+        auto now = std::chrono::system_clock::now();
+        auto unix_time = std::chrono::system_clock::to_time_t(now);
+        
+        // Convert Unix time (seconds since 1970-01-01) to Clock time (seconds since 2001-01-01)
+        // Days from 1970-01-01 to 2001-01-01 = 31 years
+        // Account for leap years: 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000 = 8 leap days
+        // Total days = 31*365 + 8 = 11323 days
+        constexpr int64_t seconds_1970_to_2001 = 11323LL * 24 * 3600;
+        
+        int64_t seconds_since_2001 = unix_time - seconds_1970_to_2001;
+        
+        return rr::hw::Clock::time_point(
+            rr::hw::Clock::duration(static_cast<rr::hw::Clock::rep>(seconds_since_2001))
+        );
     }
     
     bool create_window()
@@ -96,31 +125,33 @@ private:
     {
         double current_time = glfwGetTime();
         
-        // Update simulated time (each real second = 1 simulated second)
-        if (current_time - last_second_time >= 1.0)
+        if (current_time - last_second_time >= 0.1)
         {
             last_second_time = current_time;
-            handle_time_tick(current_time);
+            handle_time_tick();
+            
+            // Check if we need to send a timer-scheduled clock event
+            auto time_point = get_current_time_point();
+            auto next_alarm = hardware.get_next_alarm();
+            if (next_alarm.has_value() && time_point >= next_alarm.value())
+            {
+                rr::hw::TimerEvent timer_event{time_point};
+                auto flags = reveil.compute_update(hardware, hardware, timer_event);
+                hardware.process_output_flags(flags);
+            }
         }
     }
     
-    void handle_time_tick(double current_time)
+    void handle_time_tick()
     {
-        auto time_point = rr::hw::Clock::time_point(
-            rr::hw::Clock::duration(static_cast<rr::hw::Clock::rep>(current_time))
-        );
+        auto time_point = get_current_time_point();
         hardware.update_time(time_point);
-        
-        // Send clock event
-        rr::hw::ClockEvent clock_event{time_point};
-        auto flags = reveil.compute_update(hardware, hardware, clock_event);
-        hardware.process_output_flags(flags);
         
         // Send tick event if awake
         if (hardware.is_awake())
         {
             rr::hw::TickEvent tick_event{hardware.get_tick_counter()};
-            flags = reveil.compute_update(hardware, hardware, tick_event);
+            auto flags = reveil.compute_update(hardware, hardware, tick_event);
             hardware.process_output_flags(flags);
             hardware.handle_tick();
         }
@@ -257,8 +288,8 @@ private:
         ImDrawList* draw_list = ImGui::GetWindowDrawList();
         ImVec2 canvas_pos = ImGui::GetCursorScreenPos();
         const float pixel_size = 2.0f;
-        const float display_width = emulator::HardwareEmulator::DISPLAY_WIDTH * pixel_size;
-        const float display_height = emulator::HardwareEmulator::DISPLAY_HEIGHT * pixel_size;
+        const float display_width = decltype(hardware)::DISPLAY_WIDTH * pixel_size;
+        const float display_height = decltype(hardware)::DISPLAY_HEIGHT * pixel_size;
         
         draw_display_background(draw_list, canvas_pos, display_width, display_height);
         draw_display_pixels(draw_list, canvas_pos, pixel_size);
@@ -279,9 +310,9 @@ private:
     
     void draw_display_pixels(ImDrawList* draw_list, const ImVec2& canvas_pos, float pixel_size)
     {
-        for (int y = 0; y < emulator::HardwareEmulator::DISPLAY_HEIGHT; ++y)
+        for (int y = 0; y < decltype(hardware)::DISPLAY_HEIGHT; ++y)
         {
-            for (int x = 0; x < emulator::HardwareEmulator::DISPLAY_WIDTH; ++x)
+            for (int x = 0; x < decltype(hardware)::DISPLAY_WIDTH; ++x)
             {
                 draw_single_pixel(draw_list, canvas_pos, x, y, pixel_size);
             }
@@ -349,8 +380,10 @@ private:
     double last_second_time;
     ImVec4 clear_color;
     
-    rr::ReveilRepublicain reveil;
-    emulator::HardwareEmulator hardware{reveil};
+    // Use debug-enabled version of ReveilRepublicain
+    using ReveilType = rr::ReveilRepublicain<true>;
+    ReveilType reveil;
+    emulator::HardwareEmulator<ReveilType> hardware{reveil};
 };
 
 int main(int, char**)

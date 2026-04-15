@@ -28,7 +28,7 @@ namespace rr
         class ReveilTest : public ::testing::Test
         {
         protected:
-            ReveilRepublicain reveil;
+            ReveilRepublicain<false> reveil; // No debug in tests
             MockDisplay display;
             MockTimer timer;
         };
@@ -44,7 +44,7 @@ namespace rr
 
         TEST_F(ReveilTest, HandlesClockEvent)
         {
-            hw::ClockEvent event{hw::Clock::time_point{}};
+            hw::TimerEvent event{hw::Clock::time_point{}};
             hw::output_flags_t flags = reveil.compute_update(display, timer, event);
             
             EXPECT_GE(flags, 0);
@@ -56,6 +56,29 @@ namespace rr
             hw::output_flags_t flags = reveil.compute_update(display, timer, event);
             
             EXPECT_GE(flags, 0);
+        }
+
+        TEST(ReveilDebugTest, DebugOutputForEncoderEvent)
+        {
+            // Test with debug enabled - output should go to stdout
+            ReveilRepublicain<true> reveil_debug;
+            MockDisplay display;
+            MockTimer timer;
+            
+            printf("\n=== Testing debug output (should see debug messages) ===\n");
+            
+            hw::EncoderEvent encoder_event{-1, false};
+            reveil_debug.compute_update(display, timer, encoder_event);
+            
+            // Create a TimerEvent with a specific time (e.g., 14:30:45)
+            auto time_point = hw::Clock::time_point(hw::Clock::duration(14*3600 + 30*60 + 45));
+            hw::TimerEvent timer_event{time_point};
+            reveil_debug.compute_update(display, timer, timer_event);
+            
+            hw::EncoderEvent press_event{0, true};
+            reveil_debug.compute_update(display, timer, press_event);
+            
+            printf("=== End of debug output test ===\n\n");
         }
 
     } // namespace test

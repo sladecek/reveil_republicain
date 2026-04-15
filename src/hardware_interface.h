@@ -71,7 +71,7 @@ namespace rr::hw
 
     // Clock events sent to the update function when the reaches a new time point.
     // The event can wake the system up if it is asleep.
-    struct ClockEvent
+    struct TimerEvent
     {
         Clock::time_point timestamp{};
     };
@@ -90,7 +90,7 @@ namespace rr::hw
         int counter{}; // Tick counter, incremented on each tick
     };
 
-    using Event = std::variant<ClockEvent, EncoderEvent, TickEvent>;
+    using Event = std::variant<TimerEvent, EncoderEvent, TickEvent>;
 
     // -- OUTPUT ----
     // From algorithm to hw
