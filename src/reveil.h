@@ -61,8 +61,9 @@ namespace rr
                 ui::TimePainter<D, ui::NormalFont, ui::BigFont> painter(display, normal_font, big_font);
                 painter.update(current_time);
                 
-                // Timer events are sent only on initialization or when explicitly requested
-                // No automatic rescheduling here
+                // Schedule next timer event at the next decimal minute change
+                auto next_minute = current_time.compute_next_minute_change();
+                timer.set_next_clock_event_time(next_minute);
             }
             
             return static_cast<hw::output_flags_t>(hw::OutputFlags::None);
