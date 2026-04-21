@@ -78,7 +78,14 @@ class CharTable:
 
     def build_mapping(self):
         # Build a mapping from character to index
-        self.char_to_index = {char: idx for idx, char in enumerate(sorted(self.chars))} 
+        # Custom sort: digits '0'-'9' and ':' first, then the rest sorted
+        def sort_key(c):
+            if c in "0123456789:":
+                return (0, "0123456789:".index(c))
+            return (1, ord(c))
+        self.sorted_chars = sorted(self.chars, key=sort_key)
+        
+        self.char_to_index = {char: idx for idx, char in enumerate(self.sorted_chars)} 
 
     def map_char(self, char: str) -> int:
         # Map a character to its index in the char table
@@ -121,14 +128,13 @@ class FontTable:
         
     def render_font(self):
         """Render all characters in the font using PIL"""
-        sorted_chars = sorted(self.char_table.chars)
         
         # First pass: determine the maximum height and vertical offsets
         max_height = 0
         min_y_offset = 0
         max_y_bottom = 0
         
-        for i, char in enumerate(sorted_chars):
+        for i, char in enumerate(self.char_table.sorted_chars):
             if i >= self.font_char_count:
                 break
             
@@ -151,7 +157,7 @@ class FontTable:
         self.y_offset = -min_y_offset  # Offset to apply when rendering
         
         # Second pass: render each character
-        for i, char in enumerate(sorted_chars):
+        for i, char in enumerate(self.char_table.sorted_chars):
             if i >= self.font_char_count:
                 break
             
@@ -212,10 +218,6 @@ class FontTable:
                 # Extract pixel data
                 pixels = list(char_img.getdata())
                 
-                # Debug for character '1'
-                if char == '1':
-                    print(f"DEBUG '1': char_width={char_width}, bbox={bbox}, pixels length={len(pixels)}")
-                
                 # Add inter-character spacing pixels (zeros) to the right of each line
                 pixels_with_spacing = []
                 for y in range(self.height):
@@ -234,12 +236,6 @@ class FontTable:
                         pixel = pixels_with_spacing[y * (char_width + INTERCHAR_SPACE) + x]
                         row += "#" if pixel else " "
                     ascii_art.append(row)
-                
-                # Debug for character '1'
-                if char == '1':
-                    print(f"DEBUG '1': glyph width={char_width + INTERCHAR_SPACE}, pixels_with_spacing length={len(pixels_with_spacing)}")
-                    print(f"DEBUG '1': ASCII art line 7: '{ascii_art[7]}' (len={len(ascii_art[7])})")
-                    print(f"DEBUG '1': ASCII art line 8: '{ascii_art[8]}' (len={len(ascii_art[8])})")
                 
                 self.glyphs[char] = {
                     'width': char_width + INTERCHAR_SPACE,
@@ -266,7 +262,7 @@ class FontTable:
 
     def write_content(self, file):
         """Write C++ implementation for the font"""
-        sorted_chars = sorted(self.char_table.chars)[:self.font_char_count]
+        sorted_chars = self.char_table.sorted_chars[:self.font_char_count]
         
         # Write character widths
         file.write(f"// {self.name} font character widths\n")
@@ -323,26 +319,6 @@ class FontTable:
             char_width_with_space = glyph['width']
             char_line_bytes = (char_width_with_space + 7) // 8
             
-            # Debug: print pixels for character '1' line 7
-            if char == '1' and i == 4:  # character '1' at index 4 in normal font
-                print(f"DEBUG: Character '1' packing (normal font)")
-                print(f"  Glyph width={char_width_with_space}, char_line_bytes={char_line_bytes}")
-                for line_idx in [7, 8, 9]:
-                    start = line_idx * char_width_with_space
-                    end = start + char_width_with_space
-                    line_pixels = glyph['data'][start:end]
-                    print(f"  Line {line_idx}: '{glyph['ascii_art'][line_idx]}' pixels={line_pixels}")
-                    # Manually pack this line
-                    test_byte = 0
-                    for bit_idx, pixel in enumerate(line_pixels):
-                        test_byte <<= 1
-                        if pixel:
-                            test_byte |= 1
-                    # Pad remaining bits
-                    if len(line_pixels) < 8:
-                        test_byte <<= (8 - len(line_pixels))
-                    print(f"    Expected byte: 0x{test_byte:02X}")
-            
             # Pack each line separately
             for line_y in range(glyph['height']):
                 line_start = line_y * char_width_with_space
@@ -371,16 +347,6 @@ class FontTable:
                     # Shift remaining bits to MSB position
                     current_byte <<= (8 - bit_count)
                     byte_data.append(current_byte)
-            
-            # Debug: print bytes for character '0' line 7
-            if char == '0' and i == 3:  # character '0' at index 3
-                print("DEBUG: Character '0' packing")
-                char_width_with_space = glyph['width']
-                for line_idx in range(len(glyph['ascii_art'])):
-                    start = line_idx * char_width_with_space
-                    end = start + char_width_with_space
-                    line_pixels = glyph['data'][start:end]
-                    print(f"  Line {line_idx}: '{glyph['ascii_art'][line_idx]}' pixels={line_pixels}")
             
             # Ensure we have the right number of bytes
             while len(byte_data) < bytes_needed:
@@ -547,7 +513,8 @@ def main():
     fragments.add_string("day")
     fragments.add_string("month")
     fragments.add_string("year")
-    fragments.add_string("annee","année")
+    fragments.add_string("annee", "année ")
+    fragments.add_string("decade", " Décade ")
     fragments.add_string_list("on_off", ["on", "off"])
     fragments.add_string_list(
         "months",

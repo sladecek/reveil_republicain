@@ -5,40 +5,40 @@ namespace rr::ui {
 // Fragment content (character indices)
 const std::array<uint8_t, fragment_content_size> fragment_content = {
     // nr: "0"
-    3,
+    0,
 
     // "1"
-    4,
+    1,
 
     // "2"
-    5,
+    2,
 
     // "3"
-    6,
+    3,
 
     // "4"
-    7,
+    4,
 
     // "5"
-    8,
+    5,
 
     // "6"
-    9,
+    6,
 
     // "7"
-    10,
+    7,
 
     // "8"
-    11,
+    8,
 
     // "9"
-    12,
+    9,
 
     // colon: ":"
-    13,
+    10,
 
     // space: " "
-    0,
+    11,
 
     // bell: "🔔"
     61,
@@ -70,8 +70,11 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     // year: "year"
     49, 31, 27, 43,
 
-    // annee: "année"
-    27, 39, 39, 54, 31,
+    // annee: "année "
+    27, 39, 39, 54, 31, 11,
+
+    // decade: " Décade "
+    11, 15, 54, 29, 27, 30, 31, 11,
 
     // on_off: "on"
     40, 39,
@@ -146,22 +149,22 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     15, 54, 29, 27, 30, 35,
 
     // sansculottides: "Fête de la Vertu"
-    16, 55, 45, 31, 0, 30, 31, 0, 37, 27, 0, 26, 31, 43, 45, 46,
+    16, 55, 45, 31, 11, 30, 31, 11, 37, 27, 11, 26, 31, 43, 45, 46,
 
     // "Fête du Génie"
-    16, 55, 45, 31, 0, 30, 46, 0, 17, 54, 39, 35, 31,
+    16, 55, 45, 31, 11, 30, 46, 11, 17, 54, 39, 35, 31,
 
     // "Fête du Travail"
-    16, 55, 45, 31, 0, 30, 46, 0, 25, 43, 27, 47, 27, 35, 37,
+    16, 55, 45, 31, 11, 30, 46, 11, 25, 43, 27, 47, 27, 35, 37,
 
     // "Fête de l'Opinion"
-    16, 55, 45, 31, 0, 30, 31, 0, 37, 1, 20, 41, 35, 39, 35, 40, 39,
+    16, 55, 45, 31, 11, 30, 31, 11, 37, 12, 20, 41, 35, 39, 35, 40, 39,
 
     // "Fête des Récompenses"
-    16, 55, 45, 31, 0, 30, 31, 44, 0, 23, 54, 29, 40, 38, 41, 31, 39, 44, 31, 44,
+    16, 55, 45, 31, 11, 30, 31, 44, 11, 23, 54, 29, 40, 38, 41, 31, 39, 44, 31, 44,
 
     // "Fête de la Révolution"
-    16, 55, 45, 31, 0, 30, 31, 0, 37, 27, 0, 23, 54, 47, 40, 37, 46, 45, 35, 40, 39,
+    16, 55, 45, 31, 11, 30, 31, 11, 37, 27, 11, 23, 54, 47, 40, 37, 46, 45, 35, 40, 39,
 
     // day_of_year: "raisin"
     43, 27, 35, 44, 35, 39,
@@ -194,7 +197,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     29, 46, 47, 31,
 
     // "pomme de terre"
-    41, 40, 38, 38, 31, 0, 30, 31, 0, 45, 31, 43, 43, 31,
+    41, 40, 38, 38, 31, 11, 30, 31, 11, 45, 31, 43, 43, 31,
 
     // "immortelle"
     35, 38, 38, 40, 43, 45, 31, 37, 37, 31,
@@ -209,7 +212,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     52, 39, 31,
 
     // "belle de nuit"
-    28, 31, 37, 37, 31, 0, 30, 31, 0, 39, 46, 35, 45,
+    28, 31, 37, 37, 31, 11, 30, 31, 11, 39, 46, 35, 45,
 
     // "citrouille"
     29, 35, 45, 43, 40, 46, 35, 37, 37, 31,
@@ -362,7 +365,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     38, 52, 29, 34, 31,
 
     // "chou-fleur"
-    29, 34, 40, 46, 2, 32, 37, 31, 46, 43,
+    29, 34, 40, 46, 13, 32, 37, 31, 46, 43,
 
     // "miel"
     38, 35, 31, 37,
@@ -404,7 +407,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     34, 40, 49, 31,
 
     // "érable sucré"
-    54, 43, 27, 28, 37, 31, 0, 44, 46, 29, 43, 54,
+    54, 43, 27, 28, 37, 31, 11, 44, 46, 29, 43, 54,
 
     // "bruyère"
     28, 43, 46, 49, 53, 43, 31,
@@ -452,7 +455,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     37, 27, 47, 31,
 
     // "terre végétale"
-    45, 31, 43, 43, 31, 0, 47, 54, 33, 54, 45, 27, 37, 31,
+    45, 31, 43, 43, 31, 11, 47, 54, 33, 54, 45, 27, 37, 31,
 
     // "fumier"
     32, 46, 38, 35, 31, 43,
@@ -485,7 +488,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     38, 27, 43, 39, 31,
 
     // "pierre à chaux"
-    41, 35, 31, 43, 43, 31, 0, 51, 0, 29, 34, 27, 46, 48,
+    41, 35, 31, 43, 43, 31, 11, 51, 11, 29, 34, 27, 46, 48,
 
     // "marbre"
     38, 27, 43, 28, 43, 31,
@@ -494,7 +497,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     47, 27, 39,
 
     // "pierre à plâtre"
-    41, 35, 31, 43, 43, 31, 0, 51, 0, 41, 37, 52, 45, 43, 31,
+    41, 35, 31, 43, 43, 31, 11, 51, 11, 41, 37, 52, 45, 43, 31,
 
     // "sel"
     44, 31, 37,
@@ -539,7 +542,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     45, 27, 46, 43, 31, 27, 46,
 
     // "laurier-tin"
-    37, 27, 46, 43, 35, 31, 43, 2, 45, 35, 39,
+    37, 27, 46, 43, 35, 31, 43, 13, 45, 35, 39,
 
     // "amatyste"
     27, 38, 27, 45, 49, 44, 45, 31,
@@ -734,7 +737,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     29, 40, 46, 47, 40, 35, 43,
 
     // "perce-neige"
-    41, 31, 43, 29, 31, 2, 39, 31, 35, 33, 31,
+    41, 31, 43, 29, 31, 13, 39, 31, 35, 33, 31,
 
     // "crocus"
     29, 43, 40, 29, 46, 44,
@@ -788,7 +791,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     38, 40, 43, 35, 37, 37, 31,
 
     // "hêtre enraciné"
-    34, 55, 45, 43, 31, 0, 31, 39, 43, 27, 29, 35, 39, 54,
+    34, 55, 45, 43, 31, 11, 31, 39, 43, 27, 29, 35, 39, 54,
 
     // "ruche"
     43, 46, 29, 34, 31,
@@ -830,13 +833,13 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     44, 27, 35, 39, 32, 40, 35, 39,
 
     // "bâton-d'or"
-    28, 52, 45, 40, 39, 2, 30, 1, 40, 43,
+    28, 52, 45, 40, 39, 13, 30, 12, 40, 43,
 
     // "chamerisier"
     29, 34, 27, 38, 31, 43, 35, 44, 35, 31, 43,
 
     // "ver à soie"
-    47, 31, 43, 0, 51, 0, 44, 40, 35, 31,
+    47, 31, 43, 11, 51, 11, 44, 40, 35, 31,
 
     // "consoude"
     29, 40, 39, 44, 40, 46, 30, 31,
@@ -845,7 +848,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     41, 35, 38, 41, 43, 31, 39, 31, 37, 37, 31,
 
     // "corbeille d'or"
-    29, 40, 43, 28, 31, 35, 37, 37, 31, 0, 30, 1, 40, 43,
+    29, 40, 43, 28, 31, 35, 37, 37, 31, 11, 30, 12, 40, 43,
 
     // "arroche"
     27, 43, 43, 40, 29, 34, 31,
@@ -953,7 +956,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     29, 34, 54, 47, 43, 31, 32, 31, 46, 35, 37, 37, 31,
 
     // "caille-lait"
-    29, 27, 35, 37, 37, 31, 2, 37, 27, 35, 45,
+    29, 27, 35, 37, 37, 31, 13, 37, 27, 35, 45,
 
     // "tanche"
     45, 27, 39, 29, 34, 31,
@@ -1067,7 +1070,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     54, 41, 31, 27, 46, 45, 43, 31,
 
     // "bouillon-blanc"
-    28, 40, 46, 35, 37, 37, 40, 39, 2, 28, 37, 27, 39, 29,
+    28, 40, 46, 35, 37, 37, 40, 39, 13, 28, 37, 27, 39, 29,
 
     // "melon"
     38, 31, 37, 40, 39,
@@ -1190,7 +1193,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     32, 31, 39, 40, 46, 35, 37,
 
     // "épine-vinette"
-    54, 41, 35, 39, 31, 2, 47, 35, 39, 31, 45, 45, 31,
+    54, 41, 35, 39, 31, 13, 47, 35, 39, 31, 45, 45, 31,
 
     // "noix"
     39, 40, 35, 48,
@@ -1232,7 +1235,7 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     28, 35, 33, 27, 43, 27, 30, 31,
 
     // "verge d'or"
-    47, 31, 43, 33, 31, 0, 30, 1, 40, 43,
+    47, 31, 43, 33, 31, 11, 30, 12, 40, 43,
 
     // "maïs"
     38, 27, 57, 44,
@@ -1268,397 +1271,398 @@ const std::array<uint16_t, fragment_count> fragment_begin = {
     38, // day: "day"
     41, // month: "month"
     46, // year: "year"
-    50, // annee: "année"
-    55, // on_off: "on"
-    57, // "off"
-    60, // months: "Vendémiaire"
-    71, // "Brumaire"
-    79, // "Frimaire"
-    87, // "Nivôse"
-    93, // "Pluviôse"
-    101, // "Ventôse"
-    108, // "Germinal"
-    116, // "Floréal"
-    123, // "Prairial"
-    131, // "Messidor"
-    139, // "Thermidor"
-    148, // "Fructidor"
-    157, // days: "Primidi"
-    164, // "Duodi"
-    169, // "Tridi"
-    174, // "Quartidi"
-    182, // "Quintidi"
-    190, // "Sextidi"
-    197, // "Septidi"
-    204, // "Octidi"
-    210, // "Nonidi"
-    216, // "Décadi"
-    222, // sansculottides: "Fête de la Vertu"
-    238, // "Fête du Génie"
-    251, // "Fête du Travail"
-    266, // "Fête de l'Opinion"
-    283, // "Fête des Récompenses"
-    303, // "Fête de la Révolution"
-    324, // day_of_year: "raisin"
-    330, // "safran"
-    336, // "châtaigne"
-    345, // "colchique"
-    354, // "cheval"
-    360, // "balsamine"
-    369, // "carotte"
-    376, // "amarante"
-    384, // "panais"
-    390, // "cuve"
-    394, // "pomme de terre"
-    408, // "immortelle"
-    418, // "potiron"
-    425, // "réséda"
-    431, // "âne"
-    434, // "belle de nuit"
-    447, // "citrouille"
-    457, // "sarrasin"
-    465, // "tournesol"
-    474, // "pressoir"
-    482, // "chanvre"
-    489, // "pêche"
-    494, // "navet"
-    499, // "amaryllis"
-    508, // "bœuf"
-    512, // "aubergine"
-    521, // "piment"
-    527, // "tomate"
-    533, // "orge"
-    537, // "tonneau"
-    544, // "pomme"
-    549, // "céleri"
-    555, // "poire"
-    560, // "betterave"
-    569, // "oie"
-    572, // "héliotrope"
-    582, // "figue"
-    587, // "scorsonère"
-    597, // "alisier"
-    604, // "charrue"
-    611, // "salsifis"
-    619, // "macre"
-    624, // "topinambour"
-    635, // "endive"
-    641, // "dindon"
-    647, // "chervis"
-    654, // "cresson"
-    661, // "dentelaire"
-    671, // "grenade"
-    678, // "herse"
-    683, // "bacchante"
-    692, // "azerole"
-    699, // "garance"
-    706, // "orange"
-    712, // "faisan"
-    718, // "pistache"
-    726, // "macjonc"
-    733, // "coing"
-    738, // "cormier"
-    745, // "rouleau"
-    752, // "raiponce"
-    760, // "turneps"
-    767, // "chicorée"
-    775, // "nèfle"
-    780, // "cochon"
-    786, // "mâche"
-    791, // "chou-fleur"
-    801, // "miel"
-    805, // "génépi"
-    811, // "pioche"
-    817, // "cire"
-    821, // "raifort"
-    828, // "cèdre"
-    833, // "sapin"
-    838, // "chevreuil"
-    847, // "ajonc"
-    852, // "cyprès"
-    858, // "lierre"
-    864, // "sabine"
-    870, // "hoye"
-    874, // "érable sucré"
-    886, // "bruyère"
-    893, // "roseau"
-    899, // "oseille"
-    906, // "grillon"
-    913, // "pignon"
-    919, // "liège"
-    924, // "truffe"
-    930, // "olive"
-    935, // "pelle"
-    940, // "tourbe"
-    946, // "houille"
-    953, // "bitume"
-    959, // "soufre"
-    965, // "chien"
-    970, // "lave"
-    974, // "terre végétale"
-    988, // "fumier"
-    994, // "salpêtre"
-    1002, // "fléau"
-    1007, // "granite"
-    1014, // "argile"
-    1020, // "ardoise"
-    1027, // "grès"
-    1031, // "lapin"
-    1036, // "silex"
-    1041, // "marne"
-    1046, // "pierre à chaux"
-    1060, // "marbre"
-    1066, // "van"
-    1069, // "pierre à plâtre"
-    1084, // "sel"
-    1087, // "fer"
-    1090, // "cuivre"
-    1096, // "chat"
-    1100, // "étain"
-    1105, // "plomb"
-    1110, // "zinc"
-    1114, // "mercure"
-    1121, // "crible"
-    1127, // "lauréole"
-    1135, // "mousse"
-    1141, // "fragon"
-    1147, // "pervenche"
-    1156, // "taureau"
-    1163, // "laurier-tin"
-    1174, // "amatyste"
-    1182, // "mézéréon"
-    1190, // "peuplier"
-    1198, // "coignée"
-    1205, // "ellébore"
-    1213, // "brocoli"
-    1220, // "laurier"
-    1227, // "avelinier"
-    1236, // "vache"
-    1241, // "buis"
-    1245, // "lichén"
-    1251, // "if"
-    1253, // "pulmonaire"
-    1263, // "serpette"
-    1271, // "thlaspi"
-    1278, // "thimelé"
-    1285, // "chiendent"
-    1294, // "traînasse"
-    1303, // "lièvre"
-    1309, // "guède"
-    1314, // "noisetier"
-    1323, // "cyclamen"
-    1331, // "chélidoine"
-    1341, // "traîneau"
-    1349, // "tussilage"
-    1358, // "cornouiller"
-    1369, // "violier"
-    1376, // "troène"
-    1382, // "bouc"
-    1386, // "asaret"
-    1392, // "alaterne"
-    1400, // "violette"
-    1408, // "marceau"
-    1415, // "bêche"
-    1420, // "narcisse"
-    1428, // "orme"
-    1432, // "fumeterre"
-    1441, // "vélar"
-    1446, // "chèvre"
-    1452, // "épinard"
-    1459, // "doronic"
-    1466, // "mouron"
-    1472, // "cerfeuil"
-    1480, // "cordeau"
-    1487, // "mandragore"
-    1497, // "persil"
-    1503, // "cochléaria"
-    1513, // "pâquerette"
-    1523, // "thon"
-    1527, // "pissenlit"
-    1536, // "sylvie"
-    1542, // "capillaire"
-    1552, // "frêne"
-    1557, // "plantoir"
-    1565, // "primevère"
-    1574, // "platane"
-    1581, // "asperge"
-    1588, // "tulipe"
-    1594, // "poule"
-    1599, // "bette"
-    1604, // "bouleau"
-    1611, // "jonquille"
-    1620, // "aulne"
-    1625, // "couvoir"
-    1632, // "perce-neige"
-    1643, // "crocus"
-    1649, // "hêtre"
-    1654, // "laitue"
-    1660, // "torillon"
-    1668, // "lilas"
-    1673, // "anémone"
-    1680, // "pensée"
-    1686, // "myrtille"
-    1694, // "greffoir"
-    1702, // "cerisier"
-    1710, // "verveine"
-    1718, // "grenadier"
-    1727, // "vernal"
-    1733, // "cheval"
-    1739, // "brenèche"
-    1747, // "charme"
-    1753, // "morille"
-    1760, // "hêtre enraciné"
-    1774, // "ruche"
-    1779, // "rose"
-    1783, // "chêne"
-    1788, // "fougère"
-    1795, // "aubépine"
-    1803, // "rossignol"
-    1812, // "ancolie"
-    1819, // "muguet"
-    1825, // "champignon"
-    1835, // "hyacinthe"
-    1844, // "râteau"
-    1850, // "rhubarbe"
-    1858, // "sainfoin"
-    1866, // "bâton-d'or"
-    1876, // "chamerisier"
-    1887, // "ver à soie"
-    1897, // "consoude"
-    1905, // "pimprenelle"
-    1916, // "corbeille d'or"
-    1930, // "arroche"
-    1937, // "sarcloir"
-    1945, // "statice"
-    1952, // "fritillaire"
-    1963, // "bourache"
-    1971, // "valériane"
-    1980, // "carpe"
-    1985, // "fusain"
-    1991, // "civette"
-    1998, // "buglosse"
-    2006, // "sénevé"
-    2012, // "houlette"
-    2020, // "luzerne"
-    2027, // "hémérocalle"
-    2038, // "trèfle"
-    2044, // "angélique"
-    2053, // "canard"
-    2059, // "mélisse"
-    2066, // "fromental"
-    2075, // "martagon"
-    2083, // "serpolet"
-    2091, // "faux"
-    2095, // "fraise"
-    2101, // "bétoine"
-    2108, // "pois"
-    2112, // "acacia"
-    2118, // "caille"
-    2124, // "œillet"
-    2130, // "sureau"
-    2136, // "pavot"
-    2141, // "tilleul"
-    2148, // "fourche"
-    2155, // "barbeau"
-    2162, // "camomille"
-    2171, // "chévrefeuille"
-    2184, // "caille-lait"
-    2195, // "tanche"
-    2201, // "jasmin"
-    2207, // "verveine"
-    2215, // "thym"
-    2219, // "pivoine"
-    2226, // "chariot"
-    2233, // "seigle"
-    2239, // "avoine"
-    2245, // "oignon"
-    2251, // "véronique"
-    2260, // "mulet"
-    2265, // "romaine"
-    2272, // "concombre"
-    2281, // "échalote"
-    2289, // "absinthe"
-    2297, // "faucille"
-    2305, // "coriandre"
-    2314, // "artichaut"
-    2323, // "girofle"
-    2330, // "lavande"
-    2337, // "chamois"
-    2344, // "tabac"
-    2349, // "groseille"
-    2358, // "gesse"
-    2363, // "cerise"
-    2369, // "parc"
-    2373, // "menthe"
-    2379, // "cumin"
-    2384, // "haricot"
-    2391, // "orcanète"
-    2399, // "pintade"
-    2406, // "sauge"
-    2411, // "ail"
-    2414, // "vesce"
-    2419, // "blé"
-    2422, // "chalémie"
-    2430, // "épeautre"
-    2438, // "bouillon-blanc"
-    2452, // "melon"
-    2457, // "ivraie"
-    2463, // "bélier"
-    2469, // "prêle"
-    2474, // "armoise"
-    2481, // "carthame"
-    2489, // "mûre"
-    2493, // "arrosoir"
-    2501, // "panis"
-    2506, // "salicorne"
-    2515, // "abricot"
-    2522, // "basilic"
-    2529, // "brebis"
-    2535, // "guimauve"
-    2543, // "lin"
-    2546, // "amande"
-    2552, // "gentiane"
-    2560, // "écluse"
-    2566, // "carline"
-    2573, // "câprier"
-    2580, // "lentille"
-    2588, // "aunée"
-    2593, // "loutre"
-    2599, // "myrte"
-    2604, // "colza"
-    2609, // "lupin"
-    2614, // "coton"
-    2619, // "moulin"
-    2625, // "prune"
-    2630, // "millet"
-    2636, // "lycoperdon"
-    2646, // "escourgeon"
-    2656, // "saumon"
-    2662, // "tubéreuse"
-    2671, // "sucrion"
-    2678, // "apocyn"
-    2684, // "réglisse"
-    2692, // "échelle"
-    2699, // "pastèque"
-    2707, // "fenouil"
-    2714, // "épine-vinette"
-    2727, // "noix"
-    2731, // "truite"
-    2737, // "citron"
-    2743, // "cardère"
-    2750, // "nerprun"
-    2757, // "tagette"
-    2764, // "hotte"
-    2769, // "églantier"
-    2778, // "noisette"
-    2786, // "houblon"
-    2793, // "sorgho"
-    2799, // "écrevisse"
-    2808, // "bigarade"
-    2816, // "verge d'or"
-    2826, // "maïs"
-    2830, // "marron"
-    2836, // "panier"
+    50, // annee: "année "
+    56, // decade: " Décade "
+    64, // on_off: "on"
+    66, // "off"
+    69, // months: "Vendémiaire"
+    80, // "Brumaire"
+    88, // "Frimaire"
+    96, // "Nivôse"
+    102, // "Pluviôse"
+    110, // "Ventôse"
+    117, // "Germinal"
+    125, // "Floréal"
+    132, // "Prairial"
+    140, // "Messidor"
+    148, // "Thermidor"
+    157, // "Fructidor"
+    166, // days: "Primidi"
+    173, // "Duodi"
+    178, // "Tridi"
+    183, // "Quartidi"
+    191, // "Quintidi"
+    199, // "Sextidi"
+    206, // "Septidi"
+    213, // "Octidi"
+    219, // "Nonidi"
+    225, // "Décadi"
+    231, // sansculottides: "Fête de la Vertu"
+    247, // "Fête du Génie"
+    260, // "Fête du Travail"
+    275, // "Fête de l'Opinion"
+    292, // "Fête des Récompenses"
+    312, // "Fête de la Révolution"
+    333, // day_of_year: "raisin"
+    339, // "safran"
+    345, // "châtaigne"
+    354, // "colchique"
+    363, // "cheval"
+    369, // "balsamine"
+    378, // "carotte"
+    385, // "amarante"
+    393, // "panais"
+    399, // "cuve"
+    403, // "pomme de terre"
+    417, // "immortelle"
+    427, // "potiron"
+    434, // "réséda"
+    440, // "âne"
+    443, // "belle de nuit"
+    456, // "citrouille"
+    466, // "sarrasin"
+    474, // "tournesol"
+    483, // "pressoir"
+    491, // "chanvre"
+    498, // "pêche"
+    503, // "navet"
+    508, // "amaryllis"
+    517, // "bœuf"
+    521, // "aubergine"
+    530, // "piment"
+    536, // "tomate"
+    542, // "orge"
+    546, // "tonneau"
+    553, // "pomme"
+    558, // "céleri"
+    564, // "poire"
+    569, // "betterave"
+    578, // "oie"
+    581, // "héliotrope"
+    591, // "figue"
+    596, // "scorsonère"
+    606, // "alisier"
+    613, // "charrue"
+    620, // "salsifis"
+    628, // "macre"
+    633, // "topinambour"
+    644, // "endive"
+    650, // "dindon"
+    656, // "chervis"
+    663, // "cresson"
+    670, // "dentelaire"
+    680, // "grenade"
+    687, // "herse"
+    692, // "bacchante"
+    701, // "azerole"
+    708, // "garance"
+    715, // "orange"
+    721, // "faisan"
+    727, // "pistache"
+    735, // "macjonc"
+    742, // "coing"
+    747, // "cormier"
+    754, // "rouleau"
+    761, // "raiponce"
+    769, // "turneps"
+    776, // "chicorée"
+    784, // "nèfle"
+    789, // "cochon"
+    795, // "mâche"
+    800, // "chou-fleur"
+    810, // "miel"
+    814, // "génépi"
+    820, // "pioche"
+    826, // "cire"
+    830, // "raifort"
+    837, // "cèdre"
+    842, // "sapin"
+    847, // "chevreuil"
+    856, // "ajonc"
+    861, // "cyprès"
+    867, // "lierre"
+    873, // "sabine"
+    879, // "hoye"
+    883, // "érable sucré"
+    895, // "bruyère"
+    902, // "roseau"
+    908, // "oseille"
+    915, // "grillon"
+    922, // "pignon"
+    928, // "liège"
+    933, // "truffe"
+    939, // "olive"
+    944, // "pelle"
+    949, // "tourbe"
+    955, // "houille"
+    962, // "bitume"
+    968, // "soufre"
+    974, // "chien"
+    979, // "lave"
+    983, // "terre végétale"
+    997, // "fumier"
+    1003, // "salpêtre"
+    1011, // "fléau"
+    1016, // "granite"
+    1023, // "argile"
+    1029, // "ardoise"
+    1036, // "grès"
+    1040, // "lapin"
+    1045, // "silex"
+    1050, // "marne"
+    1055, // "pierre à chaux"
+    1069, // "marbre"
+    1075, // "van"
+    1078, // "pierre à plâtre"
+    1093, // "sel"
+    1096, // "fer"
+    1099, // "cuivre"
+    1105, // "chat"
+    1109, // "étain"
+    1114, // "plomb"
+    1119, // "zinc"
+    1123, // "mercure"
+    1130, // "crible"
+    1136, // "lauréole"
+    1144, // "mousse"
+    1150, // "fragon"
+    1156, // "pervenche"
+    1165, // "taureau"
+    1172, // "laurier-tin"
+    1183, // "amatyste"
+    1191, // "mézéréon"
+    1199, // "peuplier"
+    1207, // "coignée"
+    1214, // "ellébore"
+    1222, // "brocoli"
+    1229, // "laurier"
+    1236, // "avelinier"
+    1245, // "vache"
+    1250, // "buis"
+    1254, // "lichén"
+    1260, // "if"
+    1262, // "pulmonaire"
+    1272, // "serpette"
+    1280, // "thlaspi"
+    1287, // "thimelé"
+    1294, // "chiendent"
+    1303, // "traînasse"
+    1312, // "lièvre"
+    1318, // "guède"
+    1323, // "noisetier"
+    1332, // "cyclamen"
+    1340, // "chélidoine"
+    1350, // "traîneau"
+    1358, // "tussilage"
+    1367, // "cornouiller"
+    1378, // "violier"
+    1385, // "troène"
+    1391, // "bouc"
+    1395, // "asaret"
+    1401, // "alaterne"
+    1409, // "violette"
+    1417, // "marceau"
+    1424, // "bêche"
+    1429, // "narcisse"
+    1437, // "orme"
+    1441, // "fumeterre"
+    1450, // "vélar"
+    1455, // "chèvre"
+    1461, // "épinard"
+    1468, // "doronic"
+    1475, // "mouron"
+    1481, // "cerfeuil"
+    1489, // "cordeau"
+    1496, // "mandragore"
+    1506, // "persil"
+    1512, // "cochléaria"
+    1522, // "pâquerette"
+    1532, // "thon"
+    1536, // "pissenlit"
+    1545, // "sylvie"
+    1551, // "capillaire"
+    1561, // "frêne"
+    1566, // "plantoir"
+    1574, // "primevère"
+    1583, // "platane"
+    1590, // "asperge"
+    1597, // "tulipe"
+    1603, // "poule"
+    1608, // "bette"
+    1613, // "bouleau"
+    1620, // "jonquille"
+    1629, // "aulne"
+    1634, // "couvoir"
+    1641, // "perce-neige"
+    1652, // "crocus"
+    1658, // "hêtre"
+    1663, // "laitue"
+    1669, // "torillon"
+    1677, // "lilas"
+    1682, // "anémone"
+    1689, // "pensée"
+    1695, // "myrtille"
+    1703, // "greffoir"
+    1711, // "cerisier"
+    1719, // "verveine"
+    1727, // "grenadier"
+    1736, // "vernal"
+    1742, // "cheval"
+    1748, // "brenèche"
+    1756, // "charme"
+    1762, // "morille"
+    1769, // "hêtre enraciné"
+    1783, // "ruche"
+    1788, // "rose"
+    1792, // "chêne"
+    1797, // "fougère"
+    1804, // "aubépine"
+    1812, // "rossignol"
+    1821, // "ancolie"
+    1828, // "muguet"
+    1834, // "champignon"
+    1844, // "hyacinthe"
+    1853, // "râteau"
+    1859, // "rhubarbe"
+    1867, // "sainfoin"
+    1875, // "bâton-d'or"
+    1885, // "chamerisier"
+    1896, // "ver à soie"
+    1906, // "consoude"
+    1914, // "pimprenelle"
+    1925, // "corbeille d'or"
+    1939, // "arroche"
+    1946, // "sarcloir"
+    1954, // "statice"
+    1961, // "fritillaire"
+    1972, // "bourache"
+    1980, // "valériane"
+    1989, // "carpe"
+    1994, // "fusain"
+    2000, // "civette"
+    2007, // "buglosse"
+    2015, // "sénevé"
+    2021, // "houlette"
+    2029, // "luzerne"
+    2036, // "hémérocalle"
+    2047, // "trèfle"
+    2053, // "angélique"
+    2062, // "canard"
+    2068, // "mélisse"
+    2075, // "fromental"
+    2084, // "martagon"
+    2092, // "serpolet"
+    2100, // "faux"
+    2104, // "fraise"
+    2110, // "bétoine"
+    2117, // "pois"
+    2121, // "acacia"
+    2127, // "caille"
+    2133, // "œillet"
+    2139, // "sureau"
+    2145, // "pavot"
+    2150, // "tilleul"
+    2157, // "fourche"
+    2164, // "barbeau"
+    2171, // "camomille"
+    2180, // "chévrefeuille"
+    2193, // "caille-lait"
+    2204, // "tanche"
+    2210, // "jasmin"
+    2216, // "verveine"
+    2224, // "thym"
+    2228, // "pivoine"
+    2235, // "chariot"
+    2242, // "seigle"
+    2248, // "avoine"
+    2254, // "oignon"
+    2260, // "véronique"
+    2269, // "mulet"
+    2274, // "romaine"
+    2281, // "concombre"
+    2290, // "échalote"
+    2298, // "absinthe"
+    2306, // "faucille"
+    2314, // "coriandre"
+    2323, // "artichaut"
+    2332, // "girofle"
+    2339, // "lavande"
+    2346, // "chamois"
+    2353, // "tabac"
+    2358, // "groseille"
+    2367, // "gesse"
+    2372, // "cerise"
+    2378, // "parc"
+    2382, // "menthe"
+    2388, // "cumin"
+    2393, // "haricot"
+    2400, // "orcanète"
+    2408, // "pintade"
+    2415, // "sauge"
+    2420, // "ail"
+    2423, // "vesce"
+    2428, // "blé"
+    2431, // "chalémie"
+    2439, // "épeautre"
+    2447, // "bouillon-blanc"
+    2461, // "melon"
+    2466, // "ivraie"
+    2472, // "bélier"
+    2478, // "prêle"
+    2483, // "armoise"
+    2490, // "carthame"
+    2498, // "mûre"
+    2502, // "arrosoir"
+    2510, // "panis"
+    2515, // "salicorne"
+    2524, // "abricot"
+    2531, // "basilic"
+    2538, // "brebis"
+    2544, // "guimauve"
+    2552, // "lin"
+    2555, // "amande"
+    2561, // "gentiane"
+    2569, // "écluse"
+    2575, // "carline"
+    2582, // "câprier"
+    2589, // "lentille"
+    2597, // "aunée"
+    2602, // "loutre"
+    2608, // "myrte"
+    2613, // "colza"
+    2618, // "lupin"
+    2623, // "coton"
+    2628, // "moulin"
+    2634, // "prune"
+    2639, // "millet"
+    2645, // "lycoperdon"
+    2655, // "escourgeon"
+    2665, // "saumon"
+    2671, // "tubéreuse"
+    2680, // "sucrion"
+    2687, // "apocyn"
+    2693, // "réglisse"
+    2701, // "échelle"
+    2708, // "pastèque"
+    2716, // "fenouil"
+    2723, // "épine-vinette"
+    2736, // "noix"
+    2740, // "truite"
+    2746, // "citron"
+    2752, // "cardère"
+    2759, // "nerprun"
+    2766, // "tagette"
+    2773, // "hotte"
+    2778, // "églantier"
+    2787, // "noisette"
+    2795, // "houblon"
+    2802, // "sorgho"
+    2808, // "écrevisse"
+    2817, // "bigarade"
+    2825, // "verge d'or"
+    2835, // "maïs"
+    2839, // "marron"
+    2845, // "panier"
 };
 
 // Fragment lengths
@@ -1685,7 +1689,8 @@ const std::array<uint16_t, fragment_count> fragment_len = {
     3, // day: "day"
     5, // month: "month"
     4, // year: "year"
-    5, // annee: "année"
+    6, // annee: "année "
+    8, // decade: " Décade "
     2, // on_off: "on"
     3, // "off"
     11, // months: "Vendémiaire"
@@ -3383,9 +3388,6 @@ const std::array<uint8_t, 819> big_font_content = {
 
 // normal font character widths
 const std::array<uint8_t, normal_font_len> normal_font_char_widths = {
-    5, // ' '
-    3, // '''
-    6, // '-'
     8, // '0'
     6, // '1'
     8, // '2'
@@ -3397,6 +3399,9 @@ const std::array<uint8_t, normal_font_len> normal_font_char_widths = {
     8, // '8'
     8, // '9'
     3, // ':'
+    5, // ' '
+    3, // '''
+    6, // '-'
     9, // 'B'
     9, // 'D'
     7, // 'F'
@@ -3449,20 +3454,20 @@ const std::array<uint8_t, normal_font_len> normal_font_char_widths = {
 
 // normal font character begin positions
 const std::array<uint16_t, normal_font_len> normal_font_char_begin = {
-    0, // ' '
-    24, // '''
-    48, // '-'
-    72, // '0'
-    96, // '1'
-    120, // '2'
-    144, // '3'
-    168, // '4'
-    216, // '5'
-    240, // '6'
-    264, // '7'
-    288, // '8'
-    312, // '9'
-    336, // ':'
+    0, // '0'
+    24, // '1'
+    48, // '2'
+    72, // '3'
+    96, // '4'
+    144, // '5'
+    168, // '6'
+    192, // '7'
+    216, // '8'
+    240, // '9'
+    264, // ':'
+    288, // ' '
+    312, // '''
+    336, // '-'
     360, // 'B'
     408, // 'D'
     456, // 'F'
@@ -3515,132 +3520,6 @@ const std::array<uint16_t, normal_font_len> normal_font_char_begin = {
 
 // normal font content (bitmap data, packed)
 const std::array<uint8_t, 1872> normal_font_content = {
-    // ' '
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // '''
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    // ## 
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0xC0,
-    0xC0,
-    0xC0,
-    0xC0,
-    0xC0,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // '-'
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    // ##### 
-    // ##### 
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    //       
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0xF8,
-    0xF8,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
     // '0'
     //         
     //         
@@ -4210,6 +4089,132 @@ const std::array<uint8_t, 1872> normal_font_content = {
     0xC0,
     0xC0,
     0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // ' '
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // '''
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    // ## 
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    //    
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0xC0,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+
+    // '-'
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    // ##### 
+    // ##### 
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    //       
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
+    0xF8,
+    0xF8,
+    0x00,
+    0x00,
+    0x00,
+    0x00,
     0x00,
     0x00,
     0x00,

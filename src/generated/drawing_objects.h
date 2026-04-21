@@ -6,8 +6,8 @@
 namespace rr::ui {
 
 // Fragment table declarations
-constexpr int fragment_count = 413;
-constexpr int fragment_content_size = 2842;
+constexpr int fragment_count = 414;
+constexpr int fragment_content_size = 2851;
 extern const std::array<uint8_t, fragment_content_size> fragment_content;
 extern const std::array<uint16_t, fragment_count> fragment_begin;
 extern const std::array<uint16_t, fragment_count> fragment_len;
@@ -28,11 +28,12 @@ enum class fragment_index : uint16_t {
     month = 20,
     year = 21,
     annee = 22,
-    on_off = 23,
-    months = 25,
-    days = 37,
-    sansculottides = 47,
-    day_of_year = 53,
+    decade = 23,
+    on_off = 24,
+    months = 26,
+    days = 38,
+    sansculottides = 48,
+    day_of_year = 54,
 };
 
 // Font: big (size 36pt, height 39px)
