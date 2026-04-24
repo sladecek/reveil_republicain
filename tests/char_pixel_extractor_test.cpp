@@ -241,8 +241,8 @@ namespace rr::ui::test
         
         NormalFont font;
         
-        // Character '0' is at index 3
-        uint8_t char_index = 3;
+        // Character '0' is at index 0
+        uint8_t char_index = 0;
         uint8_t char_width = font.char_widths[char_index];
         
         // Expected pattern based on actual hex values from drawing_objects.cpp:

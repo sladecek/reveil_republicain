@@ -100,7 +100,8 @@ class CharTable:
         pass
 
 class FontTable:
-    def __init__(self, char_table: CharTable, name: str, size: int, font_char_count: int | None = None):
+    def __init__(self, char_table: CharTable, name: str, size: int, font_char_count: int | None = None, 
+                 scale_factor: float = 1.0, vertical_shift: float = 0.0, horizontal_padding: float = 0.0):
         self.char_table = char_table
         self.name = name
         self.size = size  # Font size in points
@@ -108,6 +109,11 @@ class FontTable:
         self.font_char_count = font_char_count if font_char_count is not None else len(char_table.chars)
         self.glyphs = {}  # Dictionary mapping character to glyph bitmap data
         self.height = None  # Actual pixel height, determined during rendering
+        
+        # Big font adjustments
+        self.scale_factor = scale_factor  # Scale the font (e.g., 1.1 for 10% bigger)
+        self.vertical_shift = vertical_shift  # Move font up (negative) or down (positive) as fraction of height
+        self.horizontal_padding = horizontal_padding  # Add padding on left/right as fraction of width
         
         # Create PIL font object
         try:
@@ -198,48 +204,74 @@ class FontTable:
             # Draw the character with vertical offset
             temp_draw.text((0, self.y_offset), char, fill=1, font=self.font)
             
+            # Apply scaling if needed
+            if self.scale_factor != 1.0:
+                new_width = int(temp_img.width * self.scale_factor)
+                new_height = int(temp_img.height * self.scale_factor)
+                temp_img = temp_img.resize((new_width, new_height), Image.Resampling.BILINEAR)
+            
             # Find the bounding box of the actual character
             bbox = temp_img.getbbox()
             if bbox is None:
                 # Empty character (space, etc.)
-                char_width = self.size // 4  # Use quarter of font size as default
+                char_width = int(self.size // 4)  # Use quarter of font size as default
+                # Add horizontal padding
+                padding_pixels = int(char_width * self.horizontal_padding)
+                total_width = char_width + 2 * padding_pixels
                 self.glyphs[char] = {
-                    'width': char_width + INTERCHAR_SPACE,
-                    'height': self.height,
-                    'data': [0] * (char_width * self.height),
+                    'width': total_width + INTERCHAR_SPACE,
+                    'height': int(self.height),
+                    'data': [0] * (total_width * int(self.height)),
                     'ascii_art': []
                 }
             else:
                 # Crop to actual character width, and use our calculated height
                 char_width = bbox[2] - bbox[0]
-                # Crop starting from y_offset to y_offset + height
-                char_img = temp_img.crop((bbox[0], self.y_offset, bbox[0] + char_width, self.y_offset + self.height))
+                
+                # Calculate vertical shift in pixels
+                shift_pixels = int(int(self.height) * self.vertical_shift)
+                crop_y_start = max(0, int(self.y_offset) + shift_pixels)
+                crop_y_end = crop_y_start + int(self.height)
+                
+                # Crop starting from y_offset (adjusted by shift) to y_offset + height
+                char_img = temp_img.crop((bbox[0], crop_y_start, bbox[0] + char_width, crop_y_end))
                 
                 # Extract pixel data
                 pixels = list(char_img.getdata())
                 
-                # Add inter-character spacing pixels (zeros) to the right of each line
+                # Calculate horizontal padding
+                padding_pixels = int(char_width * self.horizontal_padding)
+                
+                # Add horizontal padding and inter-character spacing pixels
                 pixels_with_spacing = []
-                for y in range(self.height):
+                for y in range(int(self.height)):
+                    # Add left padding
+                    for _ in range(padding_pixels):
+                        pixels_with_spacing.append(0)
                     # Copy the pixels for this line
                     for x in range(char_width):
                         pixels_with_spacing.append(pixels[y * char_width + x])
+                    # Add right padding
+                    for _ in range(padding_pixels):
+                        pixels_with_spacing.append(0)
                     # Add INTERCHAR_SPACE zero pixels at the end of each line
                     for _ in range(INTERCHAR_SPACE):
                         pixels_with_spacing.append(0)
                 
+                total_width = char_width + 2 * padding_pixels
+                
                 # Create ASCII art representation (including spacing)
                 ascii_art = []
-                for y in range(self.height):
+                for y in range(int(self.height)):
                     row = ""
-                    for x in range(char_width + INTERCHAR_SPACE):
-                        pixel = pixels_with_spacing[y * (char_width + INTERCHAR_SPACE) + x]
+                    for x in range(total_width + INTERCHAR_SPACE):
+                        pixel = pixels_with_spacing[y * (total_width + INTERCHAR_SPACE) + x]
                         row += "#" if pixel else " "
                     ascii_art.append(row)
                 
                 self.glyphs[char] = {
-                    'width': char_width + INTERCHAR_SPACE,
-                    'height': self.height,
+                    'width': total_width + INTERCHAR_SPACE,
+                    'height': int(self.height),
                     'data': pixels_with_spacing,
                     'ascii_art': ascii_art
                 }
@@ -513,8 +545,10 @@ def main():
     fragments.add_string("day")
     fragments.add_string("month")
     fragments.add_string("year")
-    fragments.add_string("annee", "année ")
+    fragments.add_string("annee", "Année ")
     fragments.add_string("decade", " Décade ")
+    fragments.add_string("jourdu", "Jour du ")
+    fragments.add_string("jourepagomene", "Jour épagomène")
     fragments.add_string_list("on_off", ["on", "off"])
     fragments.add_string_list(
         "months",
@@ -946,10 +980,12 @@ def main():
     big_char_table.build_mapping()
     
     # Big font only has digits and colon (11 characters)
-    big_font = FontTable(big_char_table, "big", 36, None)
+    # Apply 10% scale, shift down to avoid truncation, and 10% horizontal padding
+    big_font = FontTable(big_char_table, "big", 36, None, 
+                        scale_factor=1.1, vertical_shift=0.15, horizontal_padding=0.1)
     big_font.render_font()
     
-    # Normal font has all characters
+    # Normal font has all characters (no special adjustments)
     normal_font = FontTable(char_table, "normal", 18, None)
     normal_font.render_font()
 

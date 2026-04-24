@@ -103,20 +103,35 @@ namespace rr::ui
             // Line 1: "DD MonthName" (yellow on red)
             hw::window_t window{0, 0, 200, normal_font_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
-
-            // Convert day of decade to 2-digit string
-            NumberToString<NormalFont, 2> day_converter;
-            int day_in_month = time.decade * 10 + time.day + 1; // +1 because days are 1-based display
-            auto day_str = day_converter.convert(day_in_month);
-
-            // Create string with day + space
-            // String format: [digit1, digit2, space, month_fragment]
             String line1_str;
-            line1_str[0] = day_str[2];
-            line1_str[1] = day_str[3];
-            line1_str[2] = static_cast<uint16_t>(rr::ui::fragment_index::space);
-            line1_str[3] = static_cast<uint16_t>(get_month_fragment(time.month));
 
+            if (time.month == 12)
+            {
+                // Sanscoulotides (complementary days) - show only the special day name
+                fragment_index sansculotide_name = static_cast<fragment_index>(
+                    static_cast<uint16_t>(fragment_index::sansculottides) + time.day);
+
+                line1_str[0] = static_cast<uint16_t>(sansculotide_name);
+                line1_str[1] = NULL_CHAR;
+                line1_str[2] = NULL_CHAR;
+                line1_str[3] = NULL_CHAR;
+            }
+            else
+            {
+                // Regular days: "DayName decade D" (e.g., "Primidi decade 2", black on yellow)
+
+                // Convert day of decade to 2-digit string
+                NumberToString<NormalFont, 2> day_converter;
+                int day_in_month = time.decade * 10 + time.day + 1; // +1 because days are 1-based display
+                auto day_str = day_converter.convert(day_in_month);
+
+                // Create string with day + space
+                // String format: [digit1, digit2, space, month_fragment]
+                line1_str[0] = day_str[2];
+                line1_str[1] = day_str[3];
+                line1_str[2] = static_cast<uint16_t>(rr::ui::fragment_index::space);
+                line1_str[3] = static_cast<uint16_t>(get_month_fragment(time.month));
+            }
             // Draw the complete line
             renderer.draw(line1_str, COLOR_RED, COLOR_YELLOW, Align::center);
         }
@@ -142,23 +157,35 @@ namespace rr::ui
 
         void paint_line3(const Time &time)
         {
-            // Line 3: "DayName decade D" (e.g., "Primidi decade 2", black on yellow)
+            // Line 3: Day name with decade info for regular days, or sanscoulotide name
             hw::y_t y_pos = normal_font_height + big_font_height;
             hw::window_t window{0, y_pos, 200, normal_font_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
 
-            // Get day name fragment (Primidi, Duodi, etc.)
-            fragment_index day_name = get_day_name_fragment(time.day);
-
-            // Convert decade number to single digit string
-            NumberToString<NormalFont, 1> converter;
-            auto decade_str = converter.convert(time.decade + 1); // +1 for 1-based display
-
             String line3_str;
-            line3_str[0] = static_cast<uint16_t>(day_name);\
-            line3_str[1] = static_cast<uint16_t>(fragment_index::decade); 
-            line3_str[2] = decade_str[2];                                 
-            line3_str[3] = decade_str[3];                                 
+
+            if (time.month == 12)
+            {
+                // Sanscoulotides (complementary days)
+                line3_str[0] = static_cast<uint16_t>(fragment_index::jourepagomene);
+                line3_str[1] = NULL_CHAR;
+                line3_str[2] = NULL_CHAR;
+                line3_str[3] = NULL_CHAR;
+            }
+            else
+            {
+                // Regular days: "DayName decade D" (e.g., "Primidi decade 2", black on yellow)
+                fragment_index day_name = get_day_name_fragment(time.day);
+
+                // Convert decade number to single digit string
+                NumberToString<NormalFont, 1> converter;
+                auto decade_str = converter.convert(time.decade + 1); // +1 for 1-based display
+
+                line3_str[0] = static_cast<uint16_t>(day_name);
+                line3_str[1] = static_cast<uint16_t>(fragment_index::decade);
+                line3_str[2] = decade_str[2];
+                line3_str[3] = decade_str[3];
+            }
 
             // Draw the complete line
             renderer.draw(line3_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
@@ -166,7 +193,7 @@ namespace rr::ui
 
         void paint_line4(const Time &time)
         {
-            // Line 4: "an YYY" (3 digit year, black on yellow)
+            // Line 4: "Anne YYY" (3 digit year, black on yellow)
             hw::y_t y_pos = normal_font_height + big_font_height + normal_font_height;
             hw::window_t window{0, y_pos, 200, normal_font_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
@@ -177,10 +204,10 @@ namespace rr::ui
 
             // Create string: [annee_fragment, year_digit1, year_digit2, year_digit3]
             String line4_str;
-            line4_str[0] = static_cast<uint16_t>(fragment_index::annee); // "an" fragment
-            line4_str[1] = year_str[1];                                  // First year digit (from position 1 of right-aligned result)
-            line4_str[2] = year_str[2];                                  // Second year digit
-            line4_str[3] = year_str[3];                                  // Third year digit
+            line4_str[0] = static_cast<uint16_t>(fragment_index::annee);
+            line4_str[1] = year_str[1]; // First year digit (from position 1 of right-aligned result)
+            line4_str[2] = year_str[2]; // Second year digit
+            line4_str[3] = year_str[3]; // Third year digit
 
             // Draw the complete line
             renderer.draw(line4_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
@@ -188,7 +215,7 @@ namespace rr::ui
 
         void paint_line5(const Time &time)
         {
-            // Line 5: Day of year name (e.g., "raisin", black on yellow)
+            // Line 5: Day of year name (e.g., "Jour du raisin", black on yellow)
             hw::y_t y_pos = normal_font_height + big_font_height + 2 * normal_font_height;
             hw::window_t window{0, y_pos, 200, normal_font_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
@@ -196,13 +223,22 @@ namespace rr::ui
             // Get day of year (0-364 or 0-365)
             int day_of_year = time.day_of_year();
 
-            // Get day of year name fragment
-            fragment_index day_name = get_day_of_year_fragment(day_of_year);
-
             // Create string: [day_of_year_name_fragment, NULL, NULL, NULL]
             String line5_str;
-            line5_str[0] = static_cast<uint16_t>(day_name);
-            line5_str[1] = NULL_CHAR;
+            if (day_of_year < 360)
+            {
+
+                // Get day of year name fragment
+                fragment_index day_name = get_day_of_year_fragment(day_of_year);
+
+                line5_str[0] = static_cast<uint16_t>(fragment_index::jourdu);
+                line5_str[1] = static_cast<uint16_t>(day_name);
+            }
+            else
+            {
+                line5_str[0] = NULL_CHAR;
+                line5_str[1] = NULL_CHAR;
+            }
             line5_str[2] = NULL_CHAR;
             line5_str[3] = NULL_CHAR;
 

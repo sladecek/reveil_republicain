@@ -11,7 +11,6 @@ namespace rr
     Time::Time(hw::Clock::time_point time_point)
     {
         // Convert time_point UTC to Paris time
-        constexpr int longitude_of_paris_observatory_s = 561;
         auto paris_seconds = time_point.time_since_epoch().count() + longitude_of_paris_observatory_s;
         
         // Extract days and SI seconds in the day
@@ -91,7 +90,7 @@ namespace rr
         int paris_seconds = days_since_epoch * 86400 + si_seconds_in_day;
         
         // Subtract 1 hour to convert from Paris to UTC
-        int utc_seconds = paris_seconds - 3600;
+        int utc_seconds = paris_seconds - longitude_of_paris_observatory_s;
         
         return hw::Clock::time_point(hw::Clock::duration(utc_seconds));
     }

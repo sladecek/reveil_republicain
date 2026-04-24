@@ -18,7 +18,7 @@ class EmulatorApplication
 {
 public:
     EmulatorApplication() : window(nullptr), last_second_time(0.0), 
-                           clear_color(0.45f, 0.55f, 0.60f, 1.00f) {}
+                           clear_color(0.45f, 0.55f, 0.60f, 1.00f), day_offset(0) {}
     
     ~EmulatorApplication()
     {
@@ -91,6 +91,10 @@ private:
         
         int64_t seconds_since_2001 = unix_time - seconds_1970_to_2001;
         
+        // Apply day offset (can be negative or positive)
+        int64_t offset_seconds = static_cast<int64_t>(day_offset) * 24 * 3600;
+        seconds_since_2001 += offset_seconds;
+        
         return rr::hw::Clock::time_point(
             rr::hw::Clock::duration(static_cast<rr::hw::Clock::rep>(seconds_since_2001))
         );
@@ -133,8 +137,9 @@ private:
             // Check if we need to send a timer-scheduled clock event
             auto time_point = get_current_time_point();
             auto next_alarm = hardware.get_next_alarm();
-            if (next_alarm.has_value() && time_point >= next_alarm.value())
+            if (forced_update || next_alarm.has_value() && time_point >= next_alarm.value())
             {
+                forced_update = false;
                 rr::hw::TimerEvent timer_event{time_point};
                 auto flags = reveil.compute_update(hardware, hardware, timer_event);
                 hardware.process_output_flags(flags);
@@ -192,6 +197,7 @@ private:
         
         render_status_section();
         render_time_section();
+        render_time_offset_control();
         render_alarm_section();
         
         ImGui::Separator();
@@ -224,6 +230,44 @@ private:
         int minutes = (seconds / 60) % 60;
         int secs = seconds % 60;
         ImGui::Text("Current Time: %02d:%02d:%02d", hours, minutes, secs);
+    }
+    
+    void render_time_offset_control()
+    {
+        ImGui::Text("Time Offset:");
+        ImGui::SameLine();
+        
+        // Input field for day offset
+        ImGui::PushItemWidth(100);
+        if (ImGui::InputInt("days", &day_offset, 1, 10))
+        {
+            // Clamp to reasonable range (-3650 to +3650 = ±10 years)
+            if (day_offset < -3650) day_offset = -3650;
+            if (day_offset > 3650) day_offset = 3650;
+            
+            forced_update = true;
+        }
+        ImGui::PopItemWidth();
+        
+        ImGui::SameLine();
+        if (ImGui::Button("Reset"))
+        {
+            day_offset = 0;
+            
+            // Reset last_second_time to force immediate update
+            last_second_time = 0.0;
+        }
+        
+        // Show offset info
+        if (day_offset != 0)
+        {
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), 
+                              "(%s%d day%s)", 
+                              day_offset > 0 ? "+" : "", 
+                              day_offset,
+                              day_offset == 1 || day_offset == -1 ? "" : "s");
+        }
     }
     
     void render_alarm_section()
@@ -379,6 +423,8 @@ private:
     const char* glsl_version;
     double last_second_time;
     ImVec4 clear_color;
+    int day_offset;  // Days to offset from current time (can be negative)
+    bool forced_update = false;
     
     // Use debug-enabled version of ReveilRepublicain
     using ReveilType = rr::ReveilRepublicain<true>;

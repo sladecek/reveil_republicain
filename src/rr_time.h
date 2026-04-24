@@ -44,6 +44,7 @@ namespace rr
         int day_of_year() const;
 
     private:
+        static constexpr int longitude_of_paris_observatory_s = 561;
         // Julian Day Number for the first day (1 Vendémiaire) of each Republican year
         // Covers years 209-308 (Gregorian 2000-2099)
         // JD at noon UTC

@@ -35,8 +35,8 @@ namespace rr::ui::test
 
         hw::x_t width = iterator.measure_width(str);
 
-        // Fragment 1 contains char 4, check its width
-        hw::x_t expected_width = font.char_widths[4];
+        // Fragment "1" maps to char index 1
+        hw::x_t expected_width = font.char_widths[1];
         EXPECT_EQ(width, expected_width);
         EXPECT_GT(width, 0);
     }
@@ -56,8 +56,8 @@ namespace rr::ui::test
 
         hw::x_t width = iterator.measure_width(str_123);
 
-        // Fragments 1, 2, 3 contain chars 4, 5, 6
-        hw::x_t expected_width = font.char_widths[4] + font.char_widths[5] + font.char_widths[6];
+        // Fragments "1", "2", "3" map to char indices 1, 2, 3
+        hw::x_t expected_width = font.char_widths[1] + font.char_widths[2] + font.char_widths[3];
         EXPECT_EQ(width, expected_width);
         EXPECT_GT(width, 0);
     }
@@ -100,9 +100,9 @@ namespace rr::ui::test
         });
 
         ASSERT_EQ(chars.size(), 1);
-        EXPECT_EQ(chars[0], 3);  // Character index for "0"
+        EXPECT_EQ(chars[0], 0);  // Character index for "0"
         EXPECT_EQ(positions[0], 0);  // First character starts at x=0
-        EXPECT_EQ(widths[0], font.char_widths[3]);
+        EXPECT_EQ(widths[0], font.char_widths[0]);
     }
 
     TEST(StringIteratorTest, IterateMultipleCharacters)
@@ -130,19 +130,19 @@ namespace rr::ui::test
         ASSERT_EQ(chars.size(), 3);
         
         // Check character indices
-        EXPECT_EQ(chars[0], 4);  // "1"
-        EXPECT_EQ(chars[1], 5);  // "2"
-        EXPECT_EQ(chars[2], 6);  // "3"
+        EXPECT_EQ(chars[0], 1);  // "1"
+        EXPECT_EQ(chars[1], 2);  // "2"
+        EXPECT_EQ(chars[2], 3);  // "3"
 
         // Check positions (should be cumulative)
         EXPECT_EQ(positions[0], 0);
-        EXPECT_EQ(positions[1], font.char_widths[4]);
-        EXPECT_EQ(positions[2], font.char_widths[4] + font.char_widths[5]);
+        EXPECT_EQ(positions[1], font.char_widths[1]);
+        EXPECT_EQ(positions[2], font.char_widths[1] + font.char_widths[2]);
 
         // Check widths
-        EXPECT_EQ(widths[0], font.char_widths[4]);
-        EXPECT_EQ(widths[1], font.char_widths[5]);
-        EXPECT_EQ(widths[2], font.char_widths[6]);
+        EXPECT_EQ(widths[0], font.char_widths[1]);
+        EXPECT_EQ(widths[1], font.char_widths[2]);
+        EXPECT_EQ(widths[2], font.char_widths[3]);
     }
 
     TEST(StringIteratorTest, IterateReturnsCorrectTotalWidth)
@@ -159,7 +159,7 @@ namespace rr::ui::test
 
         hw::x_t total_width = iterator.iterate(str_123, [](auto&&...) {});
 
-        hw::x_t expected_width = font.char_widths[4] + font.char_widths[5] + font.char_widths[6];
+        hw::x_t expected_width = font.char_widths[1] + font.char_widths[2] + font.char_widths[3];
         EXPECT_EQ(total_width, expected_width);
     }
 
