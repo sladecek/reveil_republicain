@@ -10,21 +10,16 @@ namespace rr
 
     Time::Time(hw::Clock::time_point time_point)
     {
-        // Convert time_point UTC to Paris time (add 1 hour = 3600 seconds)
-        auto paris_seconds = time_point.time_since_epoch().count() + 3600;
+        // Convert time_point UTC to Paris time
+        constexpr int longitude_of_paris_observatory_s = 561;
+        auto paris_seconds = time_point.time_since_epoch().count() + longitude_of_paris_observatory_s;
         
         // Extract days and SI seconds in the day
         int si_seconds_in_day = paris_seconds % 86400;
         int days_since_epoch = paris_seconds / 86400;
         
-        // Convert days to Julian Day number
-        // hw::Clock epoch is 2001-01-01 00:00:00 UTC
-        // At midnight, JD = 2451910.5, but we work with integer JDs
-        // For day 0 (epoch), JD_int = 2451910
-        // For day N, JD_int = 2451910 + N
+        // Find julian day in the table of years
         int jd = hw::Clock::jd_zero + days_since_epoch;
-        
-        // Normalize to our table range
         int jd_offset = jd - JD_ZERO;
         
         // Handle overflow by wrapping (incorrect but viable)

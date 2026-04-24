@@ -55,7 +55,7 @@ namespace rr::hw
     
         // Seconds since midnight 2001-01-01 UTC
         // JD 2451910.5
-        static constexpr std::uint32_t jd_zero = 2451910;
+        static constexpr std::uint32_t jd_zero = 2451911;
     };
 
 
