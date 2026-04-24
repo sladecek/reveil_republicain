@@ -223,16 +223,15 @@ namespace rr::ui
             // Get day of year (0-364 or 0-365)
             int day_of_year = time.day_of_year();
 
-            // Create string: [day_of_year_name_fragment, NULL, NULL, NULL]
+            // Create string: [jourdu_fragment, day_of_year_name_fragment, NULL, NULL]
             String line5_str;
             if (day_of_year < 360)
             {
-
-                // Get day of year name fragment
+                // Get day of year name fragment (now includes article: "du raisin", "de la pomme", etc.)
                 fragment_index day_name = get_day_of_year_fragment(day_of_year);
 
-                line5_str[0] = static_cast<uint16_t>(fragment_index::jourdu);
-                line5_str[1] = static_cast<uint16_t>(day_name);
+                line5_str[0] = static_cast<uint16_t>(fragment_index::jourdu);  // "Jour "
+                line5_str[1] = static_cast<uint16_t>(day_name);                // "du raisin", etc.
             }
             else
             {

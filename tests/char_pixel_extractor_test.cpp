@@ -247,28 +247,29 @@ namespace rr::ui::test
         
         // Expected pattern based on actual hex values from drawing_objects.cpp:
         // Now correctly includes inter-character spacing (trailing 0s on each line)
+        // Font has been shifted up by 3 pixels to prevent bottom truncation
         std::vector<std::string> expected = {
             "........", // padding
             "........",
             "........",
             "........",
-            "........",
-            "........",
-            "........",
-            ".####...",  // line 7
-            ".#####..",  // line 8
-            "##..##..",  // line 9
-            "##...#..",  // line 10
+            ".####...",  // line 4 (shifted up by 3 pixels total)
+            ".#####..",  // line 5
+            "##..##..",  // line 6
+            "##...#..",  // line 7
+            "##...##.",  // line 8
+            "##...##.",  // line 9
+            "##...##.",  // line 10
             "##...##.",  // line 11
             "##...##.",  // line 12
-            "##...##.",  // line 13
-            "##...##.",  // line 14
-            "##...##.",  // line 15
-            "##...#..",  // line 16
-            "##..##..",  // line 17
-            ".#####..",  // line 18
-            ".####...",  // line 19
+            "##...#..",  // line 13
+            "##..##..",  // line 14
+            ".#####..",  // line 15
+            ".####...",  // line 16
             "........", // padding
+            "........",
+            "........",
+            "........",
             "........",
             "........",
             "........"

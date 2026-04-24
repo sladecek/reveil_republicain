@@ -7,7 +7,7 @@ namespace rr::ui {
 
 // Fragment table declarations
 constexpr int fragment_count = 416;
-constexpr int fragment_content_size = 2873;
+constexpr int fragment_content_size = 4455;
 extern const std::array<uint8_t, fragment_content_size> fragment_content;
 extern const std::array<uint16_t, fragment_count> fragment_begin;
 extern const std::array<uint16_t, fragment_count> fragment_len;

@@ -362,64 +362,54 @@ namespace rr::ui::test
         }
         
         // Verify the shape matches the ASCII art comments in drawing_objects.cpp
-        // Line 7: '   ## ' = "...##."
+        // Font has been shifted up by 3 pixels to prevent bottom truncation
+        // Line 5: '  ### ' = "..###."
+        auto line5_x2 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 2 && p.y == 5; });
+        ASSERT_NE(line5_x2, pixels.end());
+        EXPECT_EQ(line5_x2->value, 3) << "Line 5, x=2 should be foreground (#)";
+        
+        auto line5_x3 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 3 && p.y == 5; });
+        ASSERT_NE(line5_x3, pixels.end());
+        EXPECT_EQ(line5_x3->value, 3) << "Line 5, x=3 should be foreground (#)";
+        
+        auto line5_x4 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 4 && p.y == 5; });
+        ASSERT_NE(line5_x4, pixels.end());
+        EXPECT_EQ(line5_x4->value, 3) << "Line 5, x=4 should be foreground (#)";
+        
+        auto line5_x0 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 0 && p.y == 5; });
+        ASSERT_NE(line5_x0, pixels.end());
+        EXPECT_EQ(line5_x0->value, 0) << "Line 5, x=0 should be background (space)";
+        
+        // Line 6: ' #### ' = ".####."
+        auto line6_x1 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 1 && p.y == 6; });
+        ASSERT_NE(line6_x1, pixels.end());
+        EXPECT_EQ(line6_x1->value, 3) << "Line 6, x=1 should be foreground (#)";
+        
+        // Line 7: '## ## ' = "##.##."
+        auto line7_x0 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 0 && p.y == 7; });
+        ASSERT_NE(line7_x0, pixels.end());
+        EXPECT_EQ(line7_x0->value, 3) << "Line 7, x=0 should be foreground (#)";
+        
+        auto line7_x1 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 1 && p.y == 7; });
+        ASSERT_NE(line7_x1, pixels.end());
+        EXPECT_EQ(line7_x1->value, 3) << "Line 7, x=1 should be foreground (#)";
+        
+        auto line7_x2 = std::find_if(pixels.begin(), pixels.end(),
+            [](const MockDisplay::Pixel& p) { return p.x == 2 && p.y == 7; });
+        ASSERT_NE(line7_x2, pixels.end());
+        EXPECT_EQ(line7_x2->value, 0) << "Line 7, x=2 should be background (gap)";
+        
         auto line7_x3 = std::find_if(pixels.begin(), pixels.end(),
             [](const MockDisplay::Pixel& p) { return p.x == 3 && p.y == 7; });
         ASSERT_NE(line7_x3, pixels.end());
         EXPECT_EQ(line7_x3->value, 3) << "Line 7, x=3 should be foreground (#)";
-        
-        auto line7_x4 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 4 && p.y == 7; });
-        ASSERT_NE(line7_x4, pixels.end());
-        EXPECT_EQ(line7_x4->value, 3) << "Line 7, x=4 should be foreground (#)";
-        
-        auto line7_x0 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 0 && p.y == 7; });
-        ASSERT_NE(line7_x0, pixels.end());
-        EXPECT_EQ(line7_x0->value, 0) << "Line 7, x=0 should be background (space)";
-        
-        // Line 8: '  ### ' = "..###."
-        auto line8_x2 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 2 && p.y == 8; });
-        ASSERT_NE(line8_x2, pixels.end());
-        EXPECT_EQ(line8_x2->value, 3) << "Line 8, x=2 should be foreground (#)";
-        
-        auto line8_x3 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 3 && p.y == 8; });
-        ASSERT_NE(line8_x3, pixels.end());
-        EXPECT_EQ(line8_x3->value, 3) << "Line 8, x=3 should be foreground (#)";
-        
-        auto line8_x4 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 4 && p.y == 8; });
-        ASSERT_NE(line8_x4, pixels.end());
-        EXPECT_EQ(line8_x4->value, 3) << "Line 8, x=4 should be foreground (#)";
-        
-        // Line 9: ' #### ' = ".####."
-        auto line9_x1 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 1 && p.y == 9; });
-        ASSERT_NE(line9_x1, pixels.end());
-        EXPECT_EQ(line9_x1->value, 3) << "Line 9, x=1 should be foreground (#)";
-        
-        // Line 10: '## ## ' = "##.##."
-        auto line10_x0 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 0 && p.y == 10; });
-        ASSERT_NE(line10_x0, pixels.end());
-        EXPECT_EQ(line10_x0->value, 3) << "Line 10, x=0 should be foreground (#)";
-        
-        auto line10_x1 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 1 && p.y == 10; });
-        ASSERT_NE(line10_x1, pixels.end());
-        EXPECT_EQ(line10_x1->value, 3) << "Line 10, x=1 should be foreground (#)";
-        
-        auto line10_x2 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 2 && p.y == 10; });
-        ASSERT_NE(line10_x2, pixels.end());
-        EXPECT_EQ(line10_x2->value, 0) << "Line 10, x=2 should be background (gap)";
-        
-        auto line10_x3 = std::find_if(pixels.begin(), pixels.end(),
-            [](const MockDisplay::Pixel& p) { return p.x == 3 && p.y == 10; });
-        ASSERT_NE(line10_x3, pixels.end());
-        EXPECT_EQ(line10_x3->value, 3) << "Line 10, x=3 should be foreground (#)";
         
         std::cout << "\nTest verified: First '1' shape rendering matches ASCII art comments in drawing_objects.cpp!\n";
         std::cout << std::endl;
