@@ -15,11 +15,11 @@ namespace rr::ui
 {
 
     // Color constants (2-bit colors: 0=black, 1=white, 2=yellow, 3=red)
-    constexpr hw::color_t COLOR_BLACK = 0;
-    constexpr hw::color_t COLOR_WHITE = 1;
-    constexpr hw::color_t COLOR_YELLOW = 2;
-    constexpr hw::color_t COLOR_RED = 3;
-    constexpr hw::BitsPerPixel BPP = hw::BitsPerPixel::b2;
+    inline constexpr hw::color_t COLOR_BLACK = 0;
+    inline constexpr hw::color_t COLOR_WHITE = 1;
+    inline constexpr hw::color_t COLOR_YELLOW = 2;
+    inline constexpr hw::color_t COLOR_RED = 3;
+    inline constexpr hw::BitsPerPixel BPP = hw::BitsPerPixel::b2;
 
     template <hw::Display D, Font NormalFont, Font LargeFont>
     class TimePainter
