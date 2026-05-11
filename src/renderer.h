@@ -31,13 +31,23 @@ namespace rr::ui
             const auto layout = TextLayoutCalculator::compute_horizontal_alignment(
                 window.width, string_width, align);
 
+            // Vertical centering: calculate offset to center font in window
+            const hw::y_t vertical_offset = (window.height > font.font_height) 
+                ? (window.height - font.font_height) / 2 
+                : 0;
+
             // Create bit packer with callback to send bytes to display
             auto send_byte = [this](uint8_t byte) { display.send_pixels(byte); };
             BitPacker<static_cast<int>(BPP)> packer(send_byte);
 
             for (hw::y_t y = 0; y < window.height; y++)
             {
-                line_renderer.render_line(packer, y, font.font_height, window.width,
+                // Adjust y coordinate for vertical centering
+                hw::y_t font_y = (y >= vertical_offset && y < vertical_offset + font.font_height)
+                    ? y - vertical_offset
+                    : font.font_height; // Out of range - will fill with background
+                
+                line_renderer.render_line(packer, font_y, font.font_height, window.width,
                                           layout, s, bg, fg);
             }
 

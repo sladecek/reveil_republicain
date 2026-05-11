@@ -32,9 +32,8 @@ namespace rr::ui
 
         void update(const Time &time)
         {
-            // Display has 5 lines
-            constexpr int line_height_normal = normal_font_height;
-            constexpr int line_height_large = big_font_height;
+            // Display has 5 lines filling the entire 200px screen
+            // Line heights: 33 + 53 + 38 + 38 + 38 = 200
 
             bool needs_display_update = false;
 
@@ -101,7 +100,8 @@ namespace rr::ui
         void paint_line1(const Time &time)
         {
             // Line 1: "DD MonthName" (yellow on red)
-            hw::window_t window{0, 0, 200, normal_font_height};
+            constexpr int line_height = 33;
+            hw::window_t window{0, 0, 200, line_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
             String line1_str;
 
@@ -139,7 +139,9 @@ namespace rr::ui
         void paint_line2(const Time &time)
         {
             // Line 2: "H:MM" (black on white, large font)
-            hw::window_t window{0, static_cast<hw::y_t>(normal_font_height), 200, big_font_height};
+            constexpr int line_height = 53;
+            constexpr int y_start = 33;
+            hw::window_t window{0, static_cast<hw::y_t>(y_start), 200, line_height};
             Renderer<BPP, D, LargeFont> renderer(display, window, large_font);
 
             NumberToString<LargeFont, 2> converter;
@@ -158,8 +160,10 @@ namespace rr::ui
         void paint_line3(const Time &time)
         {
             // Line 3: Day name with decade info for regular days, or sanscoulotide name
-            hw::y_t y_pos = normal_font_height + big_font_height;
-            hw::window_t window{0, y_pos, 200, normal_font_height};
+            constexpr int line_height = 38;
+            constexpr int y_start = 33 + 53;
+            hw::y_t y_pos = y_start;
+            hw::window_t window{0, y_pos, 200, line_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
 
             String line3_str;
@@ -194,8 +198,10 @@ namespace rr::ui
         void paint_line4(const Time &time)
         {
             // Line 4: "Anne YYY" (3 digit year, black on yellow)
-            hw::y_t y_pos = normal_font_height + big_font_height + normal_font_height;
-            hw::window_t window{0, y_pos, 200, normal_font_height};
+            constexpr int line_height = 38;
+            constexpr int y_start = 33 + 53 + 38;
+            hw::y_t y_pos = y_start;
+            hw::window_t window{0, y_pos, 200, line_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
 
             // Convert year to 3-digit string
@@ -216,8 +222,10 @@ namespace rr::ui
         void paint_line5(const Time &time)
         {
             // Line 5: Day of year name (e.g., "Jour du raisin", black on yellow)
-            hw::y_t y_pos = normal_font_height + big_font_height + 2 * normal_font_height;
-            hw::window_t window{0, y_pos, 200, normal_font_height};
+            constexpr int line_height = 38;
+            constexpr int y_start = 33 + 53 + 38 + 38;
+            hw::y_t y_pos = y_start;
+            hw::window_t window{0, y_pos, 200, line_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
 
             // Get day of year (0-364 or 0-365)

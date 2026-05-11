@@ -133,8 +133,21 @@ namespace rr
         
         // Menu line indices
         static constexpr int MENU_LINE_RUN_TOP = 0;
+        static constexpr int MENU_LINE_ALARM_ON_OFF = 1;
+        static constexpr int MENU_LINE_ALARM_HOUR = 2;
+        static constexpr int MENU_LINE_ALARM_MINUTE = 3;
+        static constexpr int MENU_LINE_SET_HOUR = 4;
+        static constexpr int MENU_LINE_SET_MINUTE = 5;
+        static constexpr int MENU_LINE_SET_DAY = 6;
+        static constexpr int MENU_LINE_SET_MONTH = 7;
+        static constexpr int MENU_LINE_SET_YEAR = 8;
         static constexpr int MENU_LINE_RUN_BOTTOM = 9;
         static constexpr int MENU_LINE_COUNT = 10;
+        
+        bool is_editable_line(int line) const
+        {
+            return line >= MENU_LINE_ALARM_ON_OFF && line <= MENU_LINE_SET_YEAR;
+        }
         
         void process_menu(const hw::EncoderEvent& encoder_event)
         {
@@ -143,6 +156,7 @@ namespace rr
             {
                 state.menu_on = true;
                 state.menu_line = MENU_LINE_RUN_TOP;
+                state.menu_edit_mode = false;
                 return;
             }
             
@@ -151,30 +165,119 @@ namespace rr
             {
                 if (encoder_event.pressed)
                 {
-                    // If on "run" line, exit menu
-                    if (state.menu_line == MENU_LINE_RUN_TOP || state.menu_line == MENU_LINE_RUN_BOTTOM)
+                    if (state.menu_edit_mode)
                     {
+                        // Exit edit mode
+                        state.menu_edit_mode = false;
+                    }
+                    else if (state.menu_line == MENU_LINE_RUN_TOP || state.menu_line == MENU_LINE_RUN_BOTTOM)
+                    {
+                        // If on "run" line, exit menu
                         state.menu_on = false;
+                        state.menu_edit_mode = false;
+                    }
+                    else if (is_editable_line(state.menu_line))
+                    {
+                        // Enter edit mode for editable lines
+                        state.menu_edit_mode = true;
                     }
                 }
                 else
                 {
-                    // Scroll menu with encoder delta
-                    int new_line = static_cast<int>(state.menu_line) + encoder_event.delta;
-                    
-                    // Wrap around
-                    if (new_line < 0)
+                    // Encoder rotation
+                    if (state.menu_edit_mode)
                     {
-                        new_line = MENU_LINE_COUNT - 1;
+                        // Edit the value
+                        edit_value(encoder_event.delta);
                     }
-                    else if (new_line >= MENU_LINE_COUNT)
+                    else
                     {
-                        new_line = 0;
+                        // Scroll menu with encoder delta
+                        int new_line = static_cast<int>(state.menu_line) + encoder_event.delta;
+                        
+                        // Wrap around
+                        if (new_line < 0)
+                        {
+                            new_line = MENU_LINE_COUNT - 1;
+                        }
+                        else if (new_line >= MENU_LINE_COUNT)
+                        {
+                            new_line = 0;
+                        }
+                        
+                        state.menu_line = static_cast<uint8_t>(new_line);
                     }
-                    
-                    state.menu_line = static_cast<uint8_t>(new_line);
                 }
             }
+        }
+        
+        void edit_value(int delta)
+        {
+            switch (state.menu_line)
+            {
+            case MENU_LINE_ALARM_ON_OFF:
+                // Toggle alarm on/off with any rotation
+                if (delta != 0)
+                {
+                    if (state.alarm_state == AlarmState::off)
+                    {
+                        state.alarm_state = AlarmState::on;
+                    }
+                    else
+                    {
+                        state.alarm_state = AlarmState::off;
+                    }
+                }
+                break;
+            case MENU_LINE_ALARM_HOUR:
+                state.alarm_hour = wrap_value(static_cast<int>(state.alarm_hour), delta, 0, 9);
+                break;
+            case MENU_LINE_ALARM_MINUTE:
+                state.alarm_minute = wrap_value(static_cast<int>(state.alarm_minute), delta, 0, 99);
+                break;
+            case MENU_LINE_SET_HOUR:
+            {
+                int new_val = wrap_value(static_cast<int>(state.time.hour), delta, 0, 9);
+                state.time.hour = static_cast<uint32_t>(new_val);
+                break;
+            }
+            case MENU_LINE_SET_MINUTE:
+            {
+                int new_val = wrap_value(static_cast<int>(state.time.minute), delta, 0, 99);
+                state.time.minute = static_cast<uint32_t>(new_val);
+                break;
+            }
+            case MENU_LINE_SET_DAY:
+            {
+                int new_val = wrap_value(static_cast<int>(state.time.day), delta, 0, 9);
+                state.time.day = static_cast<uint32_t>(new_val);
+                break;
+            }
+            case MENU_LINE_SET_MONTH:
+            {
+                int new_val = wrap_value(static_cast<int>(state.time.month), delta, 0, 12);
+                state.time.month = static_cast<uint32_t>(new_val);
+                break;
+            }
+            case MENU_LINE_SET_YEAR:
+            {
+                int new_val = wrap_value(static_cast<int>(state.time.year), delta, 0, 1023);
+                state.time.year = static_cast<uint32_t>(new_val);
+                break;
+            }
+            }
+        }
+        
+        int wrap_value(int value, int delta, int min_val, int max_val)
+        {
+            int new_val = value + delta;
+            int range = max_val - min_val + 1;
+            
+            // Wrap around when exceeding bounds
+            while (new_val > max_val) new_val -= range;
+            while (new_val < min_val) new_val += range;
+            
+            return new_val;
         }
         
         void maintain_alarm_state()

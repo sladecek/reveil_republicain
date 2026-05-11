@@ -39,11 +39,11 @@ enum class fragment_index : uint16_t {
 };
 
 // Font: big (size 36pt, height 39px)
-constexpr int big_font_len = 11;
+constexpr int big_font_len = 12;
 constexpr int big_font_height = 39;
 extern const std::array<uint8_t, big_font_len> big_font_char_widths;
 extern const std::array<uint16_t, big_font_len> big_font_char_begin;
-extern const std::array<uint8_t, 1170> big_font_content;
+extern const std::array<uint8_t, 1287> big_font_content;
 
 // Font: normal (size 18pt, height 24px)
 constexpr int normal_font_len = 64;

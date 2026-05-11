@@ -30,6 +30,7 @@ namespace rr::ui
             // Check if menu line changed or any relevant state changed
             if (!previous_state.has_value() ||
                 previous_state->menu_line != state.menu_line ||
+                previous_state->menu_edit_mode != state.menu_edit_mode ||
                 previous_state->alarm_state != state.alarm_state ||
                 previous_state->alarm_hour != state.alarm_hour ||
                 previous_state->alarm_minute != state.alarm_minute ||
@@ -84,16 +85,40 @@ namespace rr::ui
 
         void paint_menu_line(int display_line, int menu_line_index, const State &state, bool highlighted)
         {
-            hw::y_t y_pos = display_line * normal_font_height;
-            hw::window_t window{0, y_pos, 200, normal_font_height};
+            // Line heights to fill 200px screen: 33 + 33 + 33 + 34 + 34 + 33 = 200
+            constexpr int line_heights[DISPLAY_LINES] = {33, 33, 33, 34, 34, 33};
+            constexpr int y_positions[DISPLAY_LINES] = {0, 33, 66, 99, 133, 167};
+            
+            hw::y_t y_pos = static_cast<hw::y_t>(y_positions[display_line]);
+            hw::y_t line_height = static_cast<hw::y_t>(line_heights[display_line]);
+            hw::window_t window{0, y_pos, 200, line_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
 
             String line_str;
             get_menu_line_content(menu_line_index, state, line_str);
 
-            // Highlighted line: white on black, others: black on white
-            hw::color_t bg_color = highlighted ? COLOR_BLACK : COLOR_WHITE;
-            hw::color_t fg_color = highlighted ? COLOR_WHITE : COLOR_BLACK;
+            // Determine colors based on highlight and edit mode
+            hw::color_t bg_color;
+            hw::color_t fg_color;
+            
+            if (highlighted && state.menu_edit_mode)
+            {
+                // Edit mode: black on red
+                bg_color = COLOR_RED;
+                fg_color = COLOR_BLACK;
+            }
+            else if (highlighted)
+            {
+                // Highlighted but not editing: white on black
+                bg_color = COLOR_BLACK;
+                fg_color = COLOR_WHITE;
+            }
+            else
+            {
+                // Not highlighted: black on white
+                bg_color = COLOR_WHITE;
+                fg_color = COLOR_BLACK;
+            }
 
             renderer.draw(line_str, bg_color, fg_color, Align::center);
         }
