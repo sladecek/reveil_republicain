@@ -60,14 +60,24 @@ namespace rr
                 }
                 else
                 {
+                    bool was_menu_on = state.menu_on;
                     process_menu(encoder_event);
                     
-                    // Update display with menu if menu is on
+                    // Update display after menu processing
+                    ui::NormalFont normal_font;
+                    
                     if (state.menu_on)
                     {
-                        ui::NormalFont normal_font;
+                        // Show menu
                         ui::MenuPainter<D, ui::NormalFont> menu_painter(display, normal_font);
                         menu_painter.update(state);
+                    }
+                    else if (was_menu_on)
+                    {
+                        // Menu was just turned off, show time immediately
+                        ui::BigFont big_font;
+                        ui::TimePainter<D, ui::NormalFont, ui::BigFont> time_painter(display, normal_font, big_font);
+                        time_painter.update(state.time);
                     }
                 }
             }
