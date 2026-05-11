@@ -52,14 +52,13 @@ namespace rr::ui
             previous_state = state;
         }
 
+        static constexpr int MENU_LINE_COUNT = 10;
     private:
         D &display;
         const NormalFont &normal_font;
         std::optional<State> previous_state;
 
-        // Menu has 10 lines total (0-9)
-        static constexpr int MENU_LINE_COUNT = 10;
-        static constexpr int DISPLAY_LINES = 4;
+        static constexpr int DISPLAY_LINES = 6;
 
         void paint_menu(const State &state)
         {

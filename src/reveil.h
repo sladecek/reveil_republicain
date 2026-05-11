@@ -60,7 +60,6 @@ namespace rr
                 }
                 else
                 {
-                    // Process menu
                     process_menu(encoder_event);
                     
                     // Update display with menu if menu is on
@@ -129,8 +128,8 @@ namespace rr
         
         void process_menu(const hw::EncoderEvent& encoder_event)
         {
-            // If menu is off and encoder is used (not pressed), turn menu on
-            if (!state.menu_on && !encoder_event.pressed)
+            // If menu is off and encoder is used turn menu on
+            if (!state.menu_on)
             {
                 state.menu_on = true;
                 state.menu_line = MENU_LINE_RUN_TOP;
