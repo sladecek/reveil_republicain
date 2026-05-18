@@ -77,7 +77,9 @@ namespace rr
                         // Menu was just turned off, show time immediately
                         ui::BigFont big_font;
                         ui::TimePainter<D, ui::NormalFont, ui::BigFont> time_painter(display, normal_font, big_font);
-                        time_painter.update(state.time);
+                        bool alarm_is_on = (state.alarm_state == AlarmState::on || 
+                                          state.alarm_state == AlarmState::active);
+                        time_painter.update(state.time, alarm_is_on);
                     }
                 }
             }
@@ -117,7 +119,9 @@ namespace rr
                 {
                     // Show time
                     ui::TimePainter<D, ui::NormalFont, ui::BigFont> time_painter(display, normal_font, big_font);
-                    time_painter.update(current_time);
+                    bool alarm_is_on = (state.alarm_state == AlarmState::on || 
+                                      state.alarm_state == AlarmState::active);
+                    time_painter.update(current_time, alarm_is_on);
                 }
                 
                 // Schedule next timer event at the next decimal minute change

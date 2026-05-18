@@ -30,55 +30,65 @@ namespace rr::ui
         {
         }
 
-        void update(const Time &time)
+        void update(const Time &time, bool alarm_is_on)
         {
             // Display has 5 lines filling the entire 200px screen
             // Line heights: 33 + 53 + 38 + 38 + 38 = 200
 
             bool needs_display_update = false;
 
-            // Line 1: Day and month name (yellow on red, normal font)
+            // Line 1: Day and month name
+            // Alarm ON: white on black | Alarm OFF: yellow on red
             if (!previous_time.has_value() ||
                 previous_time->day != time.day ||
-                previous_time->month != time.month)
+                previous_time->month != time.month ||
+                previous_alarm_is_on != alarm_is_on)
             {
-                paint_line1(time);
+                paint_line1(time, alarm_is_on);
                 needs_display_update = true;
             }
 
-            // Line 2: Hour:Minute (black on white, large font)
+            // Line 2: Hour:Minute (large font)
+            // Alarm ON: yellow on black | Alarm OFF: black on white
             if (!previous_time.has_value() ||
                 previous_time->hour != time.hour ||
-                previous_time->minute != time.minute)
+                previous_time->minute != time.minute ||
+                previous_alarm_is_on != alarm_is_on)
             {
-                paint_line2(time);
+                paint_line2(time, alarm_is_on);
                 needs_display_update = true;
             }
 
-            // Line 3: Day name (e.g., "Primidi d.1", black on yellow, normal font)
-            if (!previous_time.has_value() ||
-                previous_time->day != time.day ||
-                previous_time->decade != time.decade)
-            {
-                paint_line3(time);
-                needs_display_update = true;
-            }
-
-            // Line 4: Year (e.g., "an 234", black on yellow, normal font)
-            if (!previous_time.has_value() ||
-                previous_time->year != time.year)
-            {
-                paint_line4(time);
-                needs_display_update = true;
-            }
-
-            // Line 5: Day of year name (black on yellow, normal font)
+            // Line 3: Day name
+            // Alarm ON: yellow on black | Alarm OFF: black on yellow
             if (!previous_time.has_value() ||
                 previous_time->day != time.day ||
                 previous_time->decade != time.decade ||
-                previous_time->month != time.month)
+                previous_alarm_is_on != alarm_is_on)
             {
-                paint_line5(time);
+                paint_line3(time, alarm_is_on);
+                needs_display_update = true;
+            }
+
+            // Line 4: Year
+            // Alarm ON: yellow on black | Alarm OFF: black on yellow
+            if (!previous_time.has_value() ||
+                previous_time->year != time.year ||
+                previous_alarm_is_on != alarm_is_on)
+            {
+                paint_line4(time, alarm_is_on);
+                needs_display_update = true;
+            }
+
+            // Line 5: Day of year name
+            // Alarm ON: yellow on black | Alarm OFF: black on yellow
+            if (!previous_time.has_value() ||
+                previous_time->day != time.day ||
+                previous_time->decade != time.decade ||
+                previous_time->month != time.month ||
+                previous_alarm_is_on != alarm_is_on)
+            {
+                paint_line5(time, alarm_is_on);
                 needs_display_update = true;
             }
 
@@ -87,8 +97,9 @@ namespace rr::ui
                 display.update();
             }
 
-            // Save current time
+            // Save current time and alarm state
             previous_time = time;
+            previous_alarm_is_on = alarm_is_on;
         }
 
     private:
@@ -96,10 +107,12 @@ namespace rr::ui
         const NormalFont &normal_font;
         const LargeFont &large_font;
         std::optional<Time> previous_time;
+        bool previous_alarm_is_on = false;
 
-        void paint_line1(const Time &time)
+        void paint_line1(const Time &time, bool alarm_is_on)
         {
-            // Line 1: "DD MonthName" (yellow on red)
+            // Line 1: "DD MonthName"
+            // Alarm ON: white on black | Alarm OFF: yellow on red
             constexpr int line_height = 33;
             hw::window_t window{0, 0, 200, line_height};
             Renderer<BPP, D, NormalFont> renderer(display, window, normal_font);
@@ -118,7 +131,7 @@ namespace rr::ui
             }
             else
             {
-                // Regular days: "DayName decade D" (e.g., "Primidi decade 2", black on yellow)
+                // Regular days: "DD MonthName"
 
                 // Convert day of decade to 2-digit string
                 NumberToString<NormalFont, 2> day_converter;
@@ -132,13 +145,22 @@ namespace rr::ui
                 line1_str[2] = static_cast<uint16_t>(rr::ui::fragment_index::space);
                 line1_str[3] = static_cast<uint16_t>(get_month_fragment(time.month));
             }
-            // Draw the complete line
-            renderer.draw(line1_str, COLOR_RED, COLOR_YELLOW, Align::center);
+            
+            // Draw with different colors based on alarm state (SWAPPED)
+            if (alarm_is_on)
+            {
+                renderer.draw(line1_str, COLOR_BLACK, COLOR_WHITE, Align::center);
+            }
+            else
+            {
+                renderer.draw(line1_str, COLOR_RED, COLOR_YELLOW, Align::center);
+            }
         }
 
-        void paint_line2(const Time &time)
+        void paint_line2(const Time &time, bool alarm_is_on)
         {
-            // Line 2: "H:MM" (black on white, large font)
+            // Line 2: "H:MM" (large font)
+            // Alarm ON: yellow on black | Alarm OFF: black on white
             constexpr int line_height = 53;
             constexpr int y_start = 33;
             hw::window_t window{0, static_cast<hw::y_t>(y_start), 200, line_height};
@@ -154,12 +176,21 @@ namespace rr::ui
             line2_str[2] = minute_str[2];
             line2_str[3] = minute_str[3];
 
-            renderer.draw(line2_str, COLOR_WHITE, COLOR_BLACK, Align::center);
+            // Draw with different colors based on alarm state (SWAPPED)
+            if (alarm_is_on)
+            {
+                renderer.draw(line2_str, COLOR_BLACK, COLOR_YELLOW, Align::center);
+            }
+            else
+            {
+                renderer.draw(line2_str, COLOR_WHITE, COLOR_BLACK, Align::center);
+            }
         }
 
-        void paint_line3(const Time &time)
+        void paint_line3(const Time &time, bool alarm_is_on)
         {
             // Line 3: Day name with decade info for regular days, or sanscoulotide name
+            // Alarm ON: yellow on black | Alarm OFF: black on yellow
             constexpr int line_height = 38;
             constexpr int y_start = 33 + 53;
             hw::y_t y_pos = y_start;
@@ -178,7 +209,7 @@ namespace rr::ui
             }
             else
             {
-                // Regular days: "DayName decade D" (e.g., "Primidi decade 2", black on yellow)
+                // Regular days: "DayName decade D"
                 fragment_index day_name = get_day_name_fragment(time.day);
 
                 // Convert decade number to single digit string
@@ -191,13 +222,21 @@ namespace rr::ui
                 line3_str[3] = decade_str[3];
             }
 
-            // Draw the complete line
-            renderer.draw(line3_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
+            // Draw with different colors based on alarm state (SWAPPED)
+            if (alarm_is_on)
+            {
+                renderer.draw(line3_str, COLOR_BLACK, COLOR_YELLOW, Align::center);
+            }
+            else
+            {
+                renderer.draw(line3_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
+            }
         }
 
-        void paint_line4(const Time &time)
+        void paint_line4(const Time &time, bool alarm_is_on)
         {
-            // Line 4: "Anne YYY" (3 digit year, black on yellow)
+            // Line 4: "Anne YYY" (3 digit year)
+            // Alarm ON: yellow on black | Alarm OFF: black on yellow
             constexpr int line_height = 38;
             constexpr int y_start = 33 + 53 + 38;
             hw::y_t y_pos = y_start;
@@ -215,13 +254,21 @@ namespace rr::ui
             line4_str[2] = year_str[2]; // Second year digit
             line4_str[3] = year_str[3]; // Third year digit
 
-            // Draw the complete line
-            renderer.draw(line4_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
+            // Draw with different colors based on alarm state (SWAPPED)
+            if (alarm_is_on)
+            {
+                renderer.draw(line4_str, COLOR_BLACK, COLOR_YELLOW, Align::center);
+            }
+            else
+            {
+                renderer.draw(line4_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
+            }
         }
 
-        void paint_line5(const Time &time)
+        void paint_line5(const Time &time, bool alarm_is_on)
         {
-            // Line 5: Day of year name (e.g., "Jour du raisin", black on yellow)
+            // Line 5: Day of year name (e.g., "Jour du raisin")
+            // Alarm ON: yellow on black | Alarm OFF: black on yellow
             constexpr int line_height = 38;
             constexpr int y_start = 33 + 53 + 38 + 38;
             hw::y_t y_pos = y_start;
@@ -249,8 +296,15 @@ namespace rr::ui
             line5_str[2] = NULL_CHAR;
             line5_str[3] = NULL_CHAR;
 
-            // Draw the complete line
-            renderer.draw(line5_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
+            // Draw with different colors based on alarm state (SWAPPED)
+            if (alarm_is_on)
+            {
+                renderer.draw(line5_str, COLOR_BLACK, COLOR_YELLOW, Align::center);
+            }
+            else
+            {
+                renderer.draw(line5_str, COLOR_YELLOW, COLOR_BLACK, Align::center);
+            }
         }
 
         // Helper to get month name fragment index

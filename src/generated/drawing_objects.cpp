@@ -40,9 +40,6 @@ const std::array<uint8_t, fragment_content_size> fragment_content = {
     // space: " "
     11,
 
-    // bell: "🔔"
-    63,
-
     // run: "run"
     45, 48, 41,
 
@@ -1267,410 +1264,409 @@ const std::array<uint16_t, fragment_count> fragment_begin = {
     9, // "9"
     10, // colon: ":"
     11, // space: " "
-    12, // bell: "🔔"
-    13, // run: "run"
-    16, // stop: "stop"
-    20, // alarm: "alarm "
-    26, // hour: "hour "
-    31, // minute: "minute "
-    38, // set: "set "
-    42, // day: "day "
-    46, // month: "month "
-    52, // year: "year "
-    57, // annee: "Année "
-    63, // decade: " Décade "
-    71, // jourdu: "Jour "
-    76, // jourepagomene: "Jour épagomène"
-    90, // on_off: "on"
-    92, // "off"
-    95, // months: "Vendémiaire"
-    106, // "Brumaire"
-    114, // "Frimaire"
-    122, // "Nivôse"
-    128, // "Pluviôse"
-    136, // "Ventôse"
-    143, // "Germinal"
-    151, // "Floréal"
-    158, // "Prairial"
-    166, // "Messidor"
-    174, // "Thermidor"
-    183, // "Fructidor"
-    192, // days: "Primidi"
-    199, // "Duodi"
-    204, // "Tridi"
-    209, // "Quartidi"
-    217, // "Quintidi"
-    225, // "Sextidi"
-    232, // "Septidi"
-    239, // "Octidi"
-    245, // "Nonidi"
-    251, // "Décadi"
-    257, // sansculottides: "Fête de la Vertu"
-    273, // "Fête du Génie"
-    286, // "Fête du Travail"
-    301, // "Fête de l'Opinion"
-    318, // "Fête des Récompenses"
-    338, // "Fête de la Révolution"
-    359, // day_of_year: "du raisin"
-    368, // "du safran"
-    377, // "de la châtaigne"
-    392, // "du colchique"
-    404, // "du cheval"
-    413, // "de la balsamine"
-    428, // "de la carotte"
-    441, // "de l'amarante"
-    454, // "du panais"
-    463, // "de la cuve"
-    473, // "de la pomme de terre"
-    493, // "de l'immortelle"
-    508, // "du potiron"
-    518, // "du réséda"
-    527, // "de l'âne"
-    535, // "de la belle de nuit"
-    554, // "de la citrouille"
-    570, // "du sarrasin"
-    581, // "du tournesol"
-    593, // "du pressoir"
-    604, // "du chanvre"
-    614, // "de la pêche"
-    625, // "du navet"
-    633, // "de l'amaryllis"
-    647, // "du bœuf"
-    654, // "de l'aubergine"
-    668, // "du piment"
-    677, // "de la tomate"
-    689, // "de l'orge"
-    698, // "du tonneau"
-    708, // "de la pomme"
-    719, // "du céleri"
-    728, // "de la poire"
-    739, // "de la betterave"
-    754, // "de l'oie"
-    762, // "de l'héliotrope"
-    777, // "de la figue"
-    788, // "de la scorsonère"
-    804, // "de l'alisier"
-    816, // "de la charrue"
-    829, // "du salsifis"
-    840, // "de la macre"
-    851, // "du topinambour"
-    865, // "de l'endive"
-    876, // "du dindon"
-    885, // "du chervis"
-    895, // "du cresson"
-    905, // "de la dentelaire"
-    921, // "de la grenade"
-    934, // "de la herse"
-    945, // "de la bacchante"
-    960, // "de l'azerole"
-    972, // "de la garance"
-    985, // "de l'orange"
-    996, // "du faisan"
-    1005, // "de la pistache"
-    1019, // "du macjonc"
-    1029, // "du coing"
-    1037, // "du cormier"
-    1047, // "du rouleau"
-    1057, // "de la raiponce"
-    1071, // "du turneps"
-    1081, // "de la chicorée"
-    1095, // "de la nèfle"
-    1106, // "du cochon"
-    1115, // "de la mâche"
-    1126, // "du chou-fleur"
-    1139, // "du miel"
-    1146, // "du génépi"
-    1155, // "de la pioche"
-    1167, // "de la cire"
-    1177, // "du raifort"
-    1187, // "du cèdre"
-    1195, // "du sapin"
-    1203, // "du chevreuil"
-    1215, // "de l'ajonc"
-    1225, // "du cyprès"
-    1234, // "du lierre"
-    1243, // "de la sabine"
-    1255, // "de la hoye"
-    1265, // "de l'érable sucré"
-    1282, // "de la bruyère"
-    1295, // "du roseau"
-    1304, // "de l'oseille"
-    1316, // "du grillon"
-    1326, // "du pignon"
-    1335, // "du liège"
-    1343, // "de la truffe"
-    1355, // "de l'olive"
-    1365, // "de la pelle"
-    1376, // "de la tourbe"
-    1388, // "de la houille"
-    1401, // "du bitume"
-    1410, // "du soufre"
-    1419, // "du chien"
-    1427, // "de la lave"
-    1437, // "de la terre végétale"
-    1457, // "du fumier"
-    1466, // "du salpêtre"
-    1477, // "du fléau"
-    1485, // "du granite"
-    1495, // "de l'argile"
-    1506, // "de l'ardoise"
-    1518, // "du grès"
-    1525, // "du lapin"
-    1533, // "du silex"
-    1541, // "de la marne"
-    1552, // "de la pierre à chaux"
-    1572, // "du marbre"
-    1581, // "du van"
-    1587, // "de la pierre à plâtre"
-    1608, // "du sel"
-    1614, // "du fer"
-    1620, // "du cuivre"
-    1629, // "du chat"
-    1636, // "de l'étain"
-    1646, // "du plomb"
-    1654, // "du zinc"
-    1661, // "du mercure"
-    1671, // "du crible"
-    1680, // "de la lauréole"
-    1694, // "de la mousse"
-    1706, // "du fragon"
-    1715, // "de la pervenche"
-    1730, // "du taureau"
-    1740, // "du laurier-tin"
-    1754, // "de l'amatyste"
-    1767, // "du mézéréon"
-    1778, // "du peuplier"
-    1789, // "de la coignée"
-    1802, // "de l'ellébore"
-    1815, // "du brocoli"
-    1825, // "du laurier"
-    1835, // "de l'avelinier"
-    1849, // "de la vache"
-    1860, // "du buis"
-    1867, // "du lichén"
-    1876, // "de l'if"
-    1883, // "de la pulmonaire"
-    1899, // "de la serpette"
-    1913, // "du thlaspi"
-    1923, // "du thimelé"
-    1933, // "du chiendent"
-    1945, // "de la traînasse"
-    1960, // "du lièvre"
-    1969, // "de la guède"
-    1980, // "du noisetier"
-    1992, // "du cyclamen"
-    2003, // "de la chélidoine"
-    2019, // "du traîneau"
-    2030, // "du tussilage"
-    2042, // "du cornouiller"
-    2056, // "du violier"
-    2066, // "du troène"
-    2075, // "du bouc"
-    2082, // "de l'asaret"
-    2093, // "de l'alaterne"
-    2106, // "de la violette"
-    2120, // "du marceau"
-    2130, // "de la bêche"
-    2141, // "du narcisse"
-    2152, // "de l'orme"
-    2161, // "de la fumeterre"
-    2176, // "du vélar"
-    2184, // "de la chèvre"
-    2196, // "de l'épinard"
-    2208, // "du doronic"
-    2218, // "du mouron"
-    2227, // "du cerfeuil"
-    2238, // "du cordeau"
-    2248, // "de la mandragore"
-    2264, // "du persil"
-    2273, // "du cochléaria"
-    2286, // "de la pâquerette"
-    2302, // "du thon"
-    2309, // "du pissenlit"
-    2321, // "de la sylvie"
-    2333, // "du capillaire"
-    2346, // "du frêne"
-    2354, // "du plantoir"
-    2365, // "de la primevère"
-    2380, // "du platane"
-    2390, // "de l'asperge"
-    2402, // "de la tulipe"
-    2414, // "de la poule"
-    2425, // "de la bette"
-    2436, // "du bouleau"
-    2446, // "de la jonquille"
-    2461, // "de l'aulne"
-    2471, // "du couvoir"
-    2481, // "du perce-neige"
-    2495, // "du crocus"
-    2504, // "du hêtre"
-    2512, // "de la laitue"
-    2524, // "du torillon"
-    2535, // "du lilas"
-    2543, // "de l'anémone"
-    2555, // "de la pensée"
-    2567, // "de la myrtille"
-    2581, // "du greffoir"
-    2592, // "du cerisier"
-    2603, // "de la verveine"
-    2617, // "du grenadier"
-    2629, // "du vernal"
-    2638, // "du cheval"
-    2647, // "de la brenèche"
-    2661, // "du charme"
-    2670, // "de la morille"
-    2683, // "du hêtre enraciné"
-    2700, // "de la ruche"
-    2711, // "de la rose"
-    2721, // "du chêne"
-    2729, // "de la fougère"
-    2742, // "de l'aubépine"
-    2755, // "du rossignol"
-    2767, // "de l'ancolie"
-    2779, // "du muguet"
-    2788, // "du champignon"
-    2801, // "de l'hyacinthe"
-    2815, // "du râteau"
-    2824, // "de la rhubarbe"
-    2838, // "du sainfoin"
-    2849, // "du bâton-d'or"
-    2862, // "du chamerisier"
-    2876, // "du ver à soie"
-    2889, // "de la consoude"
-    2903, // "de la pimprenelle"
-    2920, // "de la corbeille d'or"
-    2940, // "de l'arroche"
-    2952, // "du sarcloir"
-    2963, // "de la statice"
-    2976, // "de la fritillaire"
-    2993, // "de la bourache"
-    3007, // "de la valériane"
-    3022, // "de la carpe"
-    3033, // "du fusain"
-    3042, // "de la civette"
-    3055, // "de la buglosse"
-    3069, // "du sénevé"
-    3078, // "de la houlette"
-    3092, // "de la luzerne"
-    3105, // "de l'hémérocalle"
-    3121, // "du trèfle"
-    3130, // "de l'angélique"
-    3144, // "du canard"
-    3153, // "de la mélisse"
-    3166, // "du fromental"
-    3178, // "du martagon"
-    3189, // "du serpolet"
-    3200, // "de la faux"
-    3210, // "de la fraise"
-    3222, // "de la bétoine"
-    3235, // "du pois"
-    3242, // "de l'acacia"
-    3253, // "de la caille"
-    3265, // "de l'œillet"
-    3276, // "du sureau"
-    3285, // "du pavot"
-    3293, // "du tilleul"
-    3303, // "de la fourche"
-    3316, // "du barbeau"
-    3326, // "de la camomille"
-    3341, // "du chévrefeuille"
-    3357, // "du caille-lait"
-    3371, // "de la tanche"
-    3383, // "du jasmin"
-    3392, // "de la verveine"
-    3406, // "du thym"
-    3413, // "de la pivoine"
-    3426, // "du chariot"
-    3436, // "du seigle"
-    3445, // "de l'avoine"
-    3456, // "de l'oignon"
-    3467, // "de la véronique"
-    3482, // "du mulet"
-    3490, // "de la romaine"
-    3503, // "du concombre"
-    3515, // "de l'échalote"
-    3528, // "de l'absinthe"
-    3541, // "de la faucille"
-    3555, // "de la coriandre"
-    3570, // "de l'artichaut"
-    3584, // "de la girofle"
-    3597, // "de la lavande"
-    3610, // "du chamois"
-    3620, // "du tabac"
-    3628, // "de la groseille"
-    3643, // "de la gesse"
-    3654, // "de la cerise"
-    3666, // "du parc"
-    3673, // "de la menthe"
-    3685, // "du cumin"
-    3693, // "du haricot"
-    3703, // "de l'orcanète"
-    3716, // "de la pintade"
-    3729, // "de la sauge"
-    3740, // "de l'ail"
-    3748, // "de la vesce"
-    3759, // "du blé"
-    3765, // "de la chalémie"
-    3779, // "de l'épeautre"
-    3792, // "du bouillon-blanc"
-    3809, // "du melon"
-    3817, // "de l'ivraie"
-    3828, // "du bélier"
-    3837, // "de la prêle"
-    3848, // "de l'armoise"
-    3860, // "du carthame"
-    3871, // "de la mûre"
-    3881, // "de l'arrosoir"
-    3894, // "du panis"
-    3902, // "de la salicorne"
-    3917, // "de l'abricot"
-    3929, // "du basilic"
-    3939, // "de la brebis"
-    3951, // "de la guimauve"
-    3965, // "du lin"
-    3971, // "de l'amande"
-    3982, // "de la gentiane"
-    3996, // "de l'écluse"
-    4007, // "de la carline"
-    4020, // "du câprier"
-    4030, // "de la lentille"
-    4044, // "de l'aunée"
-    4054, // "de la loutre"
-    4066, // "du myrte"
-    4074, // "du colza"
-    4082, // "du lupin"
-    4090, // "du coton"
-    4098, // "du moulin"
-    4107, // "de la prune"
-    4118, // "du millet"
-    4127, // "du lycoperdon"
-    4140, // "de l'escourgeon"
-    4155, // "du saumon"
-    4164, // "de la tubéreuse"
-    4179, // "du sucrion"
-    4189, // "de l'apocyn"
-    4200, // "de la réglisse"
-    4214, // "de l'échelle"
-    4226, // "de la pastèque"
-    4240, // "du fenouil"
-    4250, // "de l'épine-vinette"
-    4268, // "de la noix"
-    4278, // "de la truite"
-    4290, // "du citron"
-    4299, // "de la cardère"
-    4312, // "du nerprun"
-    4322, // "de la tagette"
-    4335, // "de la hotte"
-    4346, // "de l'églantier"
-    4360, // "de la noisette"
-    4374, // "du houblon"
-    4384, // "du sorgho"
-    4393, // "de l'écrevisse"
-    4407, // "de la bigarade"
-    4421, // "de la verge d'or"
-    4437, // "du maïs"
-    4444, // "du marron"
-    4453, // "du panier"
+    12, // run: "run"
+    15, // stop: "stop"
+    19, // alarm: "alarm "
+    25, // hour: "hour "
+    30, // minute: "minute "
+    37, // set: "set "
+    41, // day: "day "
+    45, // month: "month "
+    51, // year: "year "
+    56, // annee: "Année "
+    62, // decade: " Décade "
+    70, // jourdu: "Jour "
+    75, // jourepagomene: "Jour épagomène"
+    89, // on_off: "on"
+    91, // "off"
+    94, // months: "Vendémiaire"
+    105, // "Brumaire"
+    113, // "Frimaire"
+    121, // "Nivôse"
+    127, // "Pluviôse"
+    135, // "Ventôse"
+    142, // "Germinal"
+    150, // "Floréal"
+    157, // "Prairial"
+    165, // "Messidor"
+    173, // "Thermidor"
+    182, // "Fructidor"
+    191, // days: "Primidi"
+    198, // "Duodi"
+    203, // "Tridi"
+    208, // "Quartidi"
+    216, // "Quintidi"
+    224, // "Sextidi"
+    231, // "Septidi"
+    238, // "Octidi"
+    244, // "Nonidi"
+    250, // "Décadi"
+    256, // sansculottides: "Fête de la Vertu"
+    272, // "Fête du Génie"
+    285, // "Fête du Travail"
+    300, // "Fête de l'Opinion"
+    317, // "Fête des Récompenses"
+    337, // "Fête de la Révolution"
+    358, // day_of_year: "du raisin"
+    367, // "du safran"
+    376, // "de la châtaigne"
+    391, // "du colchique"
+    403, // "du cheval"
+    412, // "de la balsamine"
+    427, // "de la carotte"
+    440, // "de l'amarante"
+    453, // "du panais"
+    462, // "de la cuve"
+    472, // "de la pomme de terre"
+    492, // "de l'immortelle"
+    507, // "du potiron"
+    517, // "du réséda"
+    526, // "de l'âne"
+    534, // "de la belle de nuit"
+    553, // "de la citrouille"
+    569, // "du sarrasin"
+    580, // "du tournesol"
+    592, // "du pressoir"
+    603, // "du chanvre"
+    613, // "de la pêche"
+    624, // "du navet"
+    632, // "de l'amaryllis"
+    646, // "du bœuf"
+    653, // "de l'aubergine"
+    667, // "du piment"
+    676, // "de la tomate"
+    688, // "de l'orge"
+    697, // "du tonneau"
+    707, // "de la pomme"
+    718, // "du céleri"
+    727, // "de la poire"
+    738, // "de la betterave"
+    753, // "de l'oie"
+    761, // "de l'héliotrope"
+    776, // "de la figue"
+    787, // "de la scorsonère"
+    803, // "de l'alisier"
+    815, // "de la charrue"
+    828, // "du salsifis"
+    839, // "de la macre"
+    850, // "du topinambour"
+    864, // "de l'endive"
+    875, // "du dindon"
+    884, // "du chervis"
+    894, // "du cresson"
+    904, // "de la dentelaire"
+    920, // "de la grenade"
+    933, // "de la herse"
+    944, // "de la bacchante"
+    959, // "de l'azerole"
+    971, // "de la garance"
+    984, // "de l'orange"
+    995, // "du faisan"
+    1004, // "de la pistache"
+    1018, // "du macjonc"
+    1028, // "du coing"
+    1036, // "du cormier"
+    1046, // "du rouleau"
+    1056, // "de la raiponce"
+    1070, // "du turneps"
+    1080, // "de la chicorée"
+    1094, // "de la nèfle"
+    1105, // "du cochon"
+    1114, // "de la mâche"
+    1125, // "du chou-fleur"
+    1138, // "du miel"
+    1145, // "du génépi"
+    1154, // "de la pioche"
+    1166, // "de la cire"
+    1176, // "du raifort"
+    1186, // "du cèdre"
+    1194, // "du sapin"
+    1202, // "du chevreuil"
+    1214, // "de l'ajonc"
+    1224, // "du cyprès"
+    1233, // "du lierre"
+    1242, // "de la sabine"
+    1254, // "de la hoye"
+    1264, // "de l'érable sucré"
+    1281, // "de la bruyère"
+    1294, // "du roseau"
+    1303, // "de l'oseille"
+    1315, // "du grillon"
+    1325, // "du pignon"
+    1334, // "du liège"
+    1342, // "de la truffe"
+    1354, // "de l'olive"
+    1364, // "de la pelle"
+    1375, // "de la tourbe"
+    1387, // "de la houille"
+    1400, // "du bitume"
+    1409, // "du soufre"
+    1418, // "du chien"
+    1426, // "de la lave"
+    1436, // "de la terre végétale"
+    1456, // "du fumier"
+    1465, // "du salpêtre"
+    1476, // "du fléau"
+    1484, // "du granite"
+    1494, // "de l'argile"
+    1505, // "de l'ardoise"
+    1517, // "du grès"
+    1524, // "du lapin"
+    1532, // "du silex"
+    1540, // "de la marne"
+    1551, // "de la pierre à chaux"
+    1571, // "du marbre"
+    1580, // "du van"
+    1586, // "de la pierre à plâtre"
+    1607, // "du sel"
+    1613, // "du fer"
+    1619, // "du cuivre"
+    1628, // "du chat"
+    1635, // "de l'étain"
+    1645, // "du plomb"
+    1653, // "du zinc"
+    1660, // "du mercure"
+    1670, // "du crible"
+    1679, // "de la lauréole"
+    1693, // "de la mousse"
+    1705, // "du fragon"
+    1714, // "de la pervenche"
+    1729, // "du taureau"
+    1739, // "du laurier-tin"
+    1753, // "de l'amatyste"
+    1766, // "du mézéréon"
+    1777, // "du peuplier"
+    1788, // "de la coignée"
+    1801, // "de l'ellébore"
+    1814, // "du brocoli"
+    1824, // "du laurier"
+    1834, // "de l'avelinier"
+    1848, // "de la vache"
+    1859, // "du buis"
+    1866, // "du lichén"
+    1875, // "de l'if"
+    1882, // "de la pulmonaire"
+    1898, // "de la serpette"
+    1912, // "du thlaspi"
+    1922, // "du thimelé"
+    1932, // "du chiendent"
+    1944, // "de la traînasse"
+    1959, // "du lièvre"
+    1968, // "de la guède"
+    1979, // "du noisetier"
+    1991, // "du cyclamen"
+    2002, // "de la chélidoine"
+    2018, // "du traîneau"
+    2029, // "du tussilage"
+    2041, // "du cornouiller"
+    2055, // "du violier"
+    2065, // "du troène"
+    2074, // "du bouc"
+    2081, // "de l'asaret"
+    2092, // "de l'alaterne"
+    2105, // "de la violette"
+    2119, // "du marceau"
+    2129, // "de la bêche"
+    2140, // "du narcisse"
+    2151, // "de l'orme"
+    2160, // "de la fumeterre"
+    2175, // "du vélar"
+    2183, // "de la chèvre"
+    2195, // "de l'épinard"
+    2207, // "du doronic"
+    2217, // "du mouron"
+    2226, // "du cerfeuil"
+    2237, // "du cordeau"
+    2247, // "de la mandragore"
+    2263, // "du persil"
+    2272, // "du cochléaria"
+    2285, // "de la pâquerette"
+    2301, // "du thon"
+    2308, // "du pissenlit"
+    2320, // "de la sylvie"
+    2332, // "du capillaire"
+    2345, // "du frêne"
+    2353, // "du plantoir"
+    2364, // "de la primevère"
+    2379, // "du platane"
+    2389, // "de l'asperge"
+    2401, // "de la tulipe"
+    2413, // "de la poule"
+    2424, // "de la bette"
+    2435, // "du bouleau"
+    2445, // "de la jonquille"
+    2460, // "de l'aulne"
+    2470, // "du couvoir"
+    2480, // "du perce-neige"
+    2494, // "du crocus"
+    2503, // "du hêtre"
+    2511, // "de la laitue"
+    2523, // "du torillon"
+    2534, // "du lilas"
+    2542, // "de l'anémone"
+    2554, // "de la pensée"
+    2566, // "de la myrtille"
+    2580, // "du greffoir"
+    2591, // "du cerisier"
+    2602, // "de la verveine"
+    2616, // "du grenadier"
+    2628, // "du vernal"
+    2637, // "du cheval"
+    2646, // "de la brenèche"
+    2660, // "du charme"
+    2669, // "de la morille"
+    2682, // "du hêtre enraciné"
+    2699, // "de la ruche"
+    2710, // "de la rose"
+    2720, // "du chêne"
+    2728, // "de la fougère"
+    2741, // "de l'aubépine"
+    2754, // "du rossignol"
+    2766, // "de l'ancolie"
+    2778, // "du muguet"
+    2787, // "du champignon"
+    2800, // "de l'hyacinthe"
+    2814, // "du râteau"
+    2823, // "de la rhubarbe"
+    2837, // "du sainfoin"
+    2848, // "du bâton-d'or"
+    2861, // "du chamerisier"
+    2875, // "du ver à soie"
+    2888, // "de la consoude"
+    2902, // "de la pimprenelle"
+    2919, // "de la corbeille d'or"
+    2939, // "de l'arroche"
+    2951, // "du sarcloir"
+    2962, // "de la statice"
+    2975, // "de la fritillaire"
+    2992, // "de la bourache"
+    3006, // "de la valériane"
+    3021, // "de la carpe"
+    3032, // "du fusain"
+    3041, // "de la civette"
+    3054, // "de la buglosse"
+    3068, // "du sénevé"
+    3077, // "de la houlette"
+    3091, // "de la luzerne"
+    3104, // "de l'hémérocalle"
+    3120, // "du trèfle"
+    3129, // "de l'angélique"
+    3143, // "du canard"
+    3152, // "de la mélisse"
+    3165, // "du fromental"
+    3177, // "du martagon"
+    3188, // "du serpolet"
+    3199, // "de la faux"
+    3209, // "de la fraise"
+    3221, // "de la bétoine"
+    3234, // "du pois"
+    3241, // "de l'acacia"
+    3252, // "de la caille"
+    3264, // "de l'œillet"
+    3275, // "du sureau"
+    3284, // "du pavot"
+    3292, // "du tilleul"
+    3302, // "de la fourche"
+    3315, // "du barbeau"
+    3325, // "de la camomille"
+    3340, // "du chévrefeuille"
+    3356, // "du caille-lait"
+    3370, // "de la tanche"
+    3382, // "du jasmin"
+    3391, // "de la verveine"
+    3405, // "du thym"
+    3412, // "de la pivoine"
+    3425, // "du chariot"
+    3435, // "du seigle"
+    3444, // "de l'avoine"
+    3455, // "de l'oignon"
+    3466, // "de la véronique"
+    3481, // "du mulet"
+    3489, // "de la romaine"
+    3502, // "du concombre"
+    3514, // "de l'échalote"
+    3527, // "de l'absinthe"
+    3540, // "de la faucille"
+    3554, // "de la coriandre"
+    3569, // "de l'artichaut"
+    3583, // "de la girofle"
+    3596, // "de la lavande"
+    3609, // "du chamois"
+    3619, // "du tabac"
+    3627, // "de la groseille"
+    3642, // "de la gesse"
+    3653, // "de la cerise"
+    3665, // "du parc"
+    3672, // "de la menthe"
+    3684, // "du cumin"
+    3692, // "du haricot"
+    3702, // "de l'orcanète"
+    3715, // "de la pintade"
+    3728, // "de la sauge"
+    3739, // "de l'ail"
+    3747, // "de la vesce"
+    3758, // "du blé"
+    3764, // "de la chalémie"
+    3778, // "de l'épeautre"
+    3791, // "du bouillon-blanc"
+    3808, // "du melon"
+    3816, // "de l'ivraie"
+    3827, // "du bélier"
+    3836, // "de la prêle"
+    3847, // "de l'armoise"
+    3859, // "du carthame"
+    3870, // "de la mûre"
+    3880, // "de l'arrosoir"
+    3893, // "du panis"
+    3901, // "de la salicorne"
+    3916, // "de l'abricot"
+    3928, // "du basilic"
+    3938, // "de la brebis"
+    3950, // "de la guimauve"
+    3964, // "du lin"
+    3970, // "de l'amande"
+    3981, // "de la gentiane"
+    3995, // "de l'écluse"
+    4006, // "de la carline"
+    4019, // "du câprier"
+    4029, // "de la lentille"
+    4043, // "de l'aunée"
+    4053, // "de la loutre"
+    4065, // "du myrte"
+    4073, // "du colza"
+    4081, // "du lupin"
+    4089, // "du coton"
+    4097, // "du moulin"
+    4106, // "de la prune"
+    4117, // "du millet"
+    4126, // "du lycoperdon"
+    4139, // "de l'escourgeon"
+    4154, // "du saumon"
+    4163, // "de la tubéreuse"
+    4178, // "du sucrion"
+    4188, // "de l'apocyn"
+    4199, // "de la réglisse"
+    4213, // "de l'échelle"
+    4225, // "de la pastèque"
+    4239, // "du fenouil"
+    4249, // "de l'épine-vinette"
+    4267, // "de la noix"
+    4277, // "de la truite"
+    4289, // "du citron"
+    4298, // "de la cardère"
+    4311, // "du nerprun"
+    4321, // "de la tagette"
+    4334, // "de la hotte"
+    4345, // "de l'églantier"
+    4359, // "de la noisette"
+    4373, // "du houblon"
+    4383, // "du sorgho"
+    4392, // "de l'écrevisse"
+    4406, // "de la bigarade"
+    4420, // "de la verge d'or"
+    4436, // "du maïs"
+    4443, // "du marron"
+    4452, // "du panier"
 };
 
 // Fragment lengths
@@ -1687,7 +1683,6 @@ const std::array<uint16_t, fragment_count> fragment_len = {
     1, // "9"
     1, // colon: ":"
     1, // space: " "
-    1, // bell: "🔔"
     3, // run: "run"
     4, // stop: "stop"
     6, // alarm: "alarm "
@@ -2106,7 +2101,6 @@ const std::array<uint8_t, big_font_len> big_font_char_widths = {
     19, // '8'
     19, // '9'
     7, // ':'
-    17, // '🔔' (custom bell bitmap)
 };
 
 // big font character begin positions
@@ -2122,11 +2116,10 @@ const std::array<uint16_t, big_font_len> big_font_char_begin = {
     897, // '8'
     1014, // '9'
     1131, // ':'
-    1170, // '🔔' (custom bell bitmap)
 };
 
 // big font content (bitmap data, packed)
-const std::array<uint8_t, 1287> big_font_content = {
+const std::array<uint8_t, 1170> big_font_content = {
     // '0'
     //                    
     //                    
@@ -3746,166 +3739,6 @@ const std::array<uint8_t, 1287> big_font_content = {
     0x00,
     0x00,
     0x00,
-    0x00,
-
-    // '🔔' (custom bell bitmap)
-    //       ###       
-    //      #####      
-    //     #######     
-    //    #########    
-    //   ###########   
-    //   ###########   
-    //  ############# 
-    //  ############# 
-    //  ############# 
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    // ###############
-    //  ############# 
-    //  ############# 
-    //   ###########  
-    //                
-    //                
-    //       ###      
-    //       ###      
-    //                 
-    //                 
-    //                 
-    //                 
-    //                 
-    0x03,
-    0x80,
-    0x00,
-    0x0F,
-    0x80,
-    0x00,
-    0x3F,
-    0x80,
-    0x00,
-    0xFF,
-    0x81,
-    0x80,
-    0xFF,
-    0x83,
-    0x80,
-    0xFF,
-    0x0F,
-    0x80,
-    0xFF,
-    0x3F,
-    0x80,
-    0xFC,
-    0xFF,
-    0x80,
-    0xF7,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x80,
-    0xFF,
-    0xFF,
-    0x00,
-    0xFF,
-    0xF9,
-    0x80,
-    0xFF,
-    0xE3,
-    0x80,
-    0xFF,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x0E,
-    0x00,
-    0x00,
-    0x38,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
     0x00
 };
 
@@ -3974,7 +3807,6 @@ const std::array<uint8_t, normal_font_len> normal_font_char_widths = {
     8, // 'ô'
     8, // 'û'
     13, // 'œ'
-    10, // '🔔' (custom bell bitmap)
 };
 
 // normal font character begin positions
@@ -4042,11 +3874,10 @@ const std::array<uint16_t, normal_font_len> normal_font_char_begin = {
     1800, // 'ô'
     1824, // 'û'
     1848, // 'œ'
-    1896, // '🔔' (custom bell bitmap)
 };
 
 // normal font content (bitmap data, packed)
-const std::array<uint8_t, 1944> normal_font_content = {
+const std::array<uint8_t, 1896> normal_font_content = {
     // '0'
     //         
     //         
@@ -7542,80 +7373,6 @@ const std::array<uint8_t, 1944> normal_font_content = {
     0xE0,
     0x39,
     0xE0,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-
-    // '🔔' (custom bell bitmap)
-    //    ###   
-    //   #####  
-    //  ####### 
-    //  ####### 
-    // #########
-    // #########
-    // #########
-    // #########
-    // #########
-    // #########
-    // #########
-    // #########
-    // #########
-    // #########
-    //  ####### 
-    //          
-    //    ###   
-    //    ###   
-    //          
-    //          
-    //          
-    //          
-    //          
-    //          
-    0x1C,
-    0x00,
-    0x7C,
-    0x40,
-    0xFC,
-    0xC0,
-    0xFB,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFF,
-    0xC0,
-    0xFD,
-    0xC0,
-    0xF0,
-    0x00,
-    0x01,
-    0xC0,
-    0x03,
-    0x80,
-    0x00,
-    0x00,
     0x00,
     0x00,
     0x00,

@@ -7,67 +7,6 @@ from PIL import Image, ImageDraw, ImageFont
 FONT_PATH = "/usr/share/fonts/truetype/noto/NotoSansDisplay-CondensedMedium.ttf"
 INTERCHAR_SPACE = 1  # Inter-character spacing in pixels
 
-# Custom bitmap for bell emoji (simple bell shape)
-BELL_BITMAP_BIG = [
-    "      ###       ",
-    "     #####      ",
-    "    #######     ",
-    "   #########    ",
-    "  ###########   ",
-    "  ###########   ",
-    " ############# ",
-    " ############# ",
-    " ############# ",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    "###############",
-    " ############# ",
-    " ############# ",
-    "  ###########  ",
-    "               ",
-    "               ",
-    "      ###      ",
-    "      ###      ",
-]
-
-BELL_BITMAP_NORMAL = [
-    "   ###   ",
-    "  #####  ",
-    " ####### ",
-    " ####### ",
-    "#########",
-    "#########",
-    "#########",
-    "#########",
-    "#########",
-    "#########",
-    "#########",
-    "#########",
-    "#########",
-    "#########",
-    " ####### ",
-    "         ",
-    "   ###   ",
-    "   ###   ",
-]
-
 class CharTable:
     def __init__(self):
         self.chars = set()  # Set of all characters
@@ -122,21 +61,11 @@ class FontTable:
             # Fallback to default font if specified font is not found
             print(f"Warning: Font '{FONT_PATH}' not found, using default")
             self.font = ImageFont.load_default()
-    
-    def is_bell_emoji(self, char: str) -> bool:
-        """Check if a character is the bell emoji"""
-        return char == '🔔'
-    
-    def get_bell_bitmap(self) -> list[str]:
-        """Get the appropriate bell bitmap for this font size"""
-        # Use big bitmap for font size >= 30, otherwise normal
-        return BELL_BITMAP_BIG if self.size >= 30 else BELL_BITMAP_NORMAL
         
     def render_font(self):
         """Render all characters in the font using PIL"""
         
         # First pass: determine the maximum height and vertical offsets
-        max_height = 0
         min_y_offset = 0
         max_y_bottom = 0
         
@@ -144,19 +73,13 @@ class FontTable:
             if i >= self.font_char_count:
                 break
             
-            if self.is_bell_emoji(char):
-                # Use custom bitmap height for bell
-                bell_bitmap = self.get_bell_bitmap()
-                char_height = len(bell_bitmap)
-                max_height = max(max_height, char_height)
-            else:
-                # Measure the character bounding box
-                temp_img = Image.new('1', (100, 100), 0)
-                temp_draw = ImageDraw.Draw(temp_img)
-                bbox = temp_draw.textbbox((0, 0), char, font=self.font)
-                # bbox is (left, top, right, bottom)
-                min_y_offset = min(min_y_offset, bbox[1])
-                max_y_bottom = max(max_y_bottom, bbox[3])
+            # Measure the character bounding box
+            temp_img = Image.new('1', (100, 100), 0)
+            temp_draw = ImageDraw.Draw(temp_img)
+            bbox = temp_draw.textbbox((0, 0), char, font=self.font)
+            # bbox is (left, top, right, bottom)
+            min_y_offset = min(min_y_offset, bbox[1])
+            max_y_bottom = max(max_y_bottom, bbox[3])
         
         # Calculate the actual height needed to fit all characters
         self.height = max_y_bottom - min_y_offset
@@ -166,34 +89,6 @@ class FontTable:
         for i, char in enumerate(self.char_table.sorted_chars):
             if i >= self.font_char_count:
                 break
-            
-            if self.is_bell_emoji(char):
-                # Use custom bell bitmap
-                bell_bitmap = self.get_bell_bitmap()
-                bell_height = len(bell_bitmap)
-                bell_width = len(bell_bitmap[0]) if bell_bitmap else 0
-                
-                # Convert ASCII art to pixel data
-                pixels = []
-                ascii_art = []
-                for row in bell_bitmap:
-                    ascii_art.append(row)
-                    for char_pixel in row:
-                        pixels.append(1 if char_pixel == '#' else 0)
-                
-                # Pad to match font height if needed
-                while len(pixels) < bell_width * self.height:
-                    pixels.append(0)
-                    if len(pixels) % bell_width == 0:
-                        ascii_art.append(' ' * bell_width)
-                
-                self.glyphs[char] = {
-                    'width': bell_width + INTERCHAR_SPACE,
-                    'height': self.height,
-                    'data': pixels,
-                    'ascii_art': ascii_art
-                }
-                continue
             
             # Regular font rendering
             # Create image with enough height including offset
@@ -304,8 +199,7 @@ class FontTable:
             width = self.glyphs.get(char, {'width': 7})['width']
             # Escape the character for display
             char_display = char if char.isprintable() and char not in ['"', '\\'] else f"U+{ord(char):04X}"
-            bell_note = " (custom bell bitmap)" if self.is_bell_emoji(char) else ""
-            file.write(f"    {width}, // '{char_display}'{bell_note}\n")
+            file.write(f"    {width}, // '{char_display}'\n")
         file.write("};\n\n")
         
         # Write character begin positions
@@ -315,8 +209,7 @@ class FontTable:
         for i, char in enumerate(sorted_chars):
             glyph = self.glyphs.get(char, {'width': 7, 'height': self.height})
             char_display = char if char.isprintable() and char not in ['"', '\\'] else f"U+{ord(char):04X}"
-            bell_note = " (custom bell bitmap)" if self.is_bell_emoji(char) else ""
-            file.write(f"    {current_pos}, // '{char_display}'{bell_note}\n")
+            file.write(f"    {current_pos}, // '{char_display}'\n")
             # Calculate bytes needed for this glyph (line-by-line packing)
             char_line_bytes = (glyph['width'] + 7) // 8
             bytes_needed = char_line_bytes * glyph['height']
@@ -336,14 +229,13 @@ class FontTable:
             bytes_needed = char_line_bytes * glyph['height']
             
             char_display = char if char.isprintable() and char not in ['"', '\\'] else f"U+{ord(char):04X}"
-            bell_note = " (custom bell bitmap)" if self.is_bell_emoji(char) else ""
             
             # Blank line before each character (except first)
             if i > 0:
                 file.write("\n")
             
             # Write ASCII art as comments
-            file.write(f"    // '{char_display}'{bell_note}\n")
+            file.write(f"    // '{char_display}'\n")
             for art_line in glyph['ascii_art']:
                 file.write(f"    // {art_line}\n")
             
@@ -536,7 +428,6 @@ def main():
     fragments.add_string_list("nr", ["0","1","2","3","4","5","6","7","8","9"])
     fragments.add_string("colon", ":")
     fragments.add_string("space", " ")
-    fragments.add_string("bell", "🔔")
     fragments.add_string("run")
     fragments.add_string("stop")
     fragments.add_string("alarm","alarm ")
