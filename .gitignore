@@ -31,3 +31,25 @@ compile_commands.json
 # Testing
 Testing/
 CTestTestfile.cmake
+
+# Build output
+stm32/Debug/
+stm32/Release/
+
+# CubeIDE metadata
+stm32/.settings/
+stm32/.metadata/
+stm32/*.launch
+stm32/.mxproject
+
+# Temporary files
+*.o
+*.d
+*.su
+*.elf
+*.map
+*.list
+
+# OS files
+.DS_Store
+Thumbs.db
