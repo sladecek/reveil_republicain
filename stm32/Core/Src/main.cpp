@@ -24,7 +24,12 @@
 //EPD
 #include "Display_EPD_W21_spi.h"
 #include "Display_EPD_W21.h"
-#include "Ap_29demo.h"	
+#include "Ap_29demo.h"
+
+// Hardware abstraction and alarm logic
+#include "hardware_stm32.h"
+#include "reveil.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,6 +51,12 @@
 
 /* USER CODE BEGIN PV */
 
+#ifdef __cplusplus
+// ReveilRepublicain without debug asserts on the real hardware
+using ReveilType = rr::ReveilRepublicain<false>;
+static ReveilType reveil;
+static stm32::Stm32Hardware<ReveilType> hardware{reveil};
+#endif
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,7 +100,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  #ifdef __cplusplus
+  // TODO: Obtain the current time from RTC and send initial event
+  //       rr::hw::TimerEvent initial_event{current_time};
+  //       hardware.process_event(initial_event);
+  #endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -99,11 +114,40 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  EPD_init();
-		PIC_display(gImage_1);//To Display one image using full screen refresh.
-		EPD_sleep();//Enter the sleep mode and please do not delete it, otherwise it will reduce the lifespan of the screen.
-		HAL_Delay(5000); //Delay for 5s.
-		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+#ifdef __cplusplus
+    // TODO: Main loop with event-driven hardware interaction:
+    //
+    //   1. Check for pending events (encoder turn/press, RTC alarm, tick timer)
+    //      and call hardware.process_event(event) for each.
+    //
+    //   2. In sleep mode, enter low-power sleep (WFI) and wake on interrupt.
+    //      In awake mode, run the tick timer and poll the encoder.
+    //
+    //   3. The process_event call invokes compute_update which calls
+    //      display methods (start_window / send_pixels / finish_window / update)
+    //      and timer methods (set_next_clock_event_time).
+    //
+    //   See emulator/main.cpp for the reference event-loop pattern.
+    //
+    //   // Example tick handling:
+    //   if (awake && tick_timer_elapsed())
+    //   {
+    //       hardware.process_event(rr::hw::TickEvent{tick_counter++});
+    //   }
+    //
+    //   // Example encoder handling:
+    //   if (encoder_turned())
+    //   {
+    //       hardware.process_event(rr::hw::EncoderEvent{delta, pressed});
+    //   }
+#else
+    // Existing EPD test until C++ infrastructure is ready:
+    EPD_init();
+    PIC_display(gImage_1);
+    EPD_sleep();
+    HAL_Delay(5000);
+    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+#endif
   }
   /* USER CODE END 3 */
 }
